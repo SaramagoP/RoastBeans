@@ -1,0 +1,112 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Inscription {% endblock %}
+
+{% block description %}Inscrivez-vous.{% endblock %}
+
+{% block main %}
+    <main class="container my-5">
+        <h1 class="text-center mb-5 display-4">Inscrivez-vous</h1>
+        <div class="row">
+            <div class="col-lg-6 text-center mb-5">
+                <img src="{{asset('images/visitor/barista3.jpg')}}" alt="Barista stocking coffee beans" class="img-fluid rounded-pill" style="max-width: 65%">
+            </div>
+            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>                    
+                {% endfor %}
+
+                {{form_start(registrationForm)}}
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label for="registration_form_firstName">Prénom</label>
+                            <div class="text-danger">{{form_errors(registrationForm.firstName)}}</div>
+                            {{form_widget(registrationForm.firstName, {'attr': {'class':'form-control', 'autofocus':'autofocus'}})}}
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="registration_form_lastName">Nom</label>
+                            <div class="text-danger">{{form_errors(registrationForm.lastName)}}</div>
+                            {{form_widget(registrationForm.lastName, {'attr': {'class':'form-control'}})}}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registration_form_email">Email</label>
+                         <div class="text-danger">{{form_errors(registrationForm.email)}}</div>
+                        {{form_widget(registrationForm.email, {'attr': {'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="registration_form_password_first">Mot de passe</label>
+                        <div class="text-danger">{{form_errors(registrationForm.password.first)}}</div>
+                        {{form_widget(registrationForm.password.first, {'attr': {'class':'form-control', 'placeholder':'Au moins 12 caractères'}})}}
+                        <small><em>Le mot de passe doit contenir au moins 12 caractères, une lettre majuscule, minuscule, un chiffre et un caractère spécial.</em></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registration_form_password_second">Confirmation de mot de passe</label>
+                        <div class="text-danger">{{form_errors(registrationForm.password.second)}}</div>
+                        {{form_widget(registrationForm.password.second, {'attr': {'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="registration_form_agreeTerms">
+                            {{form_widget(registrationForm.agreeTerms)}}
+                            Lire et accepter <a href="#" data-bs-toggle="modal" data-bs-target="#agreeTermsModal">les conditions générales d'utilisation</a>
+                        </label>
+                     
+                        <!-- Modal -->
+                        <div class="modal fade" id="agreeTermsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-2" id="exampleModalLabel">Conditions générales d'utilisation</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-dark">
+                                <p><strong>Merci de lire attentivement ces Conditions Générales d'Utilisation (ci-après dénommées "CGU") avant d'utiliser nos services.</strong></p>
+
+                                <strong>1. Acceptation des conditions</strong>
+                                <p>En accédant ou en utilisant nos services, vous acceptez d'être lié par ces CGU. Si vous n'acceptez pas toutes les modalités de ces CGU, veuillez ne pas utiliser nos services.</p>
+
+                                <strong>2. Modification des conditions</strong>
+                                 <p>Nous nous réservons le droit de modifier ces CGU à tout moment. Toute modification entrera en vigueur immédiatement après sa publication sur notre site web. Votre utilisation continue de nos services après de telles modifications constitue votre acceptation des CGU modifiées.</p>
+
+                                <strong>3. Utilisation des services</strong>
+                                 <p>Vous acceptez d'utiliser nos services uniquement à des fins légales et conformément à ces CGU. Vous acceptez de ne pas utiliser nos services à des fins illicites ou interdites par ces CGU.</p>
+
+                                <strong>4. Protection des données</strong>
+                                 <p>Nous respectons votre vie privée et nous nous engageons à protéger vos données personnelles conformément à notre Politique de Confidentialité.</p>
+
+                                <strong>5. Propriété intellectuelle</strong>
+                                 <p>Nos services et leur contenu, y compris mais sans s'y limiter, le texte, les graphiques, les images, les vidéos, les logos et les icônes sont la propriété intellectuelle de RoastBeans Café ou de ses concédants de licence, et sont protégés par les lois sur le droit d'auteur et autres lois applicables en matière de propriété intellectuelle.</p>
+
+                                <strong>6. Limitation de responsabilité</strong>
+                                 <p>Dans toute la mesure permise par la loi applicable, nous déclinons toute responsabilité pour tout dommage direct, indirect, accessoire, spécial, consécutif ou exemplaire résultant de l'utilisation de nos services ou de tout contenu affiché sur nos services.</p>
+
+                                <strong>7. Indemnisation</strong>
+                                 <p>Vous acceptez de nous indemniser, ainsi que nos dirigeants, administrateurs, employés, agents, sociétés affiliées, partenaires et concédants de licence, contre toute réclamation ou demande, y compris les honoraires raisonnables d'avocat, découlant de votre violation de ces CGU ou de votre utilisation de nos services.</p>
+
+                                <strong>8. Droit applicable</strong>
+                                 <p>Ces CGU sont régies et interprétées conformément aux lois en vigueur dans la France, sans égard aux principes de conflit de lois.</p>
+
+                                <strong>9. Contact</strong>
+                                 <p>Si vous avez des questions concernant ces CGU, veuillez nous contacter à l'adresse suivante : roastbeans@gmail.com.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div>
+                        <input formnovalidate type="submit" class="w-100 btn btn" style="background-color: #C59B76" value="S'inscrire">
+                    </div>
+                {{form_end(registrationForm)}}
+                <div class="text-center mt-3">
+                    <p>Vous avez déjà un compte? <a href="">Connectez-vous</a></p> {# {{path('visitor_authentication_login')}} #}
+                    <p><a href="{{path('visitor_home_index')}}">Retour à l'accueil</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
