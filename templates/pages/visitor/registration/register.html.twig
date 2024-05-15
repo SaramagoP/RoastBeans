@@ -39,7 +39,7 @@
                         <label for="registration_form_password_first">Mot de passe</label>
                         <div class="text-danger">{{form_errors(registrationForm.password.first)}}</div>
                         {{form_widget(registrationForm.password.first, {'attr': {'class':'form-control', 'placeholder':'Au moins 12 caractères'}})}}
-                        <small><em>Le mot de passe doit contenir au moins 12 caractères</em></small>
+                        <small><em>Le mot de passe doit contenir au moins 12 caractères, une lettre majuscule, minuscule, un chiffre et un caractère spécial.</em></small>
                     </div>
                     <div class="mb-3">
                         <label for="registration_form_password_second">Confirmation de mot de passe</label>

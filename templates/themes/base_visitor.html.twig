@@ -73,12 +73,12 @@
                                 <p class="text-center fw-bold">nom d'utilisateur</p>
                                 <li><a class="dropdown-item" href="">Panier</a></li>
                                 <li><a class="dropdown-item" href="">Modifier mes informations</a></li>
-                                <li><a class="dropdown-item" href="">Se déconnecter</a></li> {# {{path('app_logout')}} #}
+                                <li><a class="dropdown-item" href="{{path('app_logout')}}">Se déconnecter</a></li> 
                             </ul>
                         </div>                        
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="">Connexion</a> {# {{path('visitor_authentication_login')}} #}
+                            <a class="nav-link text-white" href="{{path('visitor_authentication_login')}}">Connexion</a> 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_registration_register')}}">Inscription</a> 

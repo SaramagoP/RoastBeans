@@ -7,10 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Impossible de créer un compte avec cet email.')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,12 +19,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+
+    #[Assert\NotBlank(message:'Le prénom est obligatoire')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Votre prénom ne peut pas contenir plus de {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z-_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, l'undescore et tiret sont autorisés pour le prénom")]
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
+
+    #[Assert\NotBlank(message:'Le nom est obligatoire')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Votre nom ne peut pas contenir plus de {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z-_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, l'undescore et tiret sont autorisés pour le nom")]
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
+
+    #[Assert\NotBlank(message:'L\'email est obligatoire')]
+    #[Assert\Email(message: 'L\'email {{ value }} n\'est pas un email valide.')]
+    #[Assert\Length(
+        max: 180,
+        maxMessage: 'L\'email ne doit pas dépasser {{ limit }} caractères',
+    )]
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
@@ -36,6 +64,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank (message: "Le mot de passe est obligatoire.")]
+    #[Assert\Regex(
+        pattern: "/^(?=.*[a-zà-ÿ])(?=.*[A-ZÀ-Ỳ])(?=.*[0-9])(?=.*[^a-zà-ÿA-ZÀ-Ỳ0-9]).{11,255}$/",
+        match: true,
+        message: "Le mot de passe doit contentir au moins une lettre miniscule, majuscule, un chiffre et un caractère spécial.",
+    )]
+    #[Assert\Length(
+        min: 12,
+        max: 255,
+        minMessage: 'Le mot de passe doit contenir au minimum {{ limit }} caractères',
+        maxMessage: 'Le mot de passe ne doit pas dépasser {{ limit }} caractères',
+    )]
+    #[Assert\NotCompromisedPassword(message:'Votre mot de passe est facilement piratable! Veuillez en choisir un autre.')]
     #[ORM\Column]
     private ?string $password = null;
 

@@ -1,0 +1,76 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block description %}Connectez-vous.{% endblock %}
+
+{% block main %}
+    <main class="container my-5">
+        <h1 class="text-center mb-5 display-4">Connectez-vous</h1>
+        <div class="row">
+            <div class="col-lg-6 text-center">
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        <img src="{{asset('images/visitor/coffee-and-croissant.jpg')}}" alt="café et croissant" class="img-fluid rounded-pill">
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <img src="{{asset('images/visitor/arome-cafes.jpg')}}" alt="tasse de café" class="img-fluid rounded-pill">
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <img src="{{asset('images/visitor/barista4.jpg')}}" alt="barista que preparer un café" class="img-fluid rounded-pill">
+                    </div>
+                    <div class="col-lg-6 mb-5">
+                        <img src="{{asset('images/visitor/tasse-cafe.jpg')}}" alt="tasse de café" class="img-fluid rounded-pill">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+
+                <form method="POST" class="w-100">
+                    {% if error %}
+                        <div class=" text-center alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% for message in app.flashes('success') %}
+                        <div class=" text-center alert alert-success" role="alert">{{ message }}</div>
+                    {% endfor %}
+
+                    <div class="mb-3">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 my-1">
+                                <label>
+                                    <input type="checkbox" name="_remember_me" checked> Se souvenir de moi
+                                </label>
+                            </div>
+                            <div class="col-md-6 text-lg-end my-1">
+                            <a href="">Mot de passe oublié?</a>   {#{{path('visitor_authentication_forgot_password_request')}} #}
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div>
+                        <input formnovalidate type="submit" class="w-100 btn btn" style="background-color: #C59B76" value="Se connecter">
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>Vous n'avez pas encore de compte? <a href="{{path('visitor_registration_register')}}">Inscrivez-vous</a></p>
+                    <p><a href="{{path('visitor_home_index')}}">Retour à l'accueil</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+{% endblock %}
+
