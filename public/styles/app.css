@@ -1,0 +1,99 @@
+html, body {
+    height: 100%;
+    background-color: #131211;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    color: #ffffff;
+    font-family: "Merienda", cursive;
+}
+
+header {
+    padding: 10px 0;
+}
+
+.logo {
+  width: 100px;
+  margin-right: 20px;
+}
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+  
+  nav ul li {
+    display: inline;
+    align-items: center;
+    margin-right: 30px;
+}
+
+  nav ul li a:hover {
+  color: #C59B76 !important; 
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.panier, .utilisateur {
+  color: #C59B76;
+}
+
+nav, footer{
+  font-family: "Merienda", cursive;
+}
+
+h1 {
+  color: #C59B76;
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 50px;
+}
+
+.buttonComand {
+  background-color: #C59B76 !important;
+  border-radius: 50px;
+  border: none;
+  padding: 15px;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+  footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    width: 100%;
+}
+  
+  footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+  
+  footer ul li {
+    display: inline;
+    margin-right: 20px;
+}
+  
+  footer ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer ul li a:hover {
+  color: #C59B76 !important; 
+  cursor: pointer;
+}
+
+.name {
+  color: #C59B76;
+}
