@@ -6,7 +6,7 @@
 
 {% block main %}
     <main class="container my-5">
-        <h1 class="text-center mb-5 display-4">Connectez-vous</h1>
+        <h1 class="text-center mb-5 display-4">Connectez-Vous</h1>
         <div class="row">
             <div class="col-lg-6 text-center">
                 <div class="row">
@@ -57,6 +57,7 @@
                         </div>
                     </div>
 
+                    {# Jeton CSRF pour l'authentification du formulaire afin de prévenir les attaques Cross-Site Request Forgery (falsification de requête intersite) #}
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                     <div>

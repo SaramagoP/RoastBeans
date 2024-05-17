@@ -28,6 +28,9 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'visitor_registration_register', methods:['GET', 'POST'])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        // Vérifier si l'utilisateur est déjà connecté. 
+            //Il n'a plus rien à faire sur la page de connexion
+                // Rediriger l'utilisateur vers la page d'accueil
         if ($this->getUser()) 
         {
             return $this->redirectToRoute('visitor_home_index');
@@ -58,7 +61,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // 10- Envoyer l'email de verification du compte à l'utilisateur
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation('visitor_registration_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('roastbeans@gmail.com', 'Pierre Dubois'))
                     ->to($user->getEmail())
@@ -82,7 +85,7 @@ class RegistrationController extends AbstractController
         return $this->render('pages/visitor/registration/waiting_for_email_verification.html.twig');
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route('/verify/email', name: 'visitor_registration_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {
         $id = $request->query->get('id');

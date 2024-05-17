@@ -6,7 +6,7 @@
 
 {% block main %}
     <main class="container my-5">
-        <h1 class="text-center mb-5 display-4">Inscrivez-vous</h1>
+        <h1 class="text-center mb-5 display-4">Inscrivez-Vous</h1>
         <div class="row">
             <div class="col-lg-6 text-center mb-5">
                 <img src="{{asset('images/visitor/barista3.jpg')}}" alt="Barista stocking coffee beans" class="img-fluid rounded-pill" style="max-width: 65%">
@@ -103,7 +103,7 @@
                     </div>
                 {{form_end(registrationForm)}}
                 <div class="text-center mt-3">
-                    <p>Vous avez déjà un compte? <a href="">Connectez-vous</a></p> {# {{path('visitor_authentication_login')}} #}
+                    <p>Vous avez déjà un compte? <a href="{{path('visitor_authentication_login')}}">Connectez-vous</a></p> 
                     <p><a href="{{path('visitor_home_index')}}">Retour à l'accueil</a></p>
                 </div>
             </div>

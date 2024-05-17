@@ -10,12 +10,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
-    #[Route(path: '/login', name: 'visitor_authentication_login')]
+    #[Route(path: '/login', name: 'visitor_authentication_login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // Vérifier si l'utilisateur est déjà connecté. 
+            //Il n'a plus rien à faire sur la page de connexion
+                // Rediriger l'utilisateur vers la page d'accueil
         if ($this->getUser()) 
         {
-            return $this->redirectToRoute('visitor_authentication_login');
+            // Rediriger vers la page d'accueil des visiteurs si l'utilisateur est déjà connecté.
+            return $this->redirectToRoute('visitor_home_index');
         }
 
         // get the login error if there is one
@@ -23,6 +27,7 @@ class LoginController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // 1- Afficher la page de connexion
         return $this->render('pages/visitor/authentication/login.html.twig', [
             'last_username' => $lastUsername, 'error' => $error
         ]);

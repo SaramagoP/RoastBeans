@@ -20,15 +20,17 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: visitor_authentication_login
+
+            user_checker: App\Security\UserChecker # pour envoyer sur le fichier UserChecker et suivre la logique du dossier 
 
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 604800
+                lifetime: 604800 # Sa corresponde à une semaine
                 path: /
                 # by default, the feature is enabled by checking a checkbox in the
                 # login form, uncomment the following line to always enable it.
-                #always_remember_me: true
+                # always_remember_me: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
