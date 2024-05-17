@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Le mot de passe doit contenir au minimum {{ limit }} caractères',
         maxMessage: 'Le mot de passe ne doit pas dépasser {{ limit }} caractères',
     )]
-    #[Assert\NotCompromisedPassword(message:'Votre mot de passe est facilement piratable! Veuillez en choisir un autre.')]
+    #[Assert\NotCompromisedPassword(message:'Votre mot de passe est facilement piratable. Veuillez en choisir un autre.')]
     #[ORM\Column]
     private ?string $password = null;
 
