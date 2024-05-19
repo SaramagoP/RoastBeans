@@ -43,8 +43,9 @@ class SuperAdminFixtures extends Fixture
                     ->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_USER'])
                     ->setPassword($passwordHashed)
                     ->setVerified(true)
-                    ->setCreatedAt(new DateTimeImmutable())
-                    ->setUpdatedAt(new DateTimeImmutable())
+                    // ->setCreatedAt(new DateTimeImmutable())
+                    // ->setUpdatedAt(new DateTimeImmutable())
+                    ->setVerifiedAt(new DateTimeImmutable())
         ;
 
         return $superAdmin;
