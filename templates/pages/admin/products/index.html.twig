@@ -4,18 +4,45 @@
 
 {% block description %}Liste des Produits{% endblock %}
 
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block datatables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.7/i18n/fr-FR.json',
+                },
+            });
+        } );
+    </script>
+{% endblock %}
+
 {% block keywords %}Liste, produits, admin{% endblock %}
 
 {% block main %}
 
     <h1 class="text-center my-3 display-5">Liste des Produits</h1>
 
+    {% for message in app.flashes('success') %}
+        <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        </div>
+    {% endfor %}
+
     <div class="d-flex justify-content-end align-items-center my-3">
         <a href="{{path('admin_product_create')}}" class="btn btn-dark shadow"><i class="fa-solid fa-plus"></i> Nouveau Produit</a>
     </div>
 
     <div class="table-responsive">
-        <table class="table table-hover text-center table-bordered">
+        <table id="table" class="table table-hover text-center table-bordered">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>
@@ -37,8 +64,12 @@
                         <td>{{produit.description}}</td>
                         <td>{{produit.price}}€</td>
                         <td class="d-flex justify-content-evenly">
-                            <a href=""><i class="fa-solid fa-pen"></i></a>
-                            <a href=""><i style="color:red" class="fa-solid fa-trash"></i></a>
+                            <a href="{{path('admin_product_edit', {'id': produit.id})}}"><i class="fa-solid fa-edit mx-2"></i></a>
+                            <a onclick="event.preventDefault(); return confirm('Confirmer la suppression?') && document.querySelector('#delete_product_{{produit.id}}_form').submit();" href=""><i class="fa-solid fa-trash text-danger mx-2"></i></a>
+                            <form id="delete_product_{{produit.id}}_form" method="POST" action="{{path('admin_product_delete', {'id':produit.id})}}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token('delete_product_'~produit.id)}}">
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}

@@ -51,7 +51,7 @@ class Product
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -63,7 +63,7 @@ class Product
         return $this->slug;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
 
@@ -87,7 +87,7 @@ class Product
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -99,7 +99,7 @@ class Product
         return $this->price;
     }
 
-    public function setPrice(string $price): static
+    public function setPrice(?string $price): static
     {
         $this->price = $price;
 
