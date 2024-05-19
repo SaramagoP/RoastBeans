@@ -68,28 +68,28 @@
                     </ul>
                     <ul class="navbar-nav ms-auto">
                     {% if app.user %}
-                        <div class="dropdown">
-                            <button class=" utilisateur btn border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-user" style="margin-right: 15%; font-size: 20px"></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <p class="text-center"><strong style="color: #C59B76">{{ app.user.firstName }}</strong></p>
-                                <li><a class="dropdown-item" href="">Panier</a></li>
-                                <li><a class="dropdown-item" href="">Modifier mes informations</a></li>
-                                <li><a class="dropdown-item" href="{{path('app_logout')}}">Se déconnecter</a></li> 
-                            </ul>
-                        </div>                        
-                            <form action="" method="GET" class="ms-3">
-                                <input type="text" name="search">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </form>
+                        {% if is_granted('ROLE_ADMIN') %}
+                 
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{path('admin_home')}}">Espace Admin</a>
+                            </li>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{path('user_home_index')}}">Espace User</a>
+                            </li>
+                        {% endif %}
+                       
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{path('app_logout')}}">Se déconnecter</a>
+                            </li>                         
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_authentication_login')}}">Connexion</a> 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_registration_register')}}">Inscription</a> 
-                            
                         </li>
                         <form action="" method="GET">
                             <input type="text" name="search">
