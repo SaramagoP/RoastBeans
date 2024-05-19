@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
                 // Rediriger l'utilisateur vers la page d'accueil
         if ($this->getUser()) 
         {
-            return $this->redirectToRoute('visitor_home_index');
+            return $this->redirectToRoute('visitor_welcome_index');
         }
         
         // 1 -Créér l'utilisateur à insérer en base de donées

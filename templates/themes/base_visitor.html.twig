@@ -51,7 +51,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="{{path('visitor_home_index')}}">Accueil</a>
+                            <a class="nav-link active text-white" aria-current="page" href="{{path('visitor_welcome_index')}}">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="">Click & Collect</a>
@@ -110,9 +110,94 @@
     {# Le pied de page #}
     <footer>
         <ul>
-            <li><span>2024 &copy <span class="name">Café RoastBeans.</span> Tous droits réservés.</span></li>
-            <li><a href="">Mentions Légales</a></li>
-            <li><a href="">À Propos</a></li>
+            <li><span>2024 &copy <span class="name">RoastBeans Café </span>· Tous droits réservés</span></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#legalNotice">Mentions Légales</a></li>
+                <div class="modal fade" id="legalNotice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-2" id="exampleModalLabel">Mentions Légales</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-dark">
+                                <h2 className="mt-5 fs-4"><strong>Informations générales</strong></h2>
+                                <p><strong>Nom de l'entreprise :</strong> RoastBeans Café</p>
+                                <p><strong>Forme juridique :</strong> Société à Responsabilité Limitée (SARL)</p>
+                                <p><strong>Siège social :</strong> 123 Rue du Café, 75001 Paris, France</p>
+                                <p><strong>Téléphone :</strong> +33 (0)1 23 45 67 89</p>
+                                <p><strong>E-mail :</strong> roastbeans@gmail.com</p>
+                                <p><strong>Numéro d'immatriculation au RCS :</strong> 123456789 RCS Paris</p>
+                                <p><strong>Directeur de la publication :</strong> Pierre Dubois</p>
+
+                                <h2 className="mt-5 fs-4">Hébergeur</h2>
+                                <p><strong>Nom de l'hébergeur :</strong> Hébergement Web Inc.</p>
+                                <p><strong>Adresse :</strong> 123 Rue de l'Hébergement, 75002 Paris, France</p>
+                                <p><strong>Téléphone :</strong> +33 (0)1 98 76 54 32</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Propriété intellectuelle</h2>
+                                <p>Tous les contenus présents sur le site (textes, images, vidéos, etc.) sont la propriété exclusive de Café de la Rue. Toute reproduction ou utilisation non autorisée est interdite.</p> 
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Protection des données personnelles</h2>
+                                <p>Veuillez consulter notre Politique de Confidentialité pour comprendre comment nous collectons, utilisons et protégeons vos données personnelles.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Cookies</h2>
+                                <p>Notre site utilise des cookies pour améliorer votre expérience de navigation. Consultez notre Politique de Cookies pour en savoir plus sur l'utilisation des cookies et sur la manière de les gérer.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Liens externes</h2>
+                                <p>Nous déclinons toute responsabilité concernant le contenu des sites externes liés au nôtre.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Litiges</h2>
+                                <p>En cas de litige, le droit français est applicable et les tribunaux de Paris sont compétents.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Droit applicable</h2>
+                                <p>Le présent site est soumis au droit français.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Modification des mentions légales</h2>
+                                <p>Les présentes mentions légales peuvent être modifiées à tout moment sans préavis. La date de la dernière mise à jour est indiquée ci-dessous.</p>
+                                <p>Dernière mise à jour : 17/05/2024</p>
+                                
+                                <h2 className="mt-5 fs-4 text-uppercase">Politique de Confidentialité</h2>
+                                <p>La présente Politique de Confidentialité définit la manière dont RoastBeans Café collecte, utilise, protège et divulgue les informations recueillies auprès des utilisateurs ("Utilisateurs") de son site web [URL du site].</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Collecte et Utilisation des Informations Personnelles</h2>
+                                <p>Nous pouvons collecter des informations personnelles auprès des Utilisateurs de différentes manières, notamment lorsque les Utilisateurs visitent notre site, s'inscrivent sur le site, passent une commande, remplissent un formulaire, répondent à une enquête ou à un sondage, et en relation avec d'autres activités, services, fonctionnalités ou ressources que nous mettons à disposition sur notre site. Les Utilisateurs peuvent être invités, le cas échéant, à fournir leur nom, adresse e-mail, adresse postale, numéro de téléphone, informations de carte de crédit et autres informations.</p>
+                                <p>Nous collectons des informations personnelles auprès des Utilisateurs uniquement s'ils nous les fournissent volontairement. Les Utilisateurs peuvent refuser de fournir des informations personnelles, sauf que cela peut les empêcher de participer à certaines activités liées au site.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Protection des Informations</h2>
+                                <p>Nous adoptons des pratiques appropriées de collecte, de stockage et de traitement des données, ainsi que des mesures de sécurité pour protéger contre l'accès non autorisé, l'altération, la divulgation ou la destruction de vos informations personnelles, nom d'utilisateur, mot de passe, informations de transaction et données stockées sur notre site.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Partage de vos Informations Personnelles</h2>
+                                <p>Nous ne vendons, n'échangeons et ne louons pas les informations personnelles des Utilisateurs à des tiers. Nous pouvons partager des informations démographiques agrégées génériques non liées à des informations personnelles concernant les visiteurs et les utilisateurs avec nos partenaires commerciaux, affiliés de confiance et annonceurs à des fins décrites ci-dessus.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Conformité à la Loi sur la Protection de la Vie Privée en Ligne</h2>
+                                <p>Comme nous valorisons votre vie privée, nous avons pris les mesures nécessaires pour être en conformité avec la Loi sur la Protection de la Vie Privée en Ligne. Nous ne collecterons jamais sciemment des informations personnelles auprès de personnes de moins de 13 ans.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Changements à cette Politique de Confidentialité</h2>
+                                <p>[Nom de l'entreprise] se réserve le droit de mettre à jour cette Politique de Confidentialité à tout moment. Nous vous encourageons à consulter fréquemment cette page pour rester informé de la manière dont nous protégeons les informations personnelles que nous collectons. Vous reconnaissez et acceptez qu'il est de votre responsabilité de consulter périodiquement cette Politique de Confidentialité et de prendre connaissance des modifications.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Votre Acceptation de ces Termes</h2>
+                                <p>En utilisant ce site, vous signifiez votre acceptation de cette Politique de Confidentialité. Si vous n'êtes pas d'accord avec cette Politique de Confidentialité, veuillez ne pas utiliser notre site. Votre utilisation continue du site après la publication de modifications de cette Politique de Confidentialité sera considérée comme votre acceptation de ces modifications.</p>
+
+                                <h2 className="mt-5 fs-4 text-uppercase">Contactez-nous</h2>
+                                <p>Si vous avez des questions concernant cette Politique de Confidentialité, les pratiques de ce site, ou vos relations avec ce site, veuillez nous contacter à :</p>
+                                <div>
+                                    <p><strong>RoastBeans Café</strong></p>
+                                    <p><strong>Adresse : </strong>123 Rue du Café, 75001 Paris, France</p>
+                                    <p><strong>Téléphone : </strong>+33 (0)1 23 45 67 89</p>
+                                    <p><strong>E-mail : </strong>roastbeans@gmail.com</p>
+                                </div>
+
+                                <p><strong>Dernière mise à jour : </strong>17/05/2024</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <li><a href="{{path('visitor_about_index')}}">À Propos</a></li>
             <li><a href="#"><i class="fab fa-instagram"></i></a></li>
             <li><a href="#"><i class="fab fa-facebook"></i></a></li>
         </ul>
