@@ -19,7 +19,7 @@ class LoginController extends AbstractController
         if ($this->getUser()) 
         {
             // Rediriger vers la page d'accueil des visiteurs si l'utilisateur est déjà connecté.
-            return $this->redirectToRoute('visitor_home_index');
+            return $this->redirectToRoute('visitor_welcome_index');
         }
 
         // get the login error if there is one

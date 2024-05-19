@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Controller\Visitor\Home;
+namespace App\Controller\Admin\Home;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin')]
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'visitor_home_index', methods:['GET'])]
+    #[Route('/home', name: 'admin_home', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('pages/visitor/home/index.html.twig');
+        return $this->render('pages/admin/home/index.html.twig');
     }
 }
