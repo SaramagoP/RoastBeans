@@ -1,0 +1,45 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Nouveau Produit{% endblock %}
+
+{% block description %}Nouveau Produit{% endblock %}
+
+{% block keywords %}Liste, produits, admin{% endblock %}
+
+{% block main %}
+
+    <h1 class="text-center my-3 display-5">Nouveau Produit</h1>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{form_start(form)}}
+                    <div class="mb-3">
+                        <label for="admin_product_form_name">Nom</label>
+                        <div class="text-danger">{{form_errors(form.name)}}</div>
+                        {{form_widget(form.name, {'attr':{'class':'form-control', 'autofocus':'autofocus'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_product_form_image">Image</label>
+                        <div class="text-danger">{{form_errors(form.image)}}</div>
+                        {{form_widget(form.image, {'attr':{'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_product_form_description">Description</label>
+                        <div class="text-danger">{{form_errors(form.description)}}</div>
+                        {{form_widget(form.description, {'attr':{'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_product_form_price">Prix €</label>
+                        <div class="text-danger">{{form_errors(form.price)}}</div>
+                        {{form_widget(form.price, {'attr':{'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                        <input formnovalidate type="submit" class="btn btn shadow w-50" value="Créer" sytle="color: ">
+                    </div>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
