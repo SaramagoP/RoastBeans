@@ -12,7 +12,7 @@
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-6 mx-auto">
+             <div class="col-lg-9 mx-auto">
                 {{form_start(form)}}
                     <div class="mb-3">
                         <label for="admin_product_form_name">Nom</label>
@@ -20,13 +20,31 @@
                         {{form_widget(form.name, {'attr':{'class':'form-control', 'autofocus':'autofocus'}})}}
                     </div>
                     <div class="mb-3">
-                        <label for="admin_product_form_image">Image</label>
-                        {{form_widget(form.image, {'attr':{'class':'form-control'}})}}
+                        <label for="admin_produit_form_category">Catégorie</label>
+                        <div class="text-danger">{{form_errors(form.category)}}</div>
+                        {{form_widget(form.category, {'attr': {'class':'form-control'}})}}
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                         {# Image #}
+                            <label>Image actuelle</label>
+                            {% if product.image %}
+                                <img width="160" height="160" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}">
+                            {% else %}
+                                <label><i class="fa-solid fa-circle-exclamation"></i> Aucune image actuelle</label>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            {# Formulaire #}
+                            <label for="admin_product_form_imageFile_file">Modifier l'image</label>
+                            <div class="text-danger">{{form_errors(form.imageFile)}}</div>
+                            {{form_widget(form.imageFile, {'attr':{'class':'form-control mb-4'}})}}
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="admin_product_form_description">Description</label>
                         <div class="text-danger">{{form_errors(form.description)}}</div>
-                        {{form_widget(form.description, {'attr':{'class':'form-control'}})}}
+                        {{form_widget(form.description, {"attr":{"class":"form-control"}}) }}        
                     </div>
                     <div class="mb-3">
                         <label for="admin_product_form_price">Prix €</label>
@@ -34,11 +52,13 @@
                         {{form_widget(form.price, {'attr':{'class':'form-control'}})}}
                     </div>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <input formnovalidate type="submit" class="btn btn-dark shadow w-50" value="Créer" sytle="color: ">
+                        <input formnovalidate type="submit" class="btn btn-dark shadow w-50" value="Modifier">
                     </div>
                 {{form_end(form)}}
             </div>
         </div>
     </div>
+
+   
 
 {% endblock %}

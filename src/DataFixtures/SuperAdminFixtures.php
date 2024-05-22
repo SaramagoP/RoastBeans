@@ -34,7 +34,7 @@ class SuperAdminFixtures extends Fixture
     {
         $superAdmin = new User();
 
-        $passwordHashed = $this->hasher->hashPassword($superAdmin, "Azerty.123**");
+        $passwordHashed = $this->hasher->hashPassword($superAdmin, "Azerty.1234**");
 
         $superAdmin
                     ->setFirstName("Pierre")
@@ -43,9 +43,8 @@ class SuperAdminFixtures extends Fixture
                     ->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_USER'])
                     ->setPassword($passwordHashed)
                     ->setVerified(true)
-                    // ->setCreatedAt(new DateTimeImmutable())
-                    // ->setUpdatedAt(new DateTimeImmutable())
-                    ->setVerifiedAt(new DateTimeImmutable())
+                    ->setCreatedAt(new DateTimeImmutable())
+                    ->setUpdatedAt(new DateTimeImmutable())
         ;
 
         return $superAdmin;

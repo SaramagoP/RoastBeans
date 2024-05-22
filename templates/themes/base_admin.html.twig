@@ -34,6 +34,12 @@
     {# Datatables #}
     {% block datatables %}{% endblock %}
 
+    {# Wysiwyg editor #}
+    {% block ckEditor %}{% endblock %}
+
+    {# Select2 #}
+    {% block select2 %}{% endblock %}
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -202,6 +208,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_category_index')}}">
+                                <i class="fa-regular fa-folder-open"></i>
+                                Catégories
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_product_index')}}">
                                 <i class="fa-solid fa-mug-hot"></i>
                                 Produits
@@ -215,6 +227,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="#">
+                                <i class="fa-solid fa-address-book"></i>
+                                Contacts
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2 text-dark" href="#">
                                 <i class="fa-solid fa-user"></i>
                                 Utilisateurs
                             </a>
@@ -222,7 +240,7 @@
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="#">
                                 <i class="fa-solid fa-comment"></i>
-                                Avis
+                                Commentaires
                             </a>
                             </li>
                     </ul>
@@ -232,8 +250,20 @@
                 <ul class="nav flex-column mb-auto">
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('user_home_index')}}">
+                            <i class="fa-solid fa-user"></i>
+                            Mon Profil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 text-dark" href="#">
+                            <i class="fa-solid fa-gear"></i>
+                            Paramètres
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('user_home_index')}}">
                             <i class="fa-solid fa-lock"></i>
-                            Espace privé
+                            Espace utilisateur
                         </a>
                     </li>
                     <li class="nav-item">
@@ -245,7 +275,7 @@
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('app_logout')}}">
                             <i class="fa-solid fa-right-from-bracket"></i>
-                            Se déconnecter
+                            Déconnexion
                         </a>
                     </li>
                 </ul>
