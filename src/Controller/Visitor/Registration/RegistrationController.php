@@ -4,6 +4,7 @@ namespace App\Controller\Visitor\Registration;
 
 
 
+use DateTimeImmutable;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
@@ -48,6 +49,10 @@ class RegistrationController extends AbstractController
         // 5- Poser la condition si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) 
         {
+
+            $user->setCreatedAt(new DateTimeImmutable());
+            $user->setUpdatedAt(new DateTimeImmutable());
+
             // 6- Encoder le mot de passe
             $passwordHashed = $userPasswordHasher->hashPassword($user, $form->get('password')->getData());
 

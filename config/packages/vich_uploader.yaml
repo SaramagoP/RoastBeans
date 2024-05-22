@@ -1,0 +1,20 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+        products:
+            uri_prefix: /images/products
+            upload_destination: '%kernel.project_dir%/public/images/products'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+    # All options are listed below:
+    # delete_on_remove: default true, should the file be deleted when the entity is removed ;
+    # delete_on_update: default true, should the file be deleted when a new file is uploaded ;
+    # inject_on_load: default false, should the file be injected into the uploadable entity when it is loaded from the data store.
