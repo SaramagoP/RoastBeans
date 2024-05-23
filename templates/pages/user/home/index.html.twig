@@ -1,64 +1,16 @@
 {% extends 'themes/base_user.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Tableau de bord{% endblock %}
 
-{% block description %}Accueil{% endblock %}
+{% block description %}Tableau de bord{% endblock %}
 
-{% block keywords %}Accueil{% endblock %}
+{% block keywords %}Tableau-de-bord, admin{% endblock %}
 
 {% block main %}
 
-    <h1 class="text-center my-3 display-5">Espace Utilisateur</h1>
+    <h1 class="text-center my-3 display-5">Espace Utilisateur</h1><hr>
 
     <p class="text-center fs-4"> Bonjour {{app.user.firstName}}!</p>
 
-    {# {% for message in app.flashes('success') %}
-            <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
-            {{message}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-
-        <div class="d-flex justify-content-end align-items-center my-3">
-            <a href="#" class="btn btn-danger shadow">Nouveau Utilisateur</a>
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered text-center">
-                <thead class="table-primary">
-                    <tr>
-                        <th>Id</th>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Roles</th>
-                        <th>Password</th>
-                        <th>Créé le</th>
-                        <th>Modifié le</th>
-                        <th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for contact in contacts %}
-                        <tr>
-                            <td>{{contact.id}}</td>
-                            <td>{{contact.firstName}}</td>
-                            <td>{{contact.lastName}}</td>
-                            <td>{{contact.email}}</td>
-                            <td>{{contact.roles}}</td>
-                            <td>{{contact.password}}</td>
-                            <td>{{contact.createdAt | format_datetime()}}</td>
-                            <td>{{contact.updatedAt | format_datetime()}}</td>
-                            <td>
-                                <a href="{{path('app_edit', {'id':contact.id})}}" class="btn btn-sm btn-dark m-1">Modifier</a>
-                                <form action="{{path('app_delete', {'id':contact.id})}}" method="post" class="d-inline">
-                                    <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_contact_'~contact.id)}}">
-                                    <input onclick="return confirm('Confirmer la supression?')" type="submit" class="btn btn-sm btn-danger" value="supprimer"> 
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>#}
-    {% endblock %} 
+   
+{% endblock %} 

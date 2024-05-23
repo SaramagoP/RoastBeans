@@ -1,0 +1,68 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block description %}Contactez-nous{% endblock %}
+
+{% block keywords %}Email, message, contact{% endblock %}
+
+{% block main %}
+
+    <h1 class="text-center my-3 display-5">Contactez-Nous</h1>
+
+    <div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'components/_alert.html.twig' %}
+            {{form_start(form)}}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="contact_form_firstName">Prénom<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.firstName)}}</div>
+                        {{form_widget(form.firstName, {'attr':{'class':'form-control', 'autofocus':'autofocus'}})}}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="contact_form_lastName">Nom<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.lastName)}}</div>
+                        {{form_widget(form.lastName, {'attr':{'class':'form-control'}})}}
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="contact_form_email">Email<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.email)}}</div>
+                        {{form_widget(form.email, {'attr':{'class':'form-control'}})}}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="contact_form_phone">Téléphone</label>
+                        {{form_widget(form.phone, {'attr':{'class':'form-control'}})}}
+                    </div>
+                </div> 
+                <div class="mb-3">
+                    <label for="contact_form_message">Message<span class="text-danger">*</span></label>
+                    <div class="text-danger">{{form_errors(form.message)}}</div>
+                    {{form_widget(form.message, {'attr':{'class':'form-control', 'rows': 6}})}}
+                </div>
+                <div class="d-flex justify-content-center align-items-center my-3">
+                    <input formnovalidate type="submit" class="btn btn" style="background-color: #C59B76" value="Envoyer">
+                </div>
+            {{form_end(form)}}
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <div class="text-center text-md-start">
+                <p><i class="fa-solid fa-envelope text-white"></i> : roastbeans@gmail.com</p>
+                <p><i class="fa-solid fa-location-dot text-white"></i> :  123 Rue du Café, 75001 Paris, France</p>
+                <p><i class="fa-solid fa-phone text-white"></i> : +33 (0)1 23 45 67 89</p>
+                <p><i class="fa-solid fa-clock text-white"></i> Du Lundi au Samedi: 9:00 - 18:00 / Dimanche: Fermé</p>
+        
+                
+            </div>
+            <div>
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.77824573245!2d2.264634906379706!3d48.85893843461572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1716410876207!5m2!1sfr!2sfr" class="w-100 h-100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+{% endblock %}
+
