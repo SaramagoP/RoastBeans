@@ -1,8 +1,8 @@
 {% extends 'themes/base_admin.html.twig' %}
 
-{% block title %}Liste des catégories{% endblock %}
+{% block title %}Liste des Catégories{% endblock %}
 
-{% block description %}Liste des catégories{% endblock %}
+{% block description %}Liste des Catégories{% endblock %}
 
 {% block keywords %}Admin, liste, catégories{% endblock %}
 
@@ -27,12 +27,12 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Liste des catégories<hr></h1>
+    <h1 class="text-center my-3 display-5">Liste des Catégories<hr></h1>
 
     {% include 'components/_alert.html.twig' %}
 
     <div class="d-flex justify-content-end align-items-center my-3">
-        <a href="{{path('admin_category_create')}}" class="btn btn-dark shadow"><i class="fa-solid fa-plus"></i> Nouvelle catégorie</a>
+        <a href="{{path('admin_category_create')}}" class="btn btn-dark shadow"><i class="fa-solid fa-plus"></i> Nouvelle Catégorie</a>
     </div>
 
     <div class="table-responsive">

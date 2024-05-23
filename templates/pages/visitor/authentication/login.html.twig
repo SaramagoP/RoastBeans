@@ -37,11 +37,11 @@
                     {% include 'components/_alert.html.twig' %}
 
                     <div class="mb-3">
-                        <label for="inputEmail">Email</label>
+                        <label for="inputEmail">Email<span class="text-danger">*</span></label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
                     </div>
                     <div class="mb-3">
-                        <label for="inputPassword">Password</label>
+                        <label for="inputPassword">Password<span class="text-danger">*</span></label>
                         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
                     </div>
 

@@ -1,0 +1,95 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Liste des Contacts{% endblock %}
+
+{% block description %}Liste des Contacts{% endblock %}
+
+{% block keywords %}Admin, liste, contact{% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block datatables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.7/i18n/fr-FR.json',
+                },
+            });
+        } );
+    </script>
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Liste des Contacts<hr></h1>
+
+    {% include 'components/_alert.html.twig' %}
+
+    <div class="table-responsive">
+        <table id="table" class="table table-hover text-center table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Numéro de Téléphone</th>
+                    <th>Message</th>
+                    <th>Envoyé le</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                        <td>{{contact.id}}</td>
+                        <td>{{contact.firstName}}</td>
+                        <td>{{contact.lastName}}</td>
+                        <td>{{contact.email}}</td>
+                        <td>{{contact.phone ? contact.phone : "---"}}</td>
+                        <td class="text-center">
+                            <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#modal_{{contact.id}}"><i class="fa-solid fa-book-open-reader"></i></a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modal_{{contact.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <p class="modal-title fs-5" id="staticBackdropLabel">{{contact.firstName}} {{contact.lastName}}</p>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ contact.message|nl2br }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> 
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </td>
+                        <td>{{contact.createdAt|format_datetime()}}</td>
+                        <td class="d-flex justify-content-evenly">
+                            <form action="{{path('admin_contact_delete', {'id':contact.id})}}" method="post">
+                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_contact_'~contact.id)}}">
+                                <button onClick="return confirm('Confirmer la suppression?')" type="submit" value="Supprimer" style="border: none; background: none; padding: 0; color: #ff0000">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+
+
+                       
