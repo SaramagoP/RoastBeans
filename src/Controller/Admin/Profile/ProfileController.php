@@ -33,7 +33,7 @@ class ProfileController extends AbstractController
     #[Route('/profile', name: 'admin_profile_index', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('themes/base_admin.html.twig');
+        return $this->render('pages/admin/profile/index.html.twig');
     }
 
 
