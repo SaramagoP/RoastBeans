@@ -1,0 +1,47 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block description %}Mon Profil{% endblock %}
+
+{% block keywords %}Admin, profil{% endblock %}
+
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Mon Profil<hr></h1>
+
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-7 mx-auto">
+
+                {% include 'components/_alert.html.twig' %}
+
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h2 class="card-title text-center my-3">Gestion de mon Profil</h2>
+                        <p class="card-text"><strong>Prénom: </strong>{{app.user.firstName}}</p>
+                        <p class="card-text"><strong>Nom: </strong>{{app.user.lastName}}</p>
+                        <p class="card-text"><strong>Email: </strong>{{app.user.email}}</p>
+                        <a href="{{path('user_profile_edit')}}" class="m-2 btn btn-secondary">Modifier le profil</a>
+                        <a href="{{path('user_profile_edit_password')}}"class="m-2 btn btn-dark">Modifier le mot de passe</a>
+
+                        {% if "ROLE_SUPER_ADMIN" not in app.user.roles %}
+                            <form method="POST" action="{{path('user_profile_delete')}}" class="d-inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_profile')}}">
+                                <input onClick="return confirm('Confirmer la supression de votre compte?')" type="submit" class="m-2 btn btn-danger " value="Supprimer mon profile">
+                            </form>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+                       
