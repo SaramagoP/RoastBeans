@@ -6,14 +6,15 @@
 
 {% block main %}
 
+    <h1 class="text-center mb-5 display-5">Inscrivez-Vous</h1>
+    
     <div class="container my-5">
-        <h1 class="text-center mb-5 display-5">Inscrivez-Vous</h1>
         <div class="row">
             <div class="col-lg-6 text-center mb-5">
                 <img src="{{asset('images/visitor/barista3.jpg')}}" alt="Barista stocking coffee beans" class="img-fluid rounded-pill" style="max-width: 65%">
             </div>
             <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
-
+            
                 {% for flash_error in app.flashes('verify_email_error') %}
                     <div class="alert alert-danger" role="alert">{{ flash_error }}</div>                    
                 {% endfor %}
@@ -50,7 +51,7 @@
                     <div class="mb-3">
                         <label for="registration_form_agreeTerms">
                             {{form_widget(registrationForm.agreeTerms)}}
-                            Lire et accepter <a href="#" data-bs-toggle="modal" data-bs-target="#agreeTermsModal">les conditions générales d'utilisation</a>
+                            Lire et accepter <a href="#" data-bs-toggle="modal" data-bs-target="#agreeTermsModal" class="text-decoration-none">les conditions générales d'utilisation</a>
                         </label>
                      
                         <!-- Modal -->
@@ -104,8 +105,8 @@
                     </div>
                 {{form_end(registrationForm)}}
                 <div class="text-center mt-3">
-                    <p>Vous avez déjà un compte? <a href="{{path('visitor_authentication_login')}}">Connectez-vous</a></p> 
-                    <p><a href="{{path('visitor_welcome_index')}}">Retour à l'accueil</a></p>
+                    <p>Vous avez déjà un compte? <a href="{{path('visitor_authentication_login')}}" class="text-white">Connectez-vous</a></p> 
+                    <p><a href="{{path('visitor_welcome_index')}}" class="text-white">Retour à l'accueil</a></p>
                 </div>
             </div>
         </div>
