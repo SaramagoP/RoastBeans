@@ -90,16 +90,17 @@ class CategoryController extends AbstractController
     }
 
 
-    #[Route('/category/{id<\d+>}/delete', name: 'admin_category_delete', methods: ['POST', 'DELETE'])]
+    #[Route('/category/{id<\d+>}/delete', name: 'admin_category_delete', methods: ['DELETE'])]
     public function delete(Category $category, Request $request): Response
     {
         if ( $this->isCsrfTokenValid('delete_category_'.$category->getId(), $request->request->get('_csrf_token')) )
         {
+            $this->addFlash('success', "La catégorie {$category->getName()} a été supprimée avec succès.");
+            
             $this->em->remove($category);
             
             $this->em->flush();
             
-            $this->addFlash('success', "La catégorie {$category->getName()} a été supprimée avec succès.");
 
             return $this->redirectToRoute('admin_category_index');
         }

@@ -70,7 +70,6 @@
                     <ul class="navbar-nav ms-auto">
                     {% if app.user %}
                         {% if is_granted('ROLE_ADMIN') %}
-                 
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="{{path('admin_home')}}">Espace Admin</a>
                             </li>
