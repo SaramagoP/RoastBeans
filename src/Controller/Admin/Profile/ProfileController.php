@@ -127,13 +127,13 @@ class ProfileController extends AbstractController
             /** @var User */
             $admin = $this->getUser();
 
+            $this->addFlash('success', "Le profile de {$admin->getFirstName()} {$admin->getLastName()} a été supprimée avec succès.");
+            
             $this->container->get('security.token_storage')->setToken(null);
 
             $this->em->remove($admin);
             
             $this->em->flush();
-            
-            $this->addFlash('success', "Le profile de {$admin->getFirstName()} {$admin->getLastName()} a été supprimée avec succès.");
 
         return $this->redirectToRoute('admin_profile_index');
         }

@@ -58,6 +58,7 @@
                         <td class="d-flex justify-content-evenly">
                             <a href="{{path('admin_category_edit', {'id':category.id})}}" type="submit" value="Modifier"><i class="fa-solid fa-edit"></i></a>
                             <form action="{{path('admin_category_delete', {'id':category.id})}}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_category_'~category.id)}}">
                                 <button onClick="return confirm('Confirmer la suppression?')" type="submit" value="Supprimer" style="border: none; background: none; padding: 0; color: #ff0000">
                                     <i class="fa-solid fa-trash"></i>

@@ -53,6 +53,17 @@ class Product
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+
+    #[Assert\Positive(message: "Le prix de vente doit être un nombre positif.")]
+    #[Assert\Regex(
+        pattern: "/^\d+(.\d{1,2})?$/",
+        message: "Le prix de vente doit être un entier ou un nombre décimal avec au plus deux décimales."
+    )]
+    #[Assert\Range(
+        min: 0.1,
+        max: 9999999,
+        notInRangeMessage: 'Le prix de vente doit être compris entre {{ min }} euros {{ max }} euros.',
+    )]
     #[Assert\NotBlank(message: 'Le prix du produit est obligatoire')]
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
     private ?string $price = null;

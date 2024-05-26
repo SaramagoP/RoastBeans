@@ -29,11 +29,12 @@ class ContactController extends AbstractController
     {
         if ( $this->isCsrfTokenValid('delete_contact_'.$contact->getId(), $request->request->get('_csrf_token')) )
         {
+            $this->addFlash('success', "Le contact a été supprimée avec succès.");
+            
             $em->remove($contact);
             
             $em->flush();
             
-            $this->addFlash('success', "Le contact a été supprimée avec succès.");
 
             return $this->redirectToRoute('admin_contact_index');
         }
