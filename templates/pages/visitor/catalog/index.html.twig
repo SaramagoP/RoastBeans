@@ -1,0 +1,46 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block description %}Produits{% endblock %}
+
+{% block keywords %}Produits, catalog{% endblock %}
+
+{% block main %}
+
+    <h1 class="text-center my-3 display-5">Produits</h1>
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-2">
+                {# Filtre #}
+            </div>
+            <div class="col-md-10">
+                {% for row in products|batch(3) %}
+                    <div class="row">
+                        {% for product in row %}
+                            <div class="col-md-4 my-3">
+                                <div class="card">
+                                    <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}">
+                                        <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img text-center rounded-2 w-100 h-100" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="card-body">
+                                        <a class="text-decoration-none" href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}">
+                                            <h2 class="card-title text-center mb-4" style="color: #C59B76; font-family: Dancing Script, cursive;">{{ product.name }}</h2>
+                                        </a>
+                                        <p class="card-subtitle text-muted fw-bold fs-5 text-end my-3">{{ product.price }}€</p>
+                                        <p class="card-text">
+                                            <a href="" class="btn btn-sm btn-dark">Ajouter au panier</a>
+                                            <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}" class="btn btn-sm btn-secondary">Voir les détails</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+ 
+{% endblock %}

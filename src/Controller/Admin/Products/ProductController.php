@@ -24,6 +24,7 @@ class ProductController extends AbstractController
     )
     {
     }
+    
 
     #[Route('/product/list', name: 'admin_product_index', methods: ['GET'])]
     public function index(): Response

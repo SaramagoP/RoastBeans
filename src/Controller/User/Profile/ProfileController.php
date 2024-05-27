@@ -75,14 +75,14 @@ class ProfileController extends AbstractController
     }
 
 
-    #[Route('/profile/edit-password', name: 'user_profile_edit_password', methods: ['GET', 'PUT'])]
+    #[Route('/profile/edit-password', name: 'user_profile_edit_password', methods: ['GET', 'POST'])]
     public function editPassword(Request $request): Response
     {
         
         $user = $this->getUser();
 
         $form = $this->createForm(EditPasswordFormType::class, null, [
-            "method" => "PUT"
+            "method" => "POST"
         ]);
 
         $form->handleRequest($request);
