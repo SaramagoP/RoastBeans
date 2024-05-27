@@ -55,35 +55,43 @@
                             <a class="nav-link active text-white" aria-current="page" href="{{path('visitor_welcome_index')}}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="">Click & Collect</a>
+                            <a class="nav-link text-white" href="{{path('visitor_catalog_index')}}">Produits</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="">Produits</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="">Avis</a>
+                            <a class="nav-link text-white" href="{{path('visitor_review_index')}}">Avis</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_contact_create')}}">Contact</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                    {% if app.user %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{path('admin_home')}}">Espace Admin</a>
-                            </li>
-                        {% endif %}
-
-                        {% if is_granted('ROLE_USER') %}
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{path('user_home_index')}}">Espace User</a>
-                            </li>
-                        {% endif %}
-                       
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{path('app_logout')}}">Se déconnecter</a>
-                            </li>                         
+                        <form action="" method="GET" class="me-4">
+                            <input type="text" name="search">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{path('visitor_cart_index')}}"><i class="fas fa-shopping-cart"></i> Panier</a>
+                        </li>
+                        {% if app.user %}
+                        <li class="nav-item dropdown">
+                            <a href="" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                {{app.user.firstName}}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                {% if is_granted('ROLE_USER') %}
+                                <li>
+                                    <a class="dropdown-item" href="{{path('admin_home')}}">Espace Admin</a>
+                                </li>
+                                {% endif %}
+                                <li>
+                                    <a class="dropdown-item" href="{{path('user_home_index')}}">Espace User</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
+                                </li>
+                            </ul>
+                        </li> 
+                    </ul>                               
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_authentication_login')}}">Connexion</a> 
@@ -96,7 +104,6 @@
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
                     {% endif %}
-                    </ul>
                 </div>
             </div>
         </nav>

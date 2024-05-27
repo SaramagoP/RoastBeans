@@ -26,15 +26,15 @@ class SettingsController extends AbstractController
     public function index(): Response
     {
         return $this->render('pages/admin/settings/index.html.twig', [
-            "settings" => $this->settingsRepository->find(2) // dans mise en production pas oublier de metre 1
+            "settings" => $this->settingsRepository->find(4) // dans mise en production pas oublier de metre 1
         ]);
     }
 
-    #[Route('/settings/{id<\d+>}/edit', name: 'admin_settings_edit', methods: ['GET', 'PUT'])]
+    #[Route('/settings/{id<\d+>}/edit', name: 'admin_settings_edit', methods: ['GET', 'POST'])]
     public function edit(Settings $settings, Request $request): Response
     {
         $form = $this->createForm(SettingsFormType::class, $settings, [
-            "method" => "PUT"
+            "method" => "POST"
         ]);
 
         $form->handleRequest($request);

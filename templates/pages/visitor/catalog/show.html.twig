@@ -1,0 +1,31 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block description %}{{ product.name }}{% endblock %}
+
+{% block keywords %}Produits, catalog{% endblock %}
+
+{% block main %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-5 text-center mt-5">
+                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-fluid" alt="{{ product.name }}" style="width: 100%; max-width: 500px; height: auto;">
+            </div>
+            <div class="col-md-7 text-center my-3">
+                <h1 class="my-3">{{ product.name }}</h1>
+                <p>
+                    {% for category in product %}
+                        {{category.name}}
+                    {% endfor %}
+                </p>
+                <p class="fs-5"><strong>Prix :</strong> {{ product.price }} €</p>
+                <div class="fs-5">
+                    <strong>Description :</strong>
+                </div>
+                <p>{{ product.description }}</p>
+                <a href="" class="btn btn-sm my-3" style="background-color: #C59B76">Ajouter au panier</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
