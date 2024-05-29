@@ -14,16 +14,16 @@
             <div class=" col-md-8 mx-auto col-lg-6 text-center">
                 <div class="row">
                     <div class="col-md-6 col-lg-6 mb-3">
-                        <img src="{{asset('images/visitor/coffee-and-croissant.jpg')}}" alt="café et croissant" class="img-fluid rounded-pill">
+                        <img src="{{ asset('images/visitor/coffee-and-croissant.jpg') }}" alt="café et croissant" class="img-fluid rounded-pill custom-image">
                     </div>
                     <div class="col-md-6 col-lg-6 mb-3">
-                        <img src="{{asset('images/visitor/arome-cafes.jpg')}}" alt="tasse de café" class="img-fluid rounded-pill">
+                        <img src="{{ asset('images/visitor/arome-cafes.jpg') }}" alt="tasse de café" class="img-fluid rounded-pill custom-image">
                     </div>
                     <div class="col-md-6 col-lg-6 mb-3">
-                        <img src="{{asset('images/visitor/barista4.jpg')}}" alt="barista que preparer un café" class="img-fluid rounded-pill">
+                        <img src="{{ asset('images/visitor/barista4.jpg') }}" alt="barista que preparer un café" class="img-fluid rounded-pill custom-image">
                     </div>
                     <div class="col-md-6 col-lg-6 mb-5">
-                        <img src="{{asset('images/visitor/tasse-cafe.jpg')}}" alt="tasse de café" class="img-fluid rounded-pill">
+                        <img src="{{ asset('images/visitor/tasse-cafe.jpg') }}" alt="tasse de café" class="img-fluid rounded-pill custom-image">
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
 
                 <form method="POST" class="w-100">
                     {% if error %}
-                        <div class=" text-center alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        <div class="text-center alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
 
                     {% include 'components/_alert.html.twig' %}
@@ -53,12 +53,11 @@
                                 </label>
                             </div>
                             <div class="col-md-6 text-lg-end my-1">
-                            <a href="{{path('visitor_authentication_forgot_password_request')}}">Mot de passe oublié?</a>
+                                <a href="{{ path('visitor_authentication_forgot_password_request') }}">Mot de passe oublié?</a>
                             </div>
                         </div>
                     </div>
 
-                    {# Jeton CSRF pour l'authentification du formulaire afin de prévenir les attaques Cross-Site Request Forgery (falsification de requête intersite) #}
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                     <div>
@@ -67,12 +66,12 @@
                 </form>
 
                 <div class="text-center mt-3">
-                    <p>Vous n'avez pas encore de compte? <a href="{{path('visitor_registration_register')}}" class="text-white">Inscrivez-vous</a></p>
-                    <p><a href="{{path('visitor_welcome_index')}}" class="text-white">Retour à l'accueil</a></p>
+                    <p>Vous n'avez pas encore de compte? <a href="{{ path('visitor_registration_register') }}" class="text-white">Inscrivez-vous</a></p>
+                    <p><a href="{{ path('visitor_welcome_index') }}" class="text-white">Retour à l'accueil</a></p>
                 </div>
             </div>
         </div>
     </div>
-    
+
 {% endblock %}
 
