@@ -29,7 +29,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Merienda:wght@300..900&display=swap" rel="stylesheet">
 
-         {# Fontawesome #}
+        {# Fontawesome #}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         {# La feuille de style de Bootstrap 5 #}
@@ -58,7 +58,7 @@
                             <a class="nav-link text-white" href="{{path('visitor_catalog_index')}}">Produits</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{path('visitor_review_index')}}">Avis</a>
+                            <a class="nav-link active text-white" aria-current="page" href="{{path('visitor_about_index')}}">À Propos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_contact_create')}}">Contact</a>
@@ -66,8 +66,8 @@
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <form action="" method="GET" class="me-4">
-                            <input type="text" name="search">
-                            <button type="submit"><i class="fas fa-search"></i></button>
+                            <input type="text" name="search" class="rounded pill">
+                            <button type="submit" class="rounded pill"><i class="fas fa-search"></i></button>
                         </form>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_cart_index')}}"><i class="fas fa-shopping-cart"></i> Panier</a>
@@ -80,15 +80,12 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {% if is_granted('ROLE_USER') %}
                                 <li>
-                                    <a class="dropdown-item" href="{{path('admin_home')}}">Espace Admin</a>
-                                </li>
-                                {% endif %}
-                                <li>
                                     <a class="dropdown-item" href="{{path('user_home_index')}}">Espace User</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </li> 
                     </ul>                               
@@ -99,10 +96,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_registration_register')}}">Inscription</a> 
                         </li>
-                        <form action="" method="GET">
-                            <input type="text" name="search">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
                     {% endif %}
                 </div>
             </div>
@@ -204,7 +197,6 @@
                         </div>
                     </div>
                 </div>
-            <li><a href="{{path('visitor_about_index')}}">À Propos</a></li>
             <li><a href="https://instagram.com"><i class="fab fa-instagram"></i></a></li>
             <li><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
         </ul>
@@ -215,3 +207,4 @@
 
 </body>
 </html>
+

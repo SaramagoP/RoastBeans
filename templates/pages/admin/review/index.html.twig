@@ -1,10 +1,10 @@
 {% extends 'themes/base_admin.html.twig' %}
 
-{% block title %}Liste des Contacts{% endblock %}
+{% block title %}Liste des Commentaires{% endblock %}
 
-{% block description %}Liste des Contacts{% endblock %}
+{% block description %}Liste des Commentaires{% endblock %}
 
-{% block keywords %}Admin, liste, contact{% endblock %}
+{% block keywords %}Admin, liste, commentaires{% endblock %}
 
 {% block jQuery %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Liste des Contacts<hr></h1>
+    <h1 class="text-center my-3 display-5">Liste des Commentaires<hr></h1>
 
     {% include 'components/_alert.html.twig' %}
 
@@ -36,36 +36,33 @@
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
+                    <th>Utilisateur</th>
                     <th>Email</th>
-                    <th>Numéro de Téléphone</th>
-                    <th>Message</th>
-                    <th>Envoyé le</th>
+                    <th>Produit</th>
+                    <th>Contenu</th>
+                    <th>Créé le</th>
                     <th>Options</th>
                 </tr>
             </thead>
             <tbody>
-                {% for contact in contacts %}
+                {% for review in reviews %}
                     <tr>
-                        <td>{{contact.id}}</td>
-                        <td>{{contact.firstName}}</td>
-                        <td>{{contact.lastName}}</td>
-                        <td>{{contact.email}}</td>
-                        <td>{{contact.phone ? contact.phone : "---"}}</td>
-                        <td class="text-center">
-                            <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#modal_{{contact.id}}"><i class="fa-solid fa-book-open-reader"></i></a>
-
+                        <td>{{review.id}}</td>
+                        <td>{{review.user.firstName}} {{review.user.lastName}}</td>
+                        <td>{{review.user.email}}</td>
+                        <td>{{review.product.name}}</td>
+                        <td>
+                            <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#modal_{{review.id}}"><i class="fa-solid fa-book-open-reader"></i></a> 
                             <!-- Modal -->
-                            <div class="modal fade" id="modal_{{contact.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="modal_{{review.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                 <div class="modal-header">
-                                    <p class="modal-title fs-5" id="staticBackdropLabel">{{contact.firstName}} {{contact.lastName}}</p>
+                                    <p class="modal-title fs-5">{{review.user.firstName}} {{review.user.lastName}}</p>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ contact.message|nl2br }}
+                                    {{ review.content|nl2br }}
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> 
@@ -74,11 +71,11 @@
                             </div>
                             </div>
                         </td>
-                        <td>{{contact.createdAt|format_datetime()}}</td>
+                        <td>{{review.createdAt|format_datetime()}}</td>
                         <td class="d-flex justify-content-evenly">
-                            <form action="{{path('admin_contact_delete', {'id':contact.id})}}" method="post">
+                            <form action="{{path('admin_review_delete', {'id':review.id})}}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_contact_'~contact.id)}}">
+                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_review_'~review.id)}}">
                                 <button onClick="return confirm('Confirmer la suppression?')" type="submit" value="Supprimer" style="border: none; background: none; padding: 0; color: #ff0000">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>

@@ -7,6 +7,7 @@
 {% block keywords %}Produits, catalog{% endblock %}
 
 {% block main %}
+
     <div class="container my-5">
         <div class="row">
             <div class="col-md-5 text-center mt-5">
@@ -23,9 +24,51 @@
                 <div class="fs-5">
                     <strong>Description :</strong>
                 </div>
-                <p>{{ product.description }}</p>
-                <a href="" class="btn btn-sm my-3" style="background-color: #C59B76">Ajouter au panier</a>
+                    <p>{{ product.description }}</p>
+                    <a href="" class="btn btn-sm my-3" style="background-color: #C59B76">Ajouter au panier</a>
             </div>
         </div>
     </div>
+
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center align-items-center mx-auto">
+            <div class="col-md-6">
+            {% if app.user %}
+                <div class="my-5">
+                    {{form_start(form)}}
+                        <div class="mb-3">
+                            <label for="review_form_content" class="my-1 fs-5"><strong>Laissez vos commentaires</strong></label>
+                            <div class="text-danger">{{form_errors(form.content)}}</div>
+                            {{ form_widget(form.content, {'attr': {'class':'form-control', 'rows': 4}}) }}
+                        </div>
+                        <div>
+                            <input formnovalidate type="submit" class="btn btn-secondary" value="Envoyer">
+                        </div>
+                    {{form_end(form)}}
+                </div>
+            {% else %}
+                <p class="text-center my-5">Veuillez vous <a href="{{path('visitor_authentication_login')}}" class="text-decoration-none">connecter</a>  ou vous <a href="{{path('visitor_registration_register')}}"class="text-decoration-none">inscrire</a> pour poivoir laisser un commentaire.</p>
+            {% endif %}
+            </div>
+        </div>    
+    </div>
+
+    <div class="container my-5"> 
+        <div class="row">
+            {% if product.reviews|length > 0 %}  
+                {% for review in product.reviews %}
+                    <div class="col-md-6">
+                        <div class="review bg-light text-dark ">
+                            <h2 class="comment_name">{{review.user.firstName}} {{review.user.lastName}}</h2>
+                            <p>{{review.content}}</p>
+                            <p class="text-end my-2">{{review.createdAt|format_datetime()}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
 {% endblock %}
