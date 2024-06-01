@@ -6,12 +6,16 @@
 <ul>
     <li><strong>Email</strong> : {{contact_email}}</li>
     {% if contact_phone is not empty %}
+        {# Vérifie si le numéro de téléphone du contact n'est pas vide #}
         <li><strong>Phone</strong> : {{contact_phone}}</li>
+        {# Si le numéro de téléphone n'est pas vide, l'affiche dans une liste #}
     {% endif %}
 </ul>
 
 {% if contact_phone is empty %}
+    {# Vérifie si le numéro de téléphone du contact est vide #}
     <p><strong>{{contact_first_name|capitalize}}</strong> n'a pas laissé de numéro de téléphone</p>
+    {# Si le numéro de téléphone est vide, affiche un message indiquant que le contact n'a pas laissé de numéro de téléphone #}
 {% endif %}
 
 <p><u>Voici le message</u> : </p>

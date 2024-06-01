@@ -12,6 +12,7 @@ class AdminCategoryFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Ajoute un champ "name" au formulaire, de type TextType
         $builder
             ->add('name', TextType::class)
         ;
@@ -19,7 +20,9 @@ class AdminCategoryFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Configuration des options du formulaire
         $resolver->setDefaults([
+            // La classe à utiliser pour les données du formulaire
             'data_class' => Category::class,
         ]);
     }

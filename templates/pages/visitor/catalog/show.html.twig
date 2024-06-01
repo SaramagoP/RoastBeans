@@ -16,7 +16,7 @@
             <div class="col-md-7 text-center my-3">
                 <h1 class="my-3">{{ product.name }}</h1>
                 <p>
-                    {% for category in product %}
+                    {% for category in product %} {# La boucle for affiche le nom d'une catégorie de la liste des catégories associées à ce produit. #}
                         {{category.name}}
                     {% endfor %}
                 </p>
@@ -55,8 +55,8 @@
 
     <div class="container my-5"> 
         <div class="row">
-            {% if product.reviews|length > 0 %}  
-                {% for review in product.reviews %}
+            {% if product.reviews|length > 0 %}  {# Cette ligne vérifie s'il y a des avis associées au produit en vérifiant la longueur de la collection product.reviews. Si la longueur est supérieure à zéro, cela signifie qu'il y a des avis et le contenu à l'intérieur de ce bloc if sera exécuté. #}
+                {% for review in product.reviews %} {# Cette boucle for itère sur chaque critique dans la collection product.reviews. #}
                     <div class="col-md-6">
                         <div class="review bg-light text-dark ">
                             <h2 class="comment_name">{{review.user.firstName}} {{review.user.lastName}}</h2>

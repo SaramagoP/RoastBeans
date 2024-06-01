@@ -52,29 +52,50 @@
                 </tr>
             </thead>
             <tbody>
-                {% for produit in produits %}
+                 {% for produit in produits %} {# Cette ligne indique le début d'une boucle qui itère à travers chaque élément de la liste produits. À chaque itération, la variable produit contiendra un élément de la liste, et le contenu à l'intérieur de la boucle sera exécuté pour chaque élément de la liste. #}
                     <tr>
-                        <td>{{produit.id}}</td>
+                        <td>{{ produit.id }}</td>
+                        {# Affiche l'identifiant du produit #}
+
                         <td>
-                        {% if produit.image %}
-                            <img src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('admin_product') }}" alt="{{produit.name}}">
-                        {% else %}
-                            <span>---</span>
-                        {% endif %}
+                            {% if produit.image %} {# Si l'attribut image du produit est défini et non vide, cette condition est évaluée comme vraie #}
+                                <img src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('admin_product') }}" alt="{{ produit.name }}">
+                            {% else %}
+                                <span>---</span>
+                            {% endif %}
                         </td>
-                        <td>{{produit.name}}</td>
-                        <td>{{produit.category.name}}</td>
-                        <td>{{produit.description}}</td>
-                        <td>{{produit.price}}€</td>
-                        <td>{{produit.createdAt|format_datetime()}}</td>
-                        <td>{{produit.updatedAt|format_datetime()}}</td>
+                        {# Affiche l'image du produit s'il existe, sinon affiche '---' #}
+
+                        <td>{{ produit.name }}</td>
+                        {# Affiche le nom du produit #}
+
+                        <td>{{ produit.category.name }}</td>
+                        {# Affiche le nom de la catégorie du produit #}
+
+                        <td>{{ produit.description }}</td>
+                        {# Affiche la description du produit #}
+
+                        <td>{{ produit.price }}€</td>
+                        {# Affiche le prix du produit suivi du symbole '€' #}
+
+                        <td>{{ produit.createdAt|format_datetime() }}</td>
+                        {# Affiche la date de création du produit formatée #}
+
+                        <td>{{ produit.updatedAt|format_datetime() }}</td>
+                        {# Affiche la date de mise à jour du produit formatée #}
+
                         <td class="d-flex justify-content-evenly">
-                            <a href="{{path('admin_product_edit', {'id': produit.id})}}"><i class="fa-solid fa-edit mx-2"></i></a>
-                            <a onClick="event.preventDefault(); return confirm('Confirmer la suppression?') && document.querySelector('#delete_product_{{produit.id}}_form').submit();" href="#"><i class="fa-solid fa-trash text-danger mx-2"></i></a>
-                            <form id="delete_product_{{produit.id}}_form" method="POST" action="{{path('admin_product_delete', {'id':produit.id})}}">
+                            <a href="{{ path('admin_product_edit', {'id': produit.id}) }}"><i class="fa-solid fa-edit mx-2"></i></a>
+                            {# Lien pour éditer le produit #}
+
+                            <a onClick="event.preventDefault(); return confirm('Confirmer la suppression?') && document.querySelector('#delete_product_{{ produit.id }}_form').submit();" href="#"><i class="fa-solid fa-trash text-danger mx-2"></i></a>
+                            {# Lien pour supprimer le produit, avec une confirmation JavaScript #}
+
+                            <form id="delete_product_{{ produit.id }}_form" method="POST" action="{{ path('admin_product_delete', {'id': produit.id}) }}">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_product_'~produit.id)}}">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete_product_'~ produit.id) }}">
                             </form>
+                            {# Formulaire pour la suppression du produit #}
                         </td>
                     </tr>
                 {% endfor %}

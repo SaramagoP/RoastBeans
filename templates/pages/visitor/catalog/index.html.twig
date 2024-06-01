@@ -19,14 +19,14 @@
                     </button>
                     <ul class="dropdown-menu">
                  
-                        {% for category in categories %}
+                        {% for category in categories %} {# boucle qui itère à travers chaque élément de la liste categories. À chaque itération, la variable category contiendra une catégorie de la liste, et le contenu à l'intérieur de la boucle sera exécuté pour chaque catégorie de la liste #}
                             <li><a class="dropdown-item" href="{{path('visitor_filter_product_by_category', {'id':category.id, 'slug': category.slug})}}">{{category.name}} ({{category.products|length}})</a></li> 
                         {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="col-md-10">
-                {% for row in products|batch(3) %}
+                {% for row in products|batch(3) %} {# La fonction batch(3) divise la liste products en sous-listes contenant chacune au maximum 3 éléments. Ensuite, la boucle for itère sur chaque sous-liste créée par la fonction batch(3). À chaque itération, la variable row contient une sous-liste de 3 éléments ou moins (dans le cas où il reste moins de 3 éléments à la fin de la liste products). #}
                     <div class="row">
                         {% for product in row %}
                             <div class="col-md-4 my-3">

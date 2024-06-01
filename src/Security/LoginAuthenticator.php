@@ -60,17 +60,15 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             // Rediriger l'administrateur vers la'espace d'administration
             // Et l'utilisateur vers la page d'accueil
         
-        $user = $token->getUser();
-        $roles = $user->getRoles();
-
-        if ( \in_array("ROLE_ADMIN", $roles) )
-        {
-            return new RedirectResponse($this->urlGenerator->generate('admin_home'));
+        $user = $token->getUser(); // Récupère l'utilisateur associé au token de sécurité actuel
+        $roles = $user->getRoles(); // Récupère les rôles de l'utilisateur
+        
+        if (\in_array("ROLE_ADMIN", $roles)) { // Vérifie si l'utilisateur a le rôle "ROLE_ADMIN"
+            return new RedirectResponse($this->urlGenerator->generate('admin_home')); // Redirige vers la page d'accueil de l'administration
         }
-
-        if ( \in_array("ROLE_USER", $roles) )
-        {
-            return new RedirectResponse($this->urlGenerator->generate('user_home_index'));
+        
+        if (\in_array("ROLE_USER", $roles)) { // Vérifie si l'utilisateur a le rôle "ROLE_USER"
+            return new RedirectResponse($this->urlGenerator->generate('user_home_index')); // Redirige vers la page d'accueil de l'utilisateur
         }
     }
 

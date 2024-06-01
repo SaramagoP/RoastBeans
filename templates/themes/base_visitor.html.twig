@@ -72,12 +72,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_cart_index')}}"><i class="fas fa-shopping-cart"></i> Panier</a>
                         </li>
-                        {% if app.user %}
+                        {% if app.user %} {#  Si un utilisateur est actuellement connecté. La variable app.user contient les informations sur l'utilisateur connecté. #}
                         <li class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
                                 {{app.user.firstName}}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <li>
+                                    <a class="dropdown-item" href="{{path('user_home_index')}}">Espace Admin</a>
+                                </li>
+                                {% endif %}
                                 {% if is_granted('ROLE_USER') %}
                                 <li>
                                     <a class="dropdown-item" href="{{path('user_home_index')}}">Espace User</a>
@@ -89,7 +94,7 @@
                             </ul>
                         </li> 
                     </ul>                               
-                    {% else %}
+                    {% else %} {# Si aucun utilisateur n'est connecté, cette partie du code est exécutée. #}
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_authentication_login')}}">Connexion</a> 
                         </li>

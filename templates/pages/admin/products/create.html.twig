@@ -22,7 +22,7 @@
                     <div class="mb-3">
                         <label for="admin_product_form_category">Catégorie<span class="text-danger">*</span></label>
                         <div class="text-danger">{{form_errors(form.category)}}</div>
-                        {{form_widget(form.category, {'attr':{'class':'form-control'}})}}
+                        {{form_widget(form.category, {'attr':{'class':'form-control'}})}} {# form_widget C'est une fonction Twig qui permet d'afficher le champ d'un formulaire dans la page web. Elle génère le code HTML nécessaire pour rendre ce champ utilisable et visible par l'utilisateur #}
                     </div>
                     <div class="mb-3">
                         <label for="admin_product_form_imageFile_file">Image</label>

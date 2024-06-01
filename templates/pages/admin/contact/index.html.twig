@@ -76,7 +76,7 @@
                         </td>
                         <td>{{contact.createdAt|format_datetime()}}</td>
                         <td class="d-flex justify-content-evenly">
-                            <form action="{{path('admin_contact_delete', {'id':contact.id})}}" method="post">
+                            <form action="{{path('admin_contact_delete', {'id':contact.id})}}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_contact_'~contact.id)}}">
                                 <button onClick="return confirm('Confirmer la suppression?')" type="submit" value="Supprimer" style="border: none; background: none; padding: 0; color: #ff0000">
