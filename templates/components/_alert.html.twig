@@ -1,7 +1,10 @@
 {# read and display all flash messages #}
 {% for label, messages in app.flashes %}
+    {# Parcourt tous les messages flash stockés dans l'application #}
     {% for message in messages %}
+        {# Parcourt tous les messages dans chaque catégorie flash #}
         <div class="text-center alert alert-{{ label }} alert-dismissible fade show" role="alert">
+            {# Affiche le message avec une classe d'alerte correspondant à la catégorie flash #}
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

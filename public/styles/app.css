@@ -109,14 +109,5 @@ color: #C59B76;
   padding: 20px;
 }
 
-.custom-image {
-  width: 100%;
-  height: auto;
-}
 
-@media screen and (min-width: 768px) {
-  .custom-image {
-      width: 50%;
-      height: 50%; 
-  }
-}
+

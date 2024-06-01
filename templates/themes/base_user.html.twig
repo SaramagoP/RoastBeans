@@ -49,7 +49,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{path('user_profile_index')}}">Mon Profil</a>
                     </li>
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_ADMIN') %} {# Cette ligne vérifie si l'utilisateur actuel a le rôle 'ROLE_ADMIN'. La fonction is_granted() est une fonction Symfony qui vérifie si l'utilisateur a un certain rôle ou une certaine autorisation. Dans ce cas, elle vérifie si l'utilisateur a le rôle 'ROLE_ADMIN'. Si l'utilisateur a le rôle 'ROLE_ADMIN', cette balise <li> contenant un lien <a> est affichée dans la barre de navigation. #}
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('admin_home')}}">Retour admin</a>
                         </li>
