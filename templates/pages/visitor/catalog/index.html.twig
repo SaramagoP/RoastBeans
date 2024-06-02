@@ -38,10 +38,10 @@
                                         <a class="text-decoration-none" href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}">
                                             <h2 class="card-title text-center mb-4" style="color: #C59B76; font-family: Dancing Script, cursive;">{{ product.name }}</h2>
                                         </a>
-                                        <p class="card-subtitle text-muted fw-bold fs-5 text-end my-3">{{ product.price }}€</p>
-                                        <p class="card-text">
-                                            <a href="" class="btn btn-sm btn-dark">Ajouter au panier</a>
-                                            <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}" class="btn btn-sm btn-secondary">Voir les détails</a>
+                                        <p class="card-subtitle text-dark fw-bold fs-5 text-end my-3">{{ product.price }}€</p>
+                                        <p class="card-text text-center">
+                                            <a href="" class="cart btn btn-sm"><i class="fa-solid fa-cart-shopping fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
+                                            <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}" class="detail btn btn-sm"><i class="fa-solid fa-eye fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
                                         </p>
                                     </div>
                                 </div>

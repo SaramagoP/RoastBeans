@@ -1,4 +1,4 @@
-html, body {
+/* html, body {
   height: 100%;
   background-color: #131211;
 }
@@ -66,7 +66,7 @@ font-size: 20px;
 }
 
 footer {
-  background-color: #000;
+  background-color: #000000;
   color: #fff;
   padding: 20px;
   width: 100%;
@@ -110,4 +110,12 @@ color: #C59B76;
 }
 
 
+.cart:hover {
+  color: #ffffff;
+  background: #000000;
+}
 
+.detail:hover {
+  color: #ffffff;
+  background: #000000;
+} */

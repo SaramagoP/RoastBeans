@@ -25,6 +25,7 @@ class SettingsFixtures extends Fixture // La classe SettingsFixtures étend la c
         $settings->setWebsiteName("RoastBeans"); // Définition du nom du site web.
         $settings->setWebsiteUrl("http://roastbeans.com"); // Définition de l'URL du site web.
         $settings->setDescription("Nous nous engageons à vous offrir des cafés de qualité supérieure, torréfiés à la perfection."); // Définition de la description du site.
+        $settings->setUser(null);
         $settings->setEmail("roastbeans@gmail.com"); // Définition de l'adresse email de contact.
         $settings->setPhone("+33 (0)1 23 45 67 89"); // Définition du numéro de téléphone de contact.
         $settings->setAdresse("123 Rue du Café"); // Définition de l'adresse physique.

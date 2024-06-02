@@ -25,6 +25,15 @@ class ContactController extends AbstractController
 
         if ( $form->isSubmitted() && $form->isValid() )
         {
+            if ($this->getUser()) 
+            {
+                $contact->setUser($this->getUser());
+            }
+            else
+            {
+                $contact->setUser(null);
+            }
+
             $contact->setCreatedAt(new DateTimeImmutable());
 
             $em->persist($contact);
@@ -39,11 +48,12 @@ class ContactController extends AbstractController
                 "subject" => "Un message reçu sur votre site",
                 "html_template" => "emails/contact.html.twig",
                 "context" => [
-                    "contact_first_name" => $contact->getFirstName(),
-                    "contact_last_name"  => $contact->getLastName(),
-                    "contact_email"      => $contact->getEmail(),
-                    "contact_phone"      => $contact->getPhone(),
-                    "contact_message"    => $contact->getMessage()
+                    "contact_first_name"    => $contact->getFirstName(),
+                    "contact_last_name"     => $contact->getLastName(),
+                    "contact_email"         => $contact->getEmail(),
+                    "contact_phone"         => $contact->getPhone(),
+                    "contact_message"       => $contact->getMessage(),
+                    "user"                  => $contact->getUser()
                 ]
             ]);
 
