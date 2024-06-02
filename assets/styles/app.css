@@ -108,3 +108,14 @@ color: #C59B76;
   margin-bottom: 20px;
   padding: 20px;
 }
+
+/* Buttons des carts des produits */
+.cart:hover {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.detail:hover {
+  color: #ffffff;
+  background-color: #000000;
+}

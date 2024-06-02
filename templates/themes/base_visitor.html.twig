@@ -80,7 +80,7 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {% if is_granted('ROLE_ADMIN') %}
                                 <li>
-                                    <a class="dropdown-item" href="{{path('user_home_index')}}">Espace Admin</a>
+                                    <a class="dropdown-item" href="{{path('admin_home')}}">Espace Admin</a>
                                 </li>
                                 {% endif %}
                                 {% if is_granted('ROLE_USER') %}

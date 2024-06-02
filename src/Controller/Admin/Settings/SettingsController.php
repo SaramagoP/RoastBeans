@@ -58,6 +58,8 @@ class SettingsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) // Vérifie si le formulaire est soumis et valide
         {
+            $settings->setUser($this->getUser());
+
             $settings->setUpdatedAt(new DateTimeImmutable()); // Met à jour le champ 'updatedAt' avec la date et l'heure actuelles
 
             $this->em->persist($settings); // Persiste les modifications apportées aux paramètres

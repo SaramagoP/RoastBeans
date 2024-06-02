@@ -13,7 +13,6 @@
     {# Le logo dans l'onglet #}
     <link rel="icon" type="image/png" href="{{asset('images/visitor/logo.png')}}">
 
-
     {# No SEO for admin #}
     <meta name="robots" content="noindex, nofollow">
 
@@ -49,7 +48,7 @@
 <body>
     
     {# Navbar #}
-    <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+    <header class="navbar sticky-top flex-md-nowrap p-0 shadow bg-dark shadow" data-bs-theme="dark">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">RoastBeans</a>
 
         <ul class="navbar-nav flex-row d-md-none">
@@ -80,78 +79,78 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" aria-current="page" href="{{path('admin_home')}}">
-                                <i class="fa-solid fa-house"></i>
+                                <i class="fa-solid fa-house text-dark"></i>
                                 Tableau de bord
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_category_index')}}">
-                                <i class="fa-regular fa-folder-open"></i>
+                                <i class="fa-regular fa-folder-open text-dark"></i>
                                 Catégories
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_product_index')}}">
-                                <i class="fa-solid fa-mug-hot"></i>
+                                <i class="fa-solid fa-mug-hot text-dark"></i>
                                 Produits
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="">
-                                <i class="fa-solid fa-truck-fast"></i>
+                                <i class="fa-solid fa-truck-fast text-dark"></i>
                                 Commandes
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_user_index')}}">
-                                <i class="fa-solid fa-users"></i>
+                                <i class="fa-solid fa-users text-dark"></i>
                                 Utilisateurs
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_contact_index')}}">
-                                <i class="fa-solid fa-address-book"></i>
+                                <i class="fa-solid fa-address-book text-dark"></i>
                                 Contacts
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_review_index')}}">
-                                <i class="fa-solid fa-comment"></i>
+                                <i class="fa-solid fa-comment text-dark"></i>
                                 Commentaires
                             </a>
                             </li>
                     </ul>
 
-                <hr class="my-3">
+                <hr class="my-3" style="color: #C59B76">
 
                 <ul class="nav flex-column mb-auto">
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_profile_index')}}">
-                            <i class="fa-solid fa-user-tie"></i>
+                            <i class="fa-solid fa-user-tie text-dark"></i>
                             Mon Profil
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_settings_index')}}">
-                            <i class="fa-solid fa-gear"></i>
+                            <i class="fa-solid fa-gear text-dark"></i>
                             Paramètres
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('user_home_index')}}">
-                            <i class="fa-solid fa-user-tag"></i>
+                            <i class="fa-solid fa-user-tag text-dark"></i>
                             Espace utilisateur
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('visitor_welcome_index')}}">
-                            <i class="fa-solid fa-person-walking-arrow-loop-left"></i>
+                            <i class="fa-solid fa-person-walking-arrow-loop-left text-dark"></i>
                             Retour au site
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('app_logout')}}">
-                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <i class="fa-solid fa-right-from-bracket text-dark"></i>
                             Déconnexion
                         </a>
                     </li>

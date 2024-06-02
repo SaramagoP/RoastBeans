@@ -38,6 +38,7 @@
                     <th>Id</th>
                     <th>Prénom</th>
                     <th>Nom</th>
+                    <th>Rôle</th>
                     <th>Email</th>
                     <th>Numéro de Téléphone</th>
                     <th>Message</th>
@@ -51,6 +52,13 @@
                         <td>{{contact.id}}</td>
                         <td>{{contact.firstName}}</td>
                         <td>{{contact.lastName}}</td>
+                         <td>
+                            {% if (contact.user) %}
+                                <span class="badge text-bg-dark">User</span>
+                            {% else %}
+                                <span class="badge text-bg-dark">Visitor</span>
+                            {% endif %}
+                        </td>
                         <td>{{contact.email}}</td>
                         <td>{{contact.phone ? contact.phone : "---"}}</td>
                         <td class="text-center">
