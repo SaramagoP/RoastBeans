@@ -37,8 +37,7 @@
 
         {# Ma feuille de style #}
         <link rel="stylesheet" href="{{asset('styles/app.css')}}">
-       
-        
+               
 </head>
 <body>
     <header>
@@ -62,15 +61,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('visitor_contact_create')}}">Contact</a>
-                        </li>
+                        </li> 
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        <form action="" method="GET" class="me-4">
-                            <input type="text" name="search" class="rounded pill">
-                            <button type="submit" class="rounded pill"><i class="fas fa-search"></i></button>
-                        </form>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{path('visitor_cart_index')}}"><i class="fas fa-shopping-cart"></i> Panier</a>
+                            <a class="nav-link text-white" href="{{path('visitor_cart_index')}}"><i class="fas fa-shopping-cart"></i> Panier ({{cart_service.getCartItems|length}})</a>
                         </li>
                         {% if app.user %} {#  Si un utilisateur est actuellement connecté. La variable app.user contient les informations sur l'utilisateur connecté. #}
                         <li class="nav-item dropdown">
@@ -209,7 +204,8 @@
 
     {# Le script de Bootstrap 5 #}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
 </body>
 </html>
 

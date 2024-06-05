@@ -46,6 +46,7 @@
                     <th>Catégorie</th>
                     <th>Description</th>
                     <th>Prix</th>
+                    <th>Quantité</th>
                     <th>Créé le</th>
                     <th>Modifié le</th>
                     <th>Options</th>
@@ -77,6 +78,9 @@
 
                         <td>{{ produit.price }}€</td>
                         {# Affiche le prix du produit suivi du symbole '€' #}
+
+                        <td>{{ produit.quantity }}</td>
+                        {# Affiche la quantité du produit #}
 
                         <td>{{ produit.createdAt|format_datetime() }}</td>
                         {# Affiche la date de création du produit formatée #}

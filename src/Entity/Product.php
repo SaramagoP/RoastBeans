@@ -67,10 +67,17 @@ class Product
         notInRangeMessage: 'Le prix de vente doit être compris entre {{ min }} euros {{ max }} euros.',
     )]
     #[Assert\NotBlank(message: 'Le prix du produit est obligatoire')]
-    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
-    private ?string $price = null;
+    #[ORM\Column]
+    private ?float $price = null;
+    
+    #[Assert\NotBlank(message: 'La quantité du produit est obligatoire')]
+    #[Assert\Type(type: "integer", message: "La quantité doit être un entier")]
+    #[Assert\GreaterThanOrEqual(value: 0, message: "La quantité doit être un nombre positif")]
+    #[ORM\Column]
+    private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
+    #[Assert\NotBlank(message: 'La catégorie est obligatoire')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
@@ -85,6 +92,7 @@ class Product
      */
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'product', orphanRemoval: true)]
     private Collection $reviews;
+
 
     public function __construct()
     {
@@ -177,6 +185,18 @@ class Product
     public function setPrice(?string $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

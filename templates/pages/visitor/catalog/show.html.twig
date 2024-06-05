@@ -25,7 +25,7 @@
                     <strong>Description :</strong>
                 </div>
                     <p>{{ product.description }}</p>
-                    <a href="" class="btn btn-sm my-3" style="background-color: #C59B76">Ajouter au panier</a>
+                    <a href="{{path('visitor_add_cart', {'id':product.id})}}" class="btn btn-sm my-3" style="background-color: #C59B76">Ajouter au panier</a>
             </div>
         </div>
     </div>

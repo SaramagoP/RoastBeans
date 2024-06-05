@@ -18,15 +18,14 @@
                         Catégories
                     </button>
                     <ul class="dropdown-menu">
-                 
-                        {% for category in categories %} {# boucle qui itère à travers chaque élément de la liste categories. À chaque itération, la variable category contiendra une catégorie de la liste, et le contenu à l'intérieur de la boucle sera exécuté pour chaque catégorie de la liste #}
+                        {% for category in categories %}
                             <li><a class="dropdown-item" href="{{path('visitor_filter_product_by_category', {'id':category.id, 'slug': category.slug})}}">{{category.name}} ({{category.products|length}})</a></li> 
                         {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="col-md-10">
-                {% for row in products|batch(3) %} {# La fonction batch(3) divise la liste products en sous-listes contenant chacune au maximum 3 éléments. Ensuite, la boucle for itère sur chaque sous-liste créée par la fonction batch(3). À chaque itération, la variable row contient une sous-liste de 3 éléments ou moins (dans le cas où il reste moins de 3 éléments à la fin de la liste products). #}
+                {% for row in products|batch(3) %}
                     <div class="row">
                         {% for product in row %}
                             <div class="col-md-4 my-3">
@@ -40,7 +39,7 @@
                                         </a>
                                         <p class="card-subtitle text-dark fw-bold fs-5 text-end my-3">{{ product.price }}€</p>
                                         <p class="card-text text-center">
-                                            <a href="" class="cart btn btn-sm"><i class="fa-solid fa-cart-shopping fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
+                                            <a href="{{path('visitor_add_cart', {'id':product.id})}}" class="cart btn btn-sm"><i class="fa-solid fa-cart-shopping fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
                                             <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}" class="detail btn btn-sm"><i class="fa-solid fa-eye fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
                                         </p>
                                     </div>
@@ -52,5 +51,5 @@
             </div>
         </div>
     </div>
- 
+
 {% endblock %}

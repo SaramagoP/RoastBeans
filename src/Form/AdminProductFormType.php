@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -39,12 +38,8 @@ class AdminProductFormType extends AbstractType
                 'asset_helper' => false,
             ])
             ->add('description', TextareaType::class)
-            ->add('price', NumberType::class, [
-                'scale' => 2, // Defines the number of decimal places
-                'constraints' => [
-                    new Assert\GreaterThanOrEqual(0),
-                ],
-            ])
+            ->add('price', NumberType::class)
+            ->add('quantity', NumberType::class)
         ;
     }
 

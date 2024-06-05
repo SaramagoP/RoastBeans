@@ -26,7 +26,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="admin_product_form_imageFile_file">Image</label>
-                         <div class="text-danger">{{form_errors(form.imageFile)}}</div>
+                        <div class="text-danger">{{form_errors(form.imageFile)}}</div>
                         {{form_widget(form.imageFile, {'attr':{'class':'form-control'}})}}
                     </div>
                     <div class="mb-3">
@@ -36,6 +36,11 @@
                             {{form_widget(form.price, {'attr':{'class':'form-control'}})}}
                             <span class="input-group-text">€</span>
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_product_form_quantity">Stock disponible<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.quantity)}}</div>
+                        {{form_widget(form.quantity, {'attr':{'class':'form-control'}})}}
                     </div>
                     <div class="mb-3">
                         <label for="admin_product_form_description">Description<span class="text-danger">*</span></label>

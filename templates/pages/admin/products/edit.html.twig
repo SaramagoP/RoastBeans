@@ -51,6 +51,11 @@
                         <div class="text-danger">{{form_errors(form.price)}}</div>
                         {{form_widget(form.price, {'attr':{'class':'form-control'}})}}
                     </div>
+                    <div class="mb-3">
+                        <label for="admin_product_form_quantity">Stock disponible<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.quantity)}}</div>
+                        {{form_widget(form.quantity, {'attr':{'class':'form-control'}})}}
+                    </div>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
                         <input formnovalidate type="submit" class="btn btn-dark shadow w-50" value="Modifier">
                     </div>

@@ -77,12 +77,12 @@ class UserController extends AbstractController
     }
 
     // \d+ est une expression régulière qui signifie "un ou plusieurs chiffres supérieurs à zéro".
-    #[Route('/user/{id<\d+>}/edit-roles', name: 'admin_user_edit_roles', methods: ['GET', 'PUT'])]
+    #[Route('/user/{id<\d+>}/edit-roles', name: 'admin_user_edit_roles', methods: ['GET', 'POST'])]
     public function editRoles(User $user, Request $request): Response
     {
         // Crée un formulaire pour éditer les rôles de l'utilisateur
         $form = $this->createForm(EditRolesFormType::class, $user, [
-            "method" => "PUT"
+            "method" => "POST"
         ]);
 
         // Gère la soumission du formulaire
