@@ -8,8 +8,72 @@
 
 {% block main %}
 
-    <h1 class="text-center my-3 display-5">Panier</h1>
+    {% if cartItems is empty %}
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h1 class="text-center my-3 display-3">Votre panier est vide</h1>
+                    <p class="text-center mb-5">Commencez votre shopping dès maintenant à travers nos articles</p>
+                </div>
+            </div>
+        </div>
+        <button class="buttonComand mb-5 d-flex justify-content-center align-items-center mx-auto">
+            <a href="{{ path('visitor_catalog_index') }}" class="btn btn-sm border-0" style="background-color: #C59B76">Commandez votre bonheur</a>
+        </button>
+    {% else %}
+        <h1 class="text-center my-3 display-5">Panier</h1>
 
-   
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="table-responsive">
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                    <th style="color: #C59B76">Image</th>
+                                    <th style="color: #C59B76">Nom</th>
+                                    <th style="color: #C59B76">Quantité</th>
+                                    <th style="color: #C59B76">Prix unitaire</th>
+                                    <th style="color: #C59B76">Prix TTC</th>
+                                    <th style="color: #C59B76">Retirer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cartItem in cartItems %}
+                                    <tr>
+                                        <td>
+                                            <img src="{{ vich_uploader_asset(cartItem.product, 'imageFile') }}" alt="{{ cartItem.product.name }}" class="img-thumbnail" style="width: 80px; height: 80px;">
+                                        </td>
+                                        <th class="align-middle">{{ cartItem.product.name }}</th>
+                                        <th class="align-middle">
+                                            <a href="{{path('visitor_decrement_cart', {'id': cartItem.product.id})}}" class="btn btn-sm" style="background-color: #C59B76">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </a>  
+                                            <span class="mx-1">{{ cartItem.quantity }}</span>
+                                            <a href="{{path('visitor_add_cart', {'id': cartItem.product.id})}}" class="btn btn-sm" style="background-color: #C59B76">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </a>   
+                                        </th>
+                                        <th class="align-middle">{{ cartItem.product.price }} €</th>
+                                        <th class="align-middle">{{ cartItem.getAmount }} €</th>
+                                        <th class="align-middle">
+                                            <a href="{{path('visitor_remove_cart', {'id': cartItem.product.id})}}"><i class="fa-solid fa-trash text-danger mx-2"></i></a>
+                                        </th>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-right font-weight-bold"><strong>Total TTC</strong></td>
+                                    <td colspan="2" class="font-weight-bold"><strong>{{ cartTotalAmount }} €</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     
 {% endblock %}
+
