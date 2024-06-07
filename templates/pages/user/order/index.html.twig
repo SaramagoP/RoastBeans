@@ -1,0 +1,71 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Mes Commandes{% endblock %}
+
+{% block description %}Liste de Mes Commandes{% endblock %}
+
+{% block keywords %}Commandes, liste{% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block datatables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.7/i18n/fr-FR.json',
+                },
+            });
+        } );
+    </script>
+{% endblock %}
+
+{% block main %}
+
+    <h1 class="text-center my-3 display-5">Mes Commandes<hr></h1>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 col-lg-6 mx-auto shadow">
+
+            {% include 'components/_alert.html.twig' %}
+            
+            {% if app.user.orders is not empty %}
+                {% for order in app.user.orders %}
+                    <div class="card border-0 p-3">
+                        <p><strong>Id :</strong> {{order.id}} <hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Commanditaire :</strong> {{order.pickupFirstName}} {{order.pickupLastName}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Email :</strong> {{order.user.email}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Satut :</strong> {{order.status}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Montant Total :</strong> {{order.totalAmount}} €<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Commandé le :</strong> {{order.orderedAt|format_datetime()}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Modifié le :</strong> {{order.updatedAt|format_datetime()}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        {% if order.status != "commande validée" %}
+                            <div class="d-inline mx-auto">
+                                <a href="{{ path('user_order_edit', {'id': order.id}) }}" class="btn btn-secondary"></i>Modifier</a>
+                                <form method="POST" action="{{ path('user_order_delete', {'id': order.id}) }}" class="d-inline"> 
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete_order_' ~ order.id) }}">
+                                    <input onClick="return confirm('Confirmer la supression de votre compte?')" type="submit" class="m-2 btn btn-danger" value="Supprimer">
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+            <p class="text-center">Vous n'avez pas de commandes récentes.</p>
+                <div class="d-flex justify-content-center align-items-center mx-auto">
+                    <a href="{{path('visitor_catalog_index')}}" class="btn btn shadow" style="background-color: #C59B76">Commandez votre bonheur</a>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %} 

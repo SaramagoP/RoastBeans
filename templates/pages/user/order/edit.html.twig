@@ -1,0 +1,45 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Modifier cette Commande{% endblock %}
+
+{% block description %}Modifier cette Commande{% endblock %}
+
+{% block keywords %}Commandes, modifier, produits{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Modifier cette Commande</h1>
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-6 my-5 mx-auto">
+                {# Formulaire #}
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        <label for="edit_order_form_pickupFirstName">Prénom<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.pickupFirstName)}}</div>
+                        {{ form_widget(form.pickupFirstName, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_order_form_pickupLastName">Nom<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.pickupLastName)}}</div>
+                        {{ form_widget(form.pickupLastName, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="order_form_pickup_date">Sélectionnez la date de récupération de la commande<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.pickup_date)}}</div>
+                        {{ form_widget(form.pickup_date, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="order_form_pickup_time">Sélectionnez l'heure de récupération de la commande<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.pickup_time)}}</div>
+                        {{ form_widget(form.pickup_time, {'attr': {'class': 'form-control', 'autofocus':'autofocus'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class="btn btn-shadow d-flex justify-content-center align-items-center mx-auto" style="background-color: #C59B76" value="Modifier">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+                   
