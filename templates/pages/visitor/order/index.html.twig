@@ -1,0 +1,54 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block description %}Commande{% endblock %}
+
+{% block keywords %}Commandes, produits{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Commande</h1>
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-6 my-3">
+
+                {% include 'components/_alert.html.twig' %}
+
+                {# Formulaire #}
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        <label for="order_form_order_date">Sélectionnez la date de la commande<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.order_date)}}</div>
+                        {{ form_widget(form.order_date, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="order_form_pickup_date">Sélectionnez la date de récupération de la commande<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.pickup_date)}}</div>
+                        {{ form_widget(form.pickup_date, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="order_form_pickup_time">Sélectionnez l'heure de récupération de la commande<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.pickup_time)}}</div>
+                        {{ form_widget(form.pickup_time, {'attr': {'class': 'form-control', 'autofocus':'autofocus'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class="btn btn-shadow d-flex justify-content-center align-items-center mx-auto" style="background-color: #C59B76" value="Procéder au paiement">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+            <div class="col-md-6 my-3">
+                {# Recap de la commande #}
+                {% for cartItem in cartItems %}
+                    <div class="col-12 my-3">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <p>{{cartItem.quantity}}x {{cartItem.product.name}}</p>  
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

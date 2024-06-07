@@ -4,30 +4,33 @@
 
 {% block description %}Tableau de bord{% endblock %}
 
-{% block keywords %}Tableau-de-bord, admin{% endblock %}
+{% block keywords %}Tableau-de-bord{% endblock %}
 
 {% block main %}
 
-    <h1 class="text-center my-3 display-5">Espace Utilisateur</h1><hr>
-
-    <p class="text-center fs-4" id="greeting">Bonjour {{ app.user.firstName }}!</p>
-
-    <p class="text-center fs-4 d-none" id="user-name">{{ app.user.firstName }}</p>
-
-    {# <!-- Section des commandes récentes -->
-    <div class="container my-4">
-        <h2 class="text-center my-3">Vos Commandes Récentes</h2>
-        {% if orders is not empty %}
-            <ul class="list-group">
-                {% for order in orders %}
-                    <li class="list-group-item">
-                        <strong>Commande #{{ order.id }}</strong> - {{ order.date|date("d/m/Y") }} - {{ order.status }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="text-center">Vous n'avez pas de commandes récentes.</p>
-        {% endif %}
-    </div> #}
+    <h1 class="text-center my-3 display-5">Espace Utilisateur<hr></h1>
    
-{% endblock %} 
+    <p class="text-center fs-4" id="greeting">Bonjour {{ app.user.firstName }} · Vos commandes Récentes!</p>
+
+    <div class="container my-5">
+        <div class="row">
+            {% if app.user.orders is not empty %}
+                {% for order in app.user.orders %}
+                    <div class="col-md-4">
+                        <div class="bg-light text-dark rounded-5 d-flex flex-column justify-content-center align-items-center">
+                            <p style="color: #C59B76"><strong>Commande #{{ order.id }}</strong></p>
+                            <p>Status de la commande : {{ order.status }}</p>
+                            <p>{{ order.orderedAt|format_datetime() }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">Vous n'avez pas de commandes récentes.</p>
+                <div class="d-flex justify-content-center align-items-center mx-auto">
+                    <a href="{{path('visitor_catalog_index')}}" class="btn btn shadow" style="background-color: #C59B76">Commandez votre bonheur</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

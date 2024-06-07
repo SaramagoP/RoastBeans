@@ -1,10 +1,10 @@
 {% extends 'themes/base_admin.html.twig' %}
 
-{% block title %}Modifier: {{category.name}}{% endblock %}
+{% block title %}Modifier le statut de cette comande{% endblock %}
 
-{% block description %}Modifier cette catégorie{% endblock %}
+{% block description %}Modifier le statut de cette comande{% endblock %}
 
-{% block keywords %}Admin, modifier, catégories{% endblock %}
+{% block keywords %}Admin, modifier, satut, commande{% endblock %}
 
 {% block main %}
     <h1 class="text-center my-3 display-5">Modifier cette catégorie<hr></h1>
@@ -14,9 +14,8 @@
             <div class="col-md-4 mx-auto">
                 {{form_start(form)}}
                     <div class="mb-3">
-                        <label for="admin_category_form_name">Nom</label>
-                        <div class="text-danger">{{form_errors(form.name)}}</div>
-                        {{form_widget(form.name, {'attr':{'class':'form-control', 'autofocus':'autofocus'}})}}
+                        <div class="text-danger">{{form_errors(form.status)}}</div>
+                        {{form_widget(form.status, {'attr':{'class':'form-control', 'autofocus':'autofocus'}})}}
                     </div>
                     <div class="mb-3">
                         <input formnovalidate type="submit" class="btn btn-dark shadow" value="Modifier">
@@ -27,5 +26,3 @@
     </div>
 
 {% endblock %}
-
-

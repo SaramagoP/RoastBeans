@@ -12,4 +12,57 @@
 
     <p class="text-center text-white fs-4 my-3"> Bonjour {{app.user.firstName}}!</p>
 
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 my-3">
+                <div class="card text-center bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Produits</h5>
+                        <p class="card-text text-white">{{ produitsCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 my-3">
+                <div class="card text-center bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Catégories</h5>
+                        <p class="card-text text-white">{{ categoriesCount }}</p>
+                    </div>
+                </div>
+            </div>
+            {# <div class="col-md-4">
+                <div class="card text-center bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Commandes</h5>
+                        <p class="card-text text-white">{{ orderCount }}</p>
+                    </div>
+                </div>
+            </div> #}
+            <div class="col-md-4 my-3">
+                <div class="card text-center bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Utilisateurs</h5>
+                        <p class="card-text text-white">{{ utilisateursCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 my-3">
+                <div class="card text-center bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Contacts</h5>
+                        <p class="card-text text-white">{{ contactsCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 my-3">
+                <div class="card text-center bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Commentaires</h5>
+                        <p class="card-text text-white">{{ reviewsCount }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
