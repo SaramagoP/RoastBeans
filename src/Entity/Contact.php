@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -68,14 +69,16 @@ class Contact
         max: 600,
         maxMessage: 'Le message ne peut pas contenir plus de {{ limit }} caractères',
     )]
+    
     #[ORM\Column(type: Types::TEXT)]
     private ?string $message = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'contacts')]
+    #[ORM\ManyToOne(inversedBy: 'contacts', cascade: ['remove'])]
     private ?User $user = null;
+
 
     public function getId(): ?int
     {
@@ -154,7 +157,7 @@ class Contact
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?user
     {
         return $this->user;
     }
@@ -165,4 +168,5 @@ class Contact
 
         return $this;
     }
+
 }

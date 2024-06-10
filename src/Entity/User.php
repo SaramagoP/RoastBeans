@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -95,27 +96,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Review>
      */
-    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'user', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'user', orphanRemoval: true, cascade: ['remove'])]
     private Collection $reviews;
-
-    /**
-     * @var Collection<int, Contact>
-     */
-    #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'user')]
-    private Collection $contacts;
 
     /**
      * @var Collection<int, Order>
      */
-    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user', cascade: ['remove'])]
     private Collection $orders;
+
+    /**
+     * @var Collection<int, Contact>
+     */
+    #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'User', cascade: ['remove'])]
+    private Collection $contacts;
 
     public function __construct()
     {
        $this->roles[] = "ROLE_USER";
        $this->reviews = new ArrayCollection();
-       $this->contacts = new ArrayCollection();
-       $this->orders = new ArrayCollection(); 
+       $this->orders = new ArrayCollection();
+       $this->contacts = new ArrayCollection(); 
     }
 
     public function getId(): ?int
@@ -282,7 +283,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
+    
     /**
      * @return Collection<int, Contact>
      */
@@ -312,7 +313,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
+    
     /**
      * @return Collection<int, Order>
      */
@@ -342,4 +343,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }

@@ -18,11 +18,6 @@
                 {# Formulaire #}
                 {{ form_start(form) }}
                     <div class="mb-3">
-                        <label for="order_form_order_date">Sélectionnez la date de la commande<span class="text-danger">*</span></label>
-                        <div class="text-danger">{{form_errors(form.order_date)}}</div>
-                        {{ form_widget(form.order_date, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="mb-3">
                         <label for="order_form_pickup_date">Sélectionnez la date de récupération de la commande<span class="text-danger">*</span></label>
                         <div class="text-danger">{{form_errors(form.pickup_date)}}</div>
                         {{ form_widget(form.pickup_date, {'attr': {'class': 'form-control'}}) }}

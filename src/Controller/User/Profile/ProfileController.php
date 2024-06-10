@@ -36,7 +36,7 @@ class ProfileController extends AbstractController
         return $this->render('pages/user/profile/index.html.twig');
     }
 
-    #[Route('/profile/edit', name: 'user_profile_edit', methods: ['GET', 'PUT'])]
+    #[Route('/profile/edit', name: 'user_profile_edit', methods: ['GET', 'POST'])]
     public function editProfile(Request $request): Response
     {
         // Récupère l'utilisateur actuellement connecté (l'administrateur)
@@ -45,7 +45,7 @@ class ProfileController extends AbstractController
         // Crée un formulaire en utilisant la classe EditProfilFormType
         // Le formulaire est lié à l'entité utilisateur ($admin) et configuré pour utiliser la méthode HTTP PUT
         $form = $this->createForm(EditProfilFormType::class, $user, [
-            "method" => "PUT"
+            "method" => "POST"
         ]);
 
         // Traite la requête HTTP actuelle et met à jour le formulaire avec les données soumises
@@ -118,22 +118,35 @@ class ProfileController extends AbstractController
     }
 
     
+    // Annotation de route pour définir l'URL, le nom de la route et la méthode HTTP autorisée
     #[Route('/profile/delete', name: 'user_profile_delete', methods: ['DELETE'])]
     public function deleteProfile(Request $request): Response
     {
-        if ( $this->isCsrfTokenValid('delete_profile', $request->request->get('_csrf_token')) )
+        // Vérifie si le jeton CSRF est valide
+        if ($this->isCsrfTokenValid('delete_profile', $request->request->get('_csrf_token')))
         {
+            // Récupère l'utilisateur actuellement connecté
             $user = $this->getUser();
 
+            // Invalide le jeton de sécurité actuel pour déconnecter l'utilisateur
             $this->container->get('security.token_storage')->setToken(null);
 
+            // Supprime l'entité utilisateur de la base de données
             $this->em->remove($user);
             
+            // Applique les changements à la base de données
             $this->em->flush();
             
-            $this->addFlash('success', "Le profile de {$user->getFirstName()} {$user->getLastName()} a été supprimée avec succès.");
+            // Ajoute un message flash de succès pour informer l'utilisateur que le profil a été supprimé
+            $this->addFlash('success', "Le profil de {$user->getFirstName()} {$user->getLastName()} a été supprimé avec succès.");
 
+            // Redirige l'utilisateur vers la page d'index des profils utilisateur
             return $this->redirectToRoute('user_profile_index');
         }
+
+        // Si le jeton CSRF est invalide, vous pourriez vouloir ajouter une redirection ou un message d'erreur ici
+        // Note: Une réponse par défaut est nécessaire pour éviter des erreurs de retour manquant.
+        $this->addFlash('error', 'Invalid CSRF token.');
+        return $this->redirectToRoute('user_profile_index');
     }
 }
