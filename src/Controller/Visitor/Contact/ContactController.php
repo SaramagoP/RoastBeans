@@ -5,6 +5,7 @@ namespace App\Controller\Visitor\Contact;
 use DateTimeImmutable;
 use App\Entity\Contact;
 use App\Form\ContactFormType;
+use App\Repository\SettingsRepository;
 use App\Service\SendEmailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'visitor_contact_create', methods:['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $em, SendEmailService $SendEmailService): Response
+    public function create(Request $request, EntityManagerInterface $em, SendEmailService $SendEmailService, SettingsRepository $settingsRepository): Response
     {
         $contact = new Contact();
+        $settings = $settingsRepository->findAll();
+
+        $setting = $settings[0];
 
         $form = $this->createForm(ContactFormType::class, $contact);
 
@@ -25,6 +29,8 @@ class ContactController extends AbstractController
 
         if ( $form->isSubmitted() && $form->isValid() )
         {
+            $contact->setMessage(htmlspecialchars($contact->getMessage(), ENT_QUOTES, 'UTF-8'));
+
             if ($this->getUser()) 
             {
                 $contact->setUser($this->getUser());
@@ -63,7 +69,9 @@ class ContactController extends AbstractController
         }
 
         return $this->render('pages/visitor/contact/create.html.twig', [
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "setting" => $setting
         ]);
     }
 }
+

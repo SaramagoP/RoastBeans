@@ -3,6 +3,7 @@
 namespace App\Controller\Visitor\Order;
 
 
+use App\Entity\Order;
 use DateTimeImmutable;
 use App\Form\OrderFormType;
 use App\Service\OrderService;
@@ -33,6 +34,8 @@ class OrderController extends AbstractController
          */
         $user = $this->getUser();
 
+        $order = new Order();
+
         //  2- Vérifier si les produits sont toujours dans le panier
         if ( count ($this->cartService->getCartItems()) <= 0 )
         {
@@ -52,11 +55,13 @@ class OrderController extends AbstractController
         // 7- Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid())
         {
-          
+        
             $pickupTime = $form->get('pickup_time')->getData();
             $pickupDate = $form->get('pickup_date')->getData();
 
-           // Convertir les objets DateTime en DateTimeImmutable
+            // dd($pickupDate, $pickupTime);
+
+            // Convertir les objets DateTime en DateTimeImmutable
             $pickupTime = DateTimeImmutable::createFromMutable($pickupTime);
             $pickupDate = DateTimeImmutable::createFromMutable($pickupDate);
 

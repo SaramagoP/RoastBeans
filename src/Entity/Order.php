@@ -58,9 +58,8 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $pickupLastName = null;
 
-    #[Assert\NotBlank(message:'La date de commande est obligatoire')]
     #[ORM\Column]
-    private ?\DateTimeImmutable $OrderedAt = null;
+    private ?\DateTimeImmutable $orderedAt = null;
 
     #[Assert\NotBlank(message:'Pour récupérer le produit il faut preciser la date')]
     #[ORM\Column]
@@ -169,12 +168,12 @@ class Order
 
     public function getOrderedAt(): ?\DateTimeImmutable
     {
-        return $this->OrderedAt;
+        return $this->orderedAt;
     }
 
-    public function setOrderedAt(?\DateTimeImmutable $OrderedAt): static
+    public function setOrderedAt(?\DateTimeImmutable $orderedAt): static
     {
-        $this->OrderedAt = $OrderedAt;
+        $this->orderedAt = $orderedAt;
 
         return $this;
     }

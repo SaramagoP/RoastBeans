@@ -3,6 +3,7 @@
 namespace App\Controller\User\Order;
 
 use App\Entity\Order;
+use DateTimeImmutable;
 use App\Form\EditOrderFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,11 +41,13 @@ class OrderController extends AbstractController
         {
             $order->setUser($this->getUser());
 
+            $order->setupdatedAt(new DateTimeImmutable());
+
             $this->em->persist($order);
             
             $this->em->flush();
 
-            $this->addFlash('success', 'La commande a été modifié');
+            $this->addFlash('success', "La commande numéro {$order->getId()} a été modifié.");
 
             return $this->redirectToRoute("user_order_index");
         }
@@ -62,7 +65,7 @@ class OrderController extends AbstractController
         // Vérification de la validité du token CSRF pour des raisons de sécurité
         if ($this->isCsrfTokenValid('delete_order_' . $order->getId(), $request->request->get('_csrf_token'))) {
             // Ajout d'un message flash de succès
-            $this->addFlash('success', 'La commande a été supprimé avec succès.');
+            $this->addFlash('success', "La commande numéro {$order->getId()} a été supprimé avec succès.");
             
             // Demander au manager des entités de préparer la suppression du order en base de données
             $em->remove($order);

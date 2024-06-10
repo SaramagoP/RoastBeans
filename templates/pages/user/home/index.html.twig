@@ -16,11 +16,12 @@
         <div class="row">
             {% if app.user.orders is not empty %}
                 {% for order in app.user.orders %}
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-4 my-3">
                         <div class="bg-light text-dark rounded-5 d-flex flex-column justify-content-center align-items-center">
-                            <p style="color: #C59B76"><strong>Commande #{{ order.id }}</strong></p>
-                            <p>Status de la commande : {{ order.status }}</p>
-                            <p>{{ order.orderedAt|format_datetime() }}</p>
+                            <p style="color: #C59B76; padding: 5px"><strong>Commande #{{ order.id }}</strong></p>
+                            <p><strong>Status de la commande :</strong> {{ order.status }}</p>
+                            <p><strong>Commandé le :</strong> {{ order.orderedAt|format_datetime() }}</p>
+                            <p><strong>A recupérer le :</strong> {{order.pickupDate|format_date()}} à {{order.pickupTime|format_time()}}
                         </div>
                     </div>
                 {% endfor %}
