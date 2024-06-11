@@ -64,6 +64,10 @@ class Contact
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phone = null;
 
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z-_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, l'undescore et tiret sont autorisés pour le message")]
     #[Assert\NotBlank(message: 'Le message est obligatoire')]
     #[Assert\Length(
         max: 600,

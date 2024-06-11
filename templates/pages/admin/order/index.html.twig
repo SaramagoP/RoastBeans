@@ -47,10 +47,10 @@
             <tbody>
                 {% for order in orders %}
                     <tr>
-                        <td>{{order.id}}</td>
+                        <td class="text-center">{{order.id}}</td>
                         <td>{{order.user.email}}</td>
                         <td>{{order.status}}</td>
-                        <td>{{order.totalAmount}}</td>
+                        <td class="text-center">{{order.totalAmount}}€</td>
                         <td>{{order.orderedAt|format_datetime()}}</td>
                         <td>{{order.updatedAt|format_datetime()}}</td>
                         <td class="d-flex justify-content-evenly">

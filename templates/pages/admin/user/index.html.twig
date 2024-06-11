@@ -50,7 +50,7 @@
             <tbody>
                 {% for user in users %}
                     <tr>
-                        <td>{{user.id}}</td>
+                        <td class="text-center">{{user.id}}</td>
                         <td>{{user.firstName}}</td>
                         <td>{{user.lastName}}</td>
                         <td>{{user.email}}</td>
@@ -59,7 +59,7 @@
                                 <span class="badge text-bg-dark">{{role}}</span>
                             {% endfor %}
                         </td>
-                        <td>{{user.isVerified ? user.isVerified : "Pas encore"}}</td>
+                        <td class="text-center">{{user.isVerified ? user.isVerified : "Pas encore"}}</td>
                         <td>{{user.createdAt|format_datetime()}}</td>
                         <td>{{user.updatedAt|format_datetime()}}</td>
                         <td class="d-flex justify-content-evenly">

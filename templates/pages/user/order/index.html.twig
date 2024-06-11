@@ -19,9 +19,9 @@
                 <div class="col">
                     <div class="card border-0 p-3 my-3">
                         <p><strong>Id :</strong> {{order.id}} <hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Commanditaire :</strong> {{order.pickupFirstName}} {{order.pickupLastName}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Email :</strong> {{order.user.email}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Statut :</strong> {{order.status}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Qui récupère la commande :</strong> {{order.pickupFirstName}} {{order.pickupLastName}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Email du Commanditaire :</strong> {{order.user.email}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Statut de la Commande :</strong> {{order.status}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
                         <p><strong>Montant Total :</strong> {{order.totalAmount}} €<hr class="border border-secondary border-1 opacity-5 my-0"></p>
                         <p><strong>Commandé le :</strong> {{order.orderedAt|format_datetime()}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
                         <p><strong>A recupérer le :</strong> {{order.pickupDate|format_date()}} à {{order.pickupTime|format_time()}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
