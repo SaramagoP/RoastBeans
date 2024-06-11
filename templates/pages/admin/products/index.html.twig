@@ -37,8 +37,8 @@
     </div>
 
     <div class="table-responsive">
-        <table id="table" class="table table-hover text-center table-bordered">
-            <thead class="table-dark">
+        <table id="table" class="table text-center table-bordered">
+            <thead class="table-dark text-center">
                 <tr>
                     <th>Id</th>
                     <th>Image</th>
@@ -55,10 +55,10 @@
             <tbody>
                  {% for produit in produits %} {# Cette ligne indique le début d'une boucle qui itère à travers chaque élément de la liste produits. À chaque itération, la variable produit contiendra un élément de la liste, et le contenu à l'intérieur de la boucle sera exécuté pour chaque élément de la liste. #}
                     <tr>
-                        <td>{{ produit.id }}</td>
+                        <td class="text-center">{{ produit.id }}</td>
                         {# Affiche l'identifiant du produit #}
 
-                        <td>
+                        <td class="text-center">
                             {% if produit.image %} {# Si l'attribut image du produit est défini et non vide, cette condition est évaluée comme vraie #}
                                 <img src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('admin_product') }}" alt="{{ produit.name }}">
                             {% else %}
@@ -76,10 +76,10 @@
                         <td>{{ produit.description }}</td>
                         {# Affiche la description du produit #}
 
-                        <td>{{ produit.price }}€</td>
+                        <td class="text-center">{{ produit.price }}€</td>
                         {# Affiche le prix du produit suivi du symbole '€' #}
 
-                        <td>{{ produit.quantity }}</td>
+                        <td class="text-center">{{ produit.quantity }}</td>
                         {# Affiche la quantité du produit #}
 
                         <td>{{ produit.createdAt|format_datetime() }}</td>
