@@ -80,7 +80,7 @@
                                 {% endif %}
                                 {% if is_granted('ROLE_USER') %}
                                 <li>
-                                    <a class="dropdown-item" href="{{path('user_home_index')}}">Espace User</a>
+                                    <a class="dropdown-item" href="{{path('user_recent_order_index')}}">Espace User</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
@@ -111,7 +111,7 @@
     <footer>
         <ul>
             <li><span>2024 &copy <span class="name">RoastBeans Café </span>· Tous droits réservés</span></li>
-            <li><a href="#" data-bs-toggle="modal" data-bs-target="#legalNotice">Mentions Légales</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#legalNotice">· Mentions Légales</a></li>
                 <div class="modal fade" id="legalNotice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
