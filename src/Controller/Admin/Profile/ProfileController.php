@@ -92,13 +92,19 @@ class ProfileController extends AbstractController
         // Vérifie si le formulaire a été soumis et si les données sont valides
         if ($form->isSubmitted() && $form->isValid())
         {
-
+            // Récupère le mot de passe en clair à partir des données soumises dans le formulaire.
             $plainPassword = $form->getData()['password'];
 
+            // Utilise le service de hachage de mot de passe pour hasher le mot de passe en clair.
+            // $this->hasher est probablement une instance de UserPasswordHasherInterface - L'objectif principal de UserPasswordHasherInterface est de fournir une méthode standardisée pour hacher et vérifier les mots de passe des utilisateurs tout en offrant une flexibilité dans le choix de l'algorithme de hachage et des paramètres de sécurité.
             $passwordHashed = $this->hasher->hashPassword($admin, $plainPassword);
 
+            // Définit le mot de passe haché dans l'objet $admin.
+            // Cela met à jour le mot de passe de l'administrateur avec le nouveau mot de passe haché.
             $admin->setPassword($passwordHashed);
 
+            // Définit la date et l'heure actuelles comme date de dernière mise à jour de l'administrateur.
+            // Utilise DateTimeImmutable pour s'assurer que cette valeur ne peut pas être modifiée après coup.
             $admin->setUpdatedAt(new DateTimeImmutable());
 
             // Persiste l'entité utilisateur dans la base de données

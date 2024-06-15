@@ -96,7 +96,7 @@ class Product
     /**
      * @var Collection<int, OrderDetail>
      */
-    #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'product')]
+    #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'product', cascade: ['remove'])]
     private Collection $orderDetails;
 
 
