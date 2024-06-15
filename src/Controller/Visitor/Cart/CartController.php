@@ -34,41 +34,55 @@ class CartController extends AbstractController
     #[Route('/cart/{id}/add', name: 'visitor_add_cart', methods: ['GET'])]
     public function add(string $id): Response // On met $id au lieux $product pour poivoir faire des traitements particuliers, comme par exemple me assurer que le produit existe dans la base de données
     {
+        // Recherche du produit dans la base de données en fonction de son identifiant $id
         $product = $this->productRepository->find((int) $id);
 
+        // Vérification si le produit existe
         if (null === $product) 
         {
-            throw $this->createNotFoundException("The product with id={$id} not found.");
+            // Si le produit n'est pas trouvé, une exception 404 est levée
+            throw $this->createNotFoundException("Le produit avec id={$id} est introuvable.");
         }
 
+        // Vérification si la quantité du produit est supérieure à zéro
         if ($product->getQuantity() <= 0) 
         {
-           throw $this->createNotFoundException("The product with id={$id} is unavailable.");
+            // Si la quantité est nulle ou négative, le produit est considéré comme indisponible
+            throw $this->createNotFoundException("Le produit avec id={$id} n'est pas disponible.");
         }
 
+        // Appel du service de gestion du panier pour ajouter une unité du produit
         $this->cartService->add((int)$id);
 
-       return $this->redirectToRoute("visitor_cart_index");
+        // Redirection vers la page du panier après l'ajout du produit
+        return $this->redirectToRoute("visitor_cart_index");
     }
  
     
     #[Route('/cart/{id}/decrement', name: 'visitor_decrement_cart', methods: ['GET'])]
     public function decrement(string $id): Response
     {
+        // Recherche du produit dans la base de données en fonction de son identifiant $id
         $product = $this->productRepository->find((int) $id);
 
+        // Vérification si la quantité du produit est supérieure à zéro
         if (null === $product) 
         {
-            throw $this->createNotFoundException("The product with id={$id} not found.");
+            // Si la quantité est nulle ou négative, le produit est considéré comme indisponible
+            throw $this->createNotFoundException("Le produit avec id={$id} est introuvable.");
         }
 
+        // Vérification si la quantité du produit est supérieure à zéro
         if ($product->getQuantity() <= 0) 
         {
-           throw $this->createNotFoundException("The product with id={$id} is unavailable.");
+            // Si la quantité est nulle ou négative, le produit est considéré comme indisponible
+            throw $this->createNotFoundException("Le produit avec id={$id} n'est pas disponible.");
         }
 
+        // Appel du service de gestion du panier pour décrémenter une unité du produit
         $this->cartService->decrement((int)$id);
 
+        // Redirection vers la page du panier après le décrément du produit
         return $this->redirectToRoute("visitor_cart_index");
     }
 
@@ -76,20 +90,27 @@ class CartController extends AbstractController
     #[Route('/cart/{id}/remove', name: 'visitor_remove_cart', methods: ['GET'])]
     public function remove(string $id): Response
     {
+        // Recherche du produit dans la base de données en fonction de son identifiant $id
         $product = $this->productRepository->find((int) $id);
 
+        // Vérification si le produit existe
         if (null === $product) 
         {
-            throw $this->createNotFoundException("The product with id={$id} not found.");
+            // Si le produit n'est pas trouvé, une exception 404 est levée
+            throw $this->createNotFoundException("Le produit avec id={$id} est introuvable.");
         }
 
+        // Vérification si la quantité du produit est supérieure à zéro
         if ($product->getQuantity() <= 0) 
         {
-           throw $this->createNotFoundException("The product with id={$id} is unavailable.");
+            // Si la quantité est nulle ou négative, le produit est considéré comme indisponible
+            throw $this->createNotFoundException("Le produit avec id={$id} n'est pas disponible.");
         }
 
+        // Appel du service de gestion du panier pour supprimer complètement le produit du panier
         $this->cartService->remove((int)$id);
 
+        // Redirection vers la page du panier après la suppression du produit
         return $this->redirectToRoute("visitor_cart_index");
     }
 }

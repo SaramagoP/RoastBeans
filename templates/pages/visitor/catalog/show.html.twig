@@ -11,10 +11,13 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-md-5 text-center mt-5">
-                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-fluid" alt="{{ product.name }}" style="width: 100%; max-width: 500px; height: auto;">
+                {# Vérifie si le produit a une image. Si oui (?), utilise l'image du produit. Sinon, (:) utilise une image par défaut. La fonction vich_uploader_asset est utilisée pour obtenir le chemin vers un fichier téléchargé avec VichUploaderBundle, un bundle de Symfony qui facilite la gestion des fichiers uploadés. #}
+                <img src="{{ product.image ? vich_uploader_asset(product, 'imageFile') : asset('images/default-image.jpg') }}"class="img-fluid" style="width: 100%; max-width: 500px; height: auto" alt="{{ product.name }}">
+                {# Bouton pour lire la description du produit #}
+                <button onclick="readDescription('{{ product.name }}', '{{ product.description }}', '{{ product.price }}')" class="btn btn-sm my-3" style="background-color: #C59B76">Lire la description</button>
             </div>
             <div class="col-md-7 text-center my-3">
-                <h1 class="my-3">{{ product.name }}</h1>
+                <h1 class="my-5">{{ product.name }}</h1>
                 <p>
                     {% for category in product %} {# La boucle for affiche le nom d'une catégorie de la liste des catégories associées à ce produit. #}
                         {{category.name}}
@@ -70,5 +73,31 @@
         </div>
     </div>
 
+    {# Script pour la lecture vocale des descriptions de produits API Web Speech #}
+    <script>
+        function readDescription(name, description, price)
+            {
+                // Création d'un nouvel objet SpeechSynthesisUtterance qui représente un texte à énoncer à haute voix.
+                const speech = new SpeechSynthesisUtterance();
+
+                // Attribution du texte à lire à haute voix, en utilisant les paramètres name (nom du produit), description (description du produit) et price (prix du produit).
+                speech.text = `Produit: ${name}. Description: ${description}. Prix: ${price} euros`;
+
+                // Définition de la langue de la synthèse vocale. Ici, 'fr-FR' indique français (France).
+                speech.lang = 'fr-FR';
+
+                // Réglage du volume de la voix. 1 représente le volume maximum.
+                speech.volume = 1; // Valeur entre 0 (silence) et 1 (maximum).
+
+                // Réglage de la vitesse de lecture. 1 est la vitesse normale.
+                speech.rate = 1; // Valeur entre 0.1 (très lent) et 10 (très rapide).
+
+                // Réglage de la hauteur de la voix. 1 est la hauteur normale.
+                speech.pitch = 1; // Valeur entre 0 (grave) et 2 (aigu).
+
+                // Appel de l'API window.speechSynthesis pour démarrer la synthèse vocale avec l'objet speech configuré.
+                window.speechSynthesis.speak(speech);
+            }
+    </script>
 
 {% endblock %}

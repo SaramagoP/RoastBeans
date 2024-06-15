@@ -26,11 +26,11 @@ class ProductRepository extends ServiceEntityRepository
     public function filterProductsByCategory(int $category_id) : array
     {
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.category', 'c')
-            ->andWhere('p.category = :category_id')
-            ->setParameter('category_id', $category_id)
-            ->getQuery()
-            ->getResult()
+            ->innerJoin('p.category', 'c') // Jointure avec l'entité Category associée à chaque produit
+            ->andWhere('p.category = :category_id') // Filtrer les produits où l'ID de la catégorie correspond à :category_id
+            ->setParameter('category_id', $category_id) // Définir le paramètre :category_id avec la valeur passée en argument
+            ->getQuery() // Obtenir l'objet QueryBuilder
+            ->getResult() // Exécuter la requête et obtenir les résultats sous forme de tableau
         ;
     }
 

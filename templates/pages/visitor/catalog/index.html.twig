@@ -8,7 +8,7 @@
 
 {% block main %}
 
-    <h1 class="text-center my-3 display-5">Produits</h1>
+    <h1 class="text-center my-3 display-2">Produits</h1>
  
     <div class="container my-5">
         <div class="row">
@@ -28,10 +28,11 @@
                 {% for row in products|batch(3) %}
                     <div class="row">
                         {% for product in row %}
-                            <div class="col-md-4 my-3">
+                            <div class="col-md-6 col-lg-4 my-3">
                                 <div class="card">
                                     <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}">
-                                        <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img text-center rounded-2 w-100 h-100" alt="{{ product.name }}">
+                                        <img src="{{ product.image ? vich_uploader_asset(product, 'imageFile') : asset('images/default-image.jpg') }}" class="img text-center rounded-2 w-100 h-100" alt="{{ product.name }}">
+                                    </a>
                                     </a>
                                     <div class="card-body">
                                         <a class="text-decoration-none" href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}">

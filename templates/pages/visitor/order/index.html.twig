@@ -7,7 +7,7 @@
 {% block keywords %}Commandes, produits{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Commande</h1>
+    <h1 class="text-center my-3 display-2">Commande</h1>
 
     <div class="container my-3">
         <div class="row">
@@ -34,15 +34,23 @@
             </div>
             <div class="col-md-6 my-3">
                 {# Recap de la commande #}
+                {% set totalAmount = 0 %} {# Initialisation du montant total #}
                 {% for cartItem in cartItems %}
                     <div class="col-12 my-3">
                         <div class="card">
                             <div class="card-body text-center">
-                                <p>{{cartItem.quantity}}x {{cartItem.product.name}}</p>  
+                                <p>{{ cartItem.quantity }}x {{ cartItem.product.name }}</p>
+                                <p>Prix unitaire: {{ cartItem.product.getPrice() }}€</p> <!-- Prix unitaire du produit -->
+                                <p>Montant total: {{ cartItem.getAmount() }}€</p> <!-- Prix total calculé -->
                             </div>
                         </div>
                     </div>
+                    {% set totalAmount = totalAmount + cartItem.getAmount() %} {# Accumulation du montant total #}
                 {% endfor %}
+                <!-- Affichage du montant total de la commande -->
+                <div class="text-center mt-4">
+                    <h2 style="color: #C59B76">Montant total de la commande: {{ totalAmount }}€</h2>
+                </div>
             </div>
         </div>
     </div>

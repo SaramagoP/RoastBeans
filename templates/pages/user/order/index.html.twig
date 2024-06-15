@@ -8,7 +8,7 @@
 
 {% block main %}
 
-    <h1 class="text-center my-3 display-5">Mes Commandes<hr></h1>
+    <h1 class="text-center my-3 display-2">Mes Commandes<hr></h1>
 
     <div class="container my-5">
 
@@ -18,7 +18,7 @@
             {% for order in app.user.orders %}
                 <div class="col">
                     <div class="card border-0 p-3 my-3">
-                        <p><strong>Id :</strong> {{order.id}} <hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Numéro de Commande:</strong> {{order.id}} <hr class="border border-secondary border-1 opacity-5 my-0"></p>
                         <p><strong>Qui récupère la commande :</strong> {{order.pickupFirstName}} {{order.pickupLastName}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
                         <p><strong>Email du Commanditaire :</strong> {{order.user.email}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
                         <p><strong>Statut de la Commande :</strong> {{order.status}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>

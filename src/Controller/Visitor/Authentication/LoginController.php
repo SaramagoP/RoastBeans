@@ -13,21 +13,20 @@ class LoginController extends AbstractController
     #[Route(path: '/login', name: 'visitor_authentication_login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // Vérifier si l'utilisateur est déjà connecté. 
-            //Il n'a plus rien à faire sur la page de connexion
-                // Rediriger l'utilisateur vers la page d'accueil
+        // Vérifier si l'utilisateur est déjà connecté.
+        // Si oui, rediriger vers la page d'accueil des visiteurs.
         if ($this->getUser()) 
         {
-            // Rediriger vers la page d'accueil des visiteurs si l'utilisateur est déjà connecté.
+            // Redirection vers la page d'accueil des visiteurs si déjà connecté.
             return $this->redirectToRoute('visitor_welcome_index');
         }
 
-        // get the login error if there is one
+        // Récupérer l'éventuelle erreur de connexion
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // Récupérer le dernier nom d'utilisateur saisi par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        // 1- Afficher la page de connexion
+        // Afficher la page de connexion avec le dernier nom d'utilisateur et l'erreur éventuelle
         return $this->render('pages/visitor/authentication/login.html.twig', [
             'last_username' => $lastUsername, 'error' => $error
         ]);
@@ -36,6 +35,7 @@ class LoginController extends AbstractController
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
+        // Cette méthode peut être vide car la déconnexion sera gérée par Symfony via la configuration de sécurité.
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

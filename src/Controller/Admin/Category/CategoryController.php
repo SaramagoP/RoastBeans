@@ -47,7 +47,7 @@ class CategoryController extends AbstractController // il herite de la classe Ab
             $category->setCreatedAt(new DateTimeImmutable()); // Définition de la date de création de la catégorie.
             $category->setUpdatedAt(new DateTimeImmutable()); // Définition de la date de mise à jour de la catégorie.
 
-            $this->em->persist($category); //Demander au manager des entités de préparer la requête d'insertion du nouveau contact en base de données
+            $this->em->persist($category); //Demander au manager des entités de préparer la requête d'insertion de la nouvelle category en base de données
 
             $this->em->flush(); // Validation des modifications dans la base de données. Exécuter la requête
 
