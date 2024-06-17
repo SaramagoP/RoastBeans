@@ -14,7 +14,7 @@
                 {# Vérifie si le produit a une image. Si oui (?), utilise l'image du produit. Sinon, (:) utilise une image par défaut. La fonction vich_uploader_asset est utilisée pour obtenir le chemin vers un fichier téléchargé avec VichUploaderBundle, un bundle de Symfony qui facilite la gestion des fichiers uploadés. #}
                 <img src="{{ product.image ? vich_uploader_asset(product, 'imageFile') : asset('images/default-image.jpg') }}"class="img-fluid" style="width: 100%; max-width: 500px; height: auto" alt="{{ product.name }}">
                 {# Bouton pour lire la description du produit #}
-                <button onClick="readDescription('{{ product.name }}', '{{ product.description }}', '{{ product.price }}')" class="btn btn-sm my-3" style="background-color: #C59B76">Lire la description</button>
+                <button onClick="readDescription('{{ product.name|e('js') }}', '{{ product.description|e('js') }}', '{{ product.price|e('js') }}')" class="btn btn-sm my-3" style="background-color: #C59B76">Lire la description</button>
             </div>
             <div class="col-md-7 text-center my-3">
                 <h1 class="my-5">{{ product.name }}</h1>
@@ -74,17 +74,23 @@
     </div>
 
 
-    {# Script pour la lecture vocale des descriptions de produits via l'API Web Speech #}
-    <script>
-        function readDescription(name, description, price) {
-            const speech = new SpeechSynthesisUtterance();
-            speech.text = `Produit: ${name}. Description: ${description}. Prix: ${price} euros`;
-            speech.lang = 'fr-FR';
-            speech.volume = 1;
-            speech.rate = 1;
-            speech.pitch = 1;
-            window.speechSynthesis.speak(speech);
+<script>
+    function readDescription(name, description, price)
+    {
+        if (!name || !description || !price) 
+        {
+            console.error('Manque des informations.');
+            return;
         }
-    </script>
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = `Produit: ${name}. Description: ${description}. Prix: ${price} euros`;
+        speech.lang = 'fr-FR';
+        speech.volume = 1;
+        speech.rate = 1;
+        speech.pitch = 1;
+        window.speechSynthesis.speak(speech);
+    }
+    
+</script>
 
 {% endblock %}
