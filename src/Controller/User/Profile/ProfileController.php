@@ -54,6 +54,8 @@ class ProfileController extends AbstractController
         // Vérifie si le formulaire a été soumis et si les données sont valides
         if ($form->isSubmitted() && $form->isValid())
         {
+            $user->setUpdatedAt(new DateTimeImmutable());
+            
             // Persiste l'entité utilisateur dans la base de données
             $this->em->persist($user);
 

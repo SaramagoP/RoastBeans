@@ -14,9 +14,9 @@
             <div class="col-md-6 my-3">
 
                 {% include 'components/_alert.html.twig' %}
-
+                {% set totalAmount1 = 0 %}
                 {# Formulaire #}
-                {{ form_start(form) }}
+                {{ form_start(form, {'action': path('app_checkout')}) }}
                     <div class="mb-3">
                         <label for="order_form_pickup_date">Sélectionnez la date de récupération de la commande<span class="text-danger">*</span></label>
                         <div class="text-danger">{{form_errors(form.pickup_date)}}</div>
@@ -29,6 +29,12 @@
                     </div>
                     <div class="mb-3">
                         <input formnovalidate type="submit" class="btn btn-shadow d-flex justify-content-center align-items-center mx-auto" style="background-color: #C59B76" value="Procéder au paiement">
+                        {% for cartItem in cartItems %}
+                            {% set totalAmount1 = totalAmount1 + cartItem.getAmount() %} {# Accumulation du montant total #}
+                            <input type="hidden" name="product[{{ loop.index0 }}][name]" value="{{ cartItem.product.name }}">
+                            <input type="hidden" name="amount" value="{{ totalAmount1 }}">
+                            <input type="hidden" name="quantity" value="{{ cartItem.quantity }}">
+                        {% endfor %}
                     </div>
                 {{ form_end(form) }}
             </div>
@@ -39,7 +45,7 @@
                     <div class="col-12 my-3">
                         <div class="card">
                             <div class="card-body text-center">
-                                <p>{{ cartItem.quantity }}x {{ cartItem.product.name }}</p>
+                                <p>{{ cartItem.quantity }} x {{ cartItem.product.name }}</p>
                                 <p>Prix unitaire: {{ cartItem.product.getPrice() }}€</p> <!-- Prix unitaire du produit -->
                                 <p>Montant total: {{ cartItem.getAmount() }}€</p> <!-- Prix total calculé -->
                             </div>

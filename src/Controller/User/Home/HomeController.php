@@ -36,7 +36,8 @@ class HomeController extends AbstractController // Déclare la classe HomeContro
     public function order(OrderRepository $orderRepository): Response // Déclare la méthode order
     {
         $user = $this->getUser(); // Récupère l'utilisateur actuellement connecté
-        $orders = $orderRepository->findBy(['user' => $user]); // Récupère les commandes de l'utilisateur
+        
+        $orders = $orderRepository->findPaidOrdersByUser($user); // Récupère les commandes de l'utilisateur
 
         return $this->render('pages/user/home/index.html.twig', [ // Rend le template Twig 'index.html.twig'
             'orders' => $orders // Passe les commandes au template

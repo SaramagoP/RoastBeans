@@ -1,0 +1,29 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Paiement Accepté{% endblock %}
+
+{% block description %}Paiement Accepté{% endblock %}
+
+{% block keywords %}Paiement, accepté{% endblock %}
+
+{% block main %}
+
+        <div class="container mt-5">
+            <div class="row">
+                    <h1 class="text-center my-3 display-3">Merci de votre commande.</h1>
+                    <h2 class="text-center my-3"> Votre paiement a été accepté.</h2>
+                <div class="col-md-4 mx-auto">
+                    <div class="card text-center fw-bold fs-5">
+                        <div class="card-body">
+                            <p>Statut du paiement : {{ payment_status }}</p>
+                            <p>Email : {{ email }}</p>
+                            <p>Nom de l'acheteur  : {{ name }}</p>
+                            <p>Montant Total : {{ amount }} €</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+{% endblock %}
+
