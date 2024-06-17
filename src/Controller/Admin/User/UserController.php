@@ -91,7 +91,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             // Met à jour les horodatages de création et de mise à jour
-            $user->setCreatedAt(new DateTimeImmutable());
+            
             $user->setUpdatedAt(new DateTimeImmutable());
 
             // Persiste l'utilisateur dans la base de données

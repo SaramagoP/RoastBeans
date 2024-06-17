@@ -83,7 +83,7 @@ class ProductController extends AbstractController // Extension de la classe Abs
 
         if ($form->isSubmitted() && $form->isValid()) // Vérification si le formulaire est soumis et valide.
         {
-            $product->setCreatedAt(new DateTimeImmutable()); // Définition de la date de création du produit.
+            // $product->setCreatedAt(new DateTimeImmutable()); // Définition de la date de création du produit.
             $product->setUpdatedAt(new DateTimeImmutable()); // Définition de la date de mise à jour du produit.
 
             $this->em->persist($product); // Persistance de l'entité produit.

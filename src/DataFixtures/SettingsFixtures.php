@@ -22,8 +22,8 @@ class SettingsFixtures extends Fixture // La classe SettingsFixtures étend la c
     {
         $settings = new Settings(); // Création d'une nouvelle instance de Settings.
 
-        $settings->setWebsiteName("RoastBeans"); // Définition du nom du site web.
-        $settings->setWebsiteUrl("http://roastbeans.com"); // Définition de l'URL du site web.
+        $settings->setWebsiteName("RoastBeans Café"); // Définition du nom du site web.
+        $settings->setWebsiteUrl("https://psdww.com/"); // Définition de l'URL du site web.
         $settings->setDescription("Nous nous engageons à vous offrir des cafés de qualité supérieure, torréfiés à la perfection."); // Définition de la description du site.
         $settings->setUser(null);
         $settings->setEmail("roastbeans@gmail.com"); // Définition de l'adresse email de contact.

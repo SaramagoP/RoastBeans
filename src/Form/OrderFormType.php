@@ -26,7 +26,7 @@ class OrderFormType extends AbstractType
                 'html5' => true,
                 'required' => true,
                 'constraints' => [
-                    new NotBlank(['message' => 'Pour récupérer le produit il faut preciser la date']),
+                    new NotBlank(['message' => 'Pour récupérer le produit il faut préciser la date']),
                 ],
             ])
             ->add('pickup_time', TimeType::class, [
@@ -34,9 +34,10 @@ class OrderFormType extends AbstractType
                 'html5' => true,
                 'required' => true,
                 'constraints' => [
-                    new NotBlank(['message' => 'Pour récupérer le produit il faut preciser l\'heure']),
+                    new NotBlank(['message' => 'Pour récupérer le produit il faut préciser l\'heure']),
                 ],
             ])
+            
         ;
     }
 

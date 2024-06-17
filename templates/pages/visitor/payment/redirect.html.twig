@@ -1,0 +1,25 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Redirection en cours...{% endblock %}
+
+{% block description %}Redirection en cours...{% endblock %}
+
+{% block keywords %}Redirection{% endblock %}
+
+{% block main %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h1 class="text-center my-3 display-3">Redirection en cours...</h1>
+                <script type="text/javascript">
+                    document.addEventListener("DOMContentLoaded", () => {
+                        let url = "{{ url }}";
+                        window.location.href = url;
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+        
+{% endblock %}

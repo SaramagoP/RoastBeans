@@ -34,8 +34,6 @@ class SettingsController extends AbstractController
             ]);
         }
 
-        
-    
         $settings = $settings[0]; // Supposons qu'il y a un seul enregistrement de paramètres, récupérer le premier élément
     
         return $this->render('pages/admin/settings/index.html.twig', [

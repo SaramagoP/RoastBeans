@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Controller\Visitor\Stripe;
+
+
+use Stripe\StripeClient;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class StripeController extends AbstractController
+{
+    private $em;
+    private $gateway;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+        $this->gateway = new StripeClient($_ENV['STRIPE_API_SECRET']); // Initialiser le client strippe.
+    }
+
+
+    // Route pour gérer le paiement.
+    #[Route('/checkout', name: 'app_checkout', methods: "POST")]
+    public function checkout(Request $request): Response
+    {
+        // Récupération du montant et de la quantité depuis le form ou votre lien
+        $amount = $request->request->get('amount');
+    
+        $quantity = $request->request->get('quantity');
+   
+        $products = $request->request->all()['product'];
+
+        if(is_array($products) && !empty($products)) {
+            $product = [];
+
+            foreach($products as $produit) {
+                if(!empty($produit)){
+                    $product[] = $produit['name'];
+                }
+            }
+        }
+        if(!empty($product)) {
+            $nameProducts = implode(", ", $product);
+        }
+     
+        $amountCents = intval($amount*100);
+
+        // Création d'une session de paiement Stripe.
+        $checkout = $this->gateway->checkout->sessions->create([
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => $_ENV['STRIPE_API_CURRENCY'],
+                    'product_data' => [
+                        'name' => $nameProducts
+                    ],
+                    'unit_amount' => $amountCents,
+                ],
+                'quantity' => 1 
+            ]] ,
+            'mode' => 'payment',
+            'success_url' => 'https://127.0.0.1:8000/success?id_sessions={CHECKOUT_SESSION_ID}',
+            'cancel_url' => 'https://127.0.0.1:8000/cancel?id_sessions={CHECKOUT_SESSION_ID}',
+            ]);
+        $fullUrl = $checkout->url ;
+        return $this->redirectToRoute('app_redirect' , ['url' => $fullUrl ]); 
+    }
+
+
+    #[Route('/redirect', name: 'app_redirect')]
+    public function redirectFragment(Request $request): Response
+    {
+    $url = $request->query->get('url');
+    return $this->render('pages/visitor/payment/redirect.html.twig', ['url' => $url]);
+    }
+
+    // Route pour gérer le paiement réussi
+    #[Route('/success', name: 'app_success', methods: 'GET')]
+    public function success(Request $request): Response
+    {
+        // Récupération des données de la session de paiement Stripe pour un paiement réussi.
+        $id_session = $request->query->get('id_sessions');
+        $customer = $this->gateway->checkout->sessions->retrieve($id_session, []);
+
+        // Extraction des données nécessaires pour le traitement ultérieur.
+        $payment_status = $customer->payment_status;
+        $email = $customer->customer_details->email;
+        $name = $customer->customer_details->name;
+        $amount = $customer->amount_total;
+        $formattedAmount = number_format($amount / 100, 2, ',', ' ');
+
+
+        
+        return $this->render('pages/visitor/payment/success.html.twig', [
+            'payment_status' => $payment_status,
+            'email' => $email,
+            'name' => $name,
+            'amount' => $formattedAmount
+        ]);
+    }
+
+
+    // Route pour gérer l'annulation du paiment.
+    #[Route('/cancel', name: 'app_cancel', methods: 'GET')]
+    public function cancel(Request $request): Response
+    {
+        // Enregistrer des informations sur l'annulation du paiment dans la base de données, SI NECESSAIRE.
+
+        // Redirection vers la page d'annulation.
+        return $this->render('pages/visitor/payment/cancel.html.twig');
+    }
+}
