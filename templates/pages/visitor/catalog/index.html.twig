@@ -16,18 +16,19 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Catégories
-                    </button>
+                    </button> {# Bouton pour ouvrir le menu déroulant des catégories #}
                     <ul class="dropdown-menu">
-                        {% for category in categories %}
-                            <li><a class="dropdown-item" href="{{path('visitor_filter_product_by_category', {'id':category.id, 'slug': category.slug})}}">{{category.name}} ({{category.products|length}})</a></li> 
+                            <li><a class="dropdown-item" href="{{ path('visitor_catalog_index') }}">Tous les produits</a></li> {# Élément de menu pour afficher tous les produits #}
+                        {% for category in categories %}{# Boucle pour chaque catégorie #}
+                            <li><a class="dropdown-item" href="{{path('visitor_filter_product_by_category', {'id':category.id, 'slug': category.slug})}}">{{category.name}} ({{category.products|length}})</a></li>  {# Élément de menu pour chaque catégorie avec un lien vers les produits filtrés par catégorie #}
                         {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="col-md-9 col-lg-10">
-                {% for row in products|batch(3) %}
+                {% for row in products|batch(3) %} {# Boucle pour chaque rangée de produits, groupés par 3 #}
                     <div class="row">
-                        {% for product in row %}
+                        {% for product in row %} {# Boucle pour chaque produit dans la rangée #}
                             <div class="col-md-6 col-lg-4 my-3">
                                 <div class="card">
                                     <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}">

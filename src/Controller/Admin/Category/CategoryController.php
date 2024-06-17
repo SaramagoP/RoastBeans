@@ -71,7 +71,6 @@ class CategoryController extends AbstractController // il herite de la classe Ab
 
         if ($form->isSubmitted() && $form->isValid()) // Vérification si le formulaire est soumis et valide.
         {
-            $category->setCreatedAt(new DateTimeImmutable()); // Définition de la date de création de la catégorie.
             $category->setUpdatedAt(new DateTimeImmutable()); // Définition de la date de mise à jour de la catégorie.
 
             $this->em->persist($category); // Persistance de l'entité catégorie.
@@ -104,6 +103,8 @@ class CategoryController extends AbstractController // il herite de la classe Ab
 
             return $this->redirectToRoute('admin_category_index'); // Redirection vers la page d'index des catégories. Puis arrêter l'exécution du script
         }
+
+        return $this->redirectToRoute('admin_category_index'); // Redirection vers la page d'index des catégories même si le CSRF token est invalide.
     }
 }
 
