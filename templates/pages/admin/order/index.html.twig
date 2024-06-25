@@ -54,7 +54,7 @@
                         <td>{{order.orderedAt|format_datetime()}}</td>
                         <td>{{order.updatedAt|format_datetime()}}</td>
                         <td class="d-flex justify-content-evenly">
-                            {% if order.status != "commande validée" %}
+                            {# {% if order.status != "commande validée" %} #}
                                 <a href="{{path('admin_order_status_edit', {'id':order.id})}}" type="submit" value="Modifier"><i class="fa-solid fa-edit"></i></a>
                                 <form action="{{path('admin_order_delete', {'id':order.id})}}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
@@ -63,7 +63,7 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
-                            {% endif %}
+                            {# {% endif %} #}
                         </td>
                     </tr>
                 {% endfor %}

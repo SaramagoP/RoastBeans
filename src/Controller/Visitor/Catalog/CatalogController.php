@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\ReviewFormType;
+use App\Service\Cart\CartService;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +20,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CatalogController extends AbstractController
 {
     public function __construct(
-        private productRepository $productRepository)
+        private productRepository $productRepository,
+        private CartService $cartService
+    )
     {
     }
 
@@ -40,6 +43,32 @@ class CatalogController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/add', name: 'visitor_add_product_cart', methods: ['GET'])]
+    public function addProduct(string $id): Response // On met $id au lieux $product pour poivoir faire des traitements particuliers, comme par exemple me assurer que le produit existe dans la base de données
+    {
+        // Recherche du produit dans la base de données en fonction de son identifiant $id
+        $product = $this->productRepository->find((int) $id);
+
+        // Vérification si le produit existe
+        if (null === $product) 
+        {
+            // Si le produit n'est pas trouvé, une exception 404 est levée
+            throw $this->createNotFoundException("Le produit avec id={$id} est introuvable.");
+        }
+
+        // Vérification si la quantité du produit est supérieure à zéro
+        if ($product->getQuantity() <= 0) 
+        {
+            // Si la quantité est nulle ou négative, le produit est considéré comme indisponible
+            throw $this->createNotFoundException("Le produit avec id={$id} n'est pas disponible.");
+        }
+
+        // Appel du service de gestion du panier pour ajouter une unité du produit
+        $this->cartService->add((int)$id);
+
+        // Redirection vers la page du panier après l'ajout du produit
+        return $this->redirectToRoute("visitor_catalog_index");
+    }
 
     #[Route('/{id}/{slug}/show', name: 'visitor_catalog_product_show', methods: ['GET', 'POST'])]
     public function show(
@@ -90,9 +119,9 @@ class CatalogController extends AbstractController
 
     #[Route('/product/filter-by-category/{id}/{slug}', name: 'visitor_filter_product_by_category', methods: ['GET'])]
     public function filterByCategory(
-        Category $category, // Il s'agit d'un paramètre typé qui représente une instance de la classe Category.
-        CategoryRepository $categoryRepository, // Il s'agit d'un service qui agit comme un pont entre l'application Symfony et la base de données pour la gestion des entités Category.
-        ProductRepository $productRepository // Il s'agit d'un service qui agit comme un pont entre l'application Symfony et la base de données pour la gestion des entités Product.
+        Category $category, 
+        CategoryRepository $categoryRepository, 
+        ProductRepository $productRepository 
     ): Response
     {
         // Récupère toutes les catégories pour afficher le menu de navigation

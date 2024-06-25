@@ -13,8 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`order`')]
 class Order
 {
-    public const STATUS_PENDING = "En cours";
-    public const STATUS_PAYMENT_PROBLEM = "Paiement refusé";
+    public const STATUS_PAYMENT_PENDING = "En cours";
+    public const STATUS_PAYMENT_CANCEL = "Paiement annulé";
     public const STATUS_PAYMENT_SUCCESSFULLY = "Paiement effectué";
 
     #[ORM\Id]
@@ -61,13 +61,17 @@ class Order
     #[ORM\Column]
     private ?\DateTimeImmutable $orderedAt = null;
 
-    #[Assert\NotBlank(message:'Pour récupérer le produit il faut preciser la date')]
+    // #[Assert\NotBlank(message:'Pour récupérer le produit il faut preciser la date')]
     #[ORM\Column]
     private ?\DateTimeImmutable $pickupDate = null;
 
-    #[Assert\NotBlank(message:'Pour récupérer le produit il faut preciser l\'heure')]
+    // #[Assert\NotBlank(message:'Pour récupérer le produit il faut preciser l\'heure')]
+    // #[ORM\Column]
+    // private ?\DateTimeImmutable $pickupTime = null;
+
     #[ORM\Column]
-    private ?\DateTimeImmutable $pickupTime = null;
+    private ?string $pickupTime = null;
+
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -154,12 +158,12 @@ class Order
         return $this;
     }
 
-    public function getPickupTime(): ?\DateTimeImmutable
+    public function getPickupTime(): ?string
     {
         return $this->pickupTime;
     }
 
-    public function setPickupTime(?\DateTimeImmutable $pickupTime): static
+    public function setPickupTime(?string $pickupTime): static
     {
         $this->pickupTime = $pickupTime;
 

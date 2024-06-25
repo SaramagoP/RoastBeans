@@ -4,11 +4,14 @@ namespace App\Controller\Admin\Order;
 
 
 use App\Entity\Order;
-use App\Repository\OrderRepository;
-use App\Form\EditOrderStatusFormType;
 use DateTimeImmutable;
+use Symfony\Component\Mime\Email;
+use App\Repository\OrderRepository;
+use Symfony\Component\Mime\Address;
+use App\Form\EditOrderStatusFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +21,8 @@ class OrderController extends AbstractController
 {
     public function __construct(
         private OrderRepository $orderRepository,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private MailerInterface $mailer
     )
     {    
     }
@@ -47,6 +51,9 @@ class OrderController extends AbstractController
             $this->em->persist($order);
 
             $this->em->flush();
+
+            // Envoyer email de confirmation
+            $this->sendConfirmationEmail($order);
 
             $this->addFlash('success', 'Le status de la commande a été modifié.');
 
@@ -81,6 +88,19 @@ class OrderController extends AbstractController
 
         // Redirection vers la page d'index des orders si le token CSRF n'est pas valide
         return $this->redirectToRoute('admin_order_index');
+    }
+
+    private function sendConfirmationEmail(Order $order): void
+    {
+        $email = (new Email())
+           ->from(new Address('roastbeans@gmail.com', 'Pierre Dubois'))
+            ->to($order->getUserEmail())
+            ->subject('Confirmation de commande validé')
+            ->html($this->renderView('emails/order_confirmation.html.twig', [
+                'order' => $order
+            ]));
+
+        $this->mailer->send($email);
     }
 }
  

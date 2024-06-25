@@ -4,6 +4,7 @@ namespace App\Controller\Visitor\Stripe;
 
 
 use Stripe\StripeClient;
+use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,10 @@ class StripeController extends AbstractController
     private $em;
     private $gateway;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(
+        EntityManagerInterface $em,
+        private CartService $cartService
+        )
     {
         $this->em = $em;
         $this->gateway = new StripeClient($_ENV['STRIPE_API_SECRET']); // Initialiser le client strippe.
@@ -23,8 +27,8 @@ class StripeController extends AbstractController
 
 
     // Route pour gérer le paiement.
-    #[Route('/checkout', name: 'app_checkout', methods: "POST")]
-    public function checkout(Request $request): Response
+    #[Route('/checkout', name: 'app_checkout', methods: "GET")]
+    public function checkout(): Response
     {
         // Récupération du montant et de la quantité depuis le form ou votre lien
         $amount = $request->request->get('amount');
@@ -106,8 +110,6 @@ class StripeController extends AbstractController
     #[Route('/cancel', name: 'app_cancel', methods: 'GET')]
     public function cancel(Request $request): Response
     {
-        // Enregistrer des informations sur l'annulation du paiment dans la base de données, SI NECESSAIRE.
-
         // Redirection vers la page d'annulation.
         return $this->render('pages/visitor/payment/cancel.html.twig');
     }

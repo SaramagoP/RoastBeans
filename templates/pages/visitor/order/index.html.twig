@@ -12,11 +12,10 @@
     <div class="container my-3">
         <div class="row">
             <div class="col-md-6 my-3">
-
                 {% include 'components/_alert.html.twig' %}
                 {% set totalAmount1 = 0 %}
                 {# Formulaire #}
-                {{ form_start(form, {'action': path('app_checkout')}) }}
+                {{ form_start(form) }}
                     <div class="mb-3">
                         <label for="order_form_pickup_date">Sélectionnez la date de récupération de la commande<span class="text-danger">*</span></label>
                         <div class="text-danger">{{form_errors(form.pickup_date)}}</div>
@@ -28,9 +27,11 @@
                         {{ form_widget(form.pickup_time, {'attr': {'class': 'form-control', 'autofocus':'autofocus'}}) }}
                     </div>
                     <div class="mb-3">
-                        <input formnovalidate type="submit" class="btn btn-shadow d-flex justify-content-center align-items-center mx-auto" style="background-color: #C59B76" value="Procéder au paiement">
+                        <button formnovalidate type="submit" class="btn btn-shadow d-flex justify-content-center align-items-center mx-auto" style="background-color: #C59B76">
+                            <i class="fas fa-credit-card me-2"></i> Procéder au paiement
+                        </button>
                         {% for cartItem in cartItems %}
-                            {% set totalAmount1 = totalAmount1 + cartItem.getAmount() %} {# Accumulation du montant total #}
+                            {% set totalAmount1 = totalAmount1 + cartItem.getAmount() %}
                             <input type="hidden" name="product[{{ loop.index0 }}][name]" value="{{ cartItem.product.name }}">
                             <input type="hidden" name="amount" value="{{ totalAmount1 }}">
                             <input type="hidden" name="quantity" value="{{ cartItem.quantity }}">

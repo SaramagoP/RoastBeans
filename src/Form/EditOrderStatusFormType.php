@@ -17,7 +17,7 @@ class EditOrderStatusFormType extends AbstractType
         $builder
             ->add('status', ChoiceType::class, [
                 'choices'  => [
-                    'Valider la commande' => "commande validée",
+                    'Valider la commande' => "Commande Validée",
                 ],
                 'placeholder' => "Modifier le statut de la commande",
                 'constraints' => [
