@@ -8,14 +8,21 @@
 
 {% block main %}
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <h1 class="text-center my-3 display-3">Redirection</h1>
-                    <p>Nous vous informons que votre tentative de paiement a été refusée. Il semble y avoir un problème avec les informations que vous avez fournies.</p>
-                    <p>Assurez-vous que les informations de votre carte de crédit/débit sont correctes (numéro de carte, date d'expiration, CVV).</p>
-                </div>
-            </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <i class="fas fa-exclamation-triangle text-danger display-1"></i>
+            <h1 class="my-3 display-3">Paiement annulé</h1>
+            <p class="lead">Nous vous informons que votre tentative de paiement a été refusée. Il semble y avoir un problème avec les informations que vous avez fournies.</p>
+            <p>Veuillez vérifier les informations suivantes :</p>
+            <ul class="list-unstyled">
+                <li>Numéro de carte</li>
+                <li>Date d'expiration</li>
+                <li>CVV</li>
+            </ul>
+            <p class="mt-4">Si le problème persiste, veuillez contacter votre banque ou utiliser une autre méthode de paiement.</p>
         </div>
-        
+    </div>
+</div>
+
 {% endblock %}

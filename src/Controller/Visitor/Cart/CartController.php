@@ -55,7 +55,7 @@ class CartController extends AbstractController
         $this->cartService->add((int)$id);
 
         // Redirection vers la page du panier après l'ajout du produit
-        return $this->redirectToRoute("visitor_catalog_index");
+        return $this->redirectToRoute("visitor_cart_index");
     }
  
     

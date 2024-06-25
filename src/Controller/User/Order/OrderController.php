@@ -24,7 +24,11 @@ class OrderController extends AbstractController
     #[Route('/order/list', name: 'user_order_index', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('pages/user/order/index.html.twig');
+        $orders = $this->em->getRepository(Order::class)->findBy(['user' => $this->getUser()]);
+        
+        return $this->render('pages/user/order/index.html.twig', [
+            'orders' => $orders
+        ]);
     }
 
 

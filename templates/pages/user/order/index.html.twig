@@ -18,13 +18,13 @@
             {% for order in app.user.orders %}
                 <div class="col">
                     <div class="card border-0 p-3 my-3">
-                        <p><strong>Numéro de Commande:</strong> {{order.id}} <hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Qui récupère la commande :</strong> {{order.pickupFirstName}} {{order.pickupLastName}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Email du Commanditaire :</strong> {{order.user.email}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Statut de la Commande :</strong> {{order.status}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Montant Total :</strong> {{order.totalAmount}} €<hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>Commandé le :</strong> {{order.orderedAt|format_datetime()}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
-                        <p><strong>A recupérer le :</strong> {{order.pickupDate|format_date()}} à {{order.pickupTime|format_time()}}<hr class="border border-secondary border-1 opacity-5 my-0"></p>
+                        <p><strong>Numéro de Commande:</strong> {{order.id}}</p>
+                        <p><strong>Qui récupère la commande :</strong> {{order.pickupFirstName}} {{order.pickupLastName}}</p>
+                        <p><strong>Email du Commanditaire :</strong> {{order.user.email}}</p>
+                        <p><strong>Statut de la Commande :</strong> {{order.status}}</p>
+                        <p><strong>Montant Total :</strong> {{order.totalAmount}} €</p>
+                        <p><strong>Commandé le :</strong> {{order.orderedAt|format_datetime()}}</p>
+                        <p><strong>A recupérer le :</strong> {{order.pickupDate|format_date()}} à {{order.pickupTime|format_time()}}</p>{# <hr class="border border-secondary border-1 opacity-5 my-0"> #}
                         {% if order.status != "commande validée" %}
                             <div class="d-inline mx-auto">
                                 <a href="{{ path('user_order_edit', {'id': order.id}) }}" class="btn btn-secondary">Modifier</a>
@@ -42,3 +42,4 @@
     </div>
 
 {% endblock %}
+

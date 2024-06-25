@@ -61,7 +61,7 @@
                             <li class="nav-item">
                                 <a class="dropdown-item" href="{{path('user_order_index')}}">Mes Commandes</a>
                             </li>
-                            {% if is_granted('ROLE_ADMIN') %} {# Cette ligne vérifie si l'utilisateur actuel a le rôle 'ROLE_ADMIN'. La fonction is_granted() est une fonction Symfony qui vérifie si l'utilisateur a un certain rôle ou une certaine autorisation. Dans ce cas, elle vérifie si l'utilisateur a le rôle 'ROLE_ADMIN'. Si l'utilisateur a le rôle 'ROLE_ADMIN', cette balise <li> contenant un lien <a> est affichée dans la barre de navigation. #}
+                            {% if is_granted('ROLE_ADMIN') %} 
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="{{path('admin_home')}}">Retour admin</a>
                                 </li>
@@ -87,7 +87,7 @@
      {# Le pied de page #}
     <footer>
         <ul>
-            <li><span>2024 &copy <span class="name">RoastBeans Café </span>· Tous droits réservés</span></li>
+            <li><span> &copy; 2024<span class="name">RoastBeans Café</span>· Tous droits réservés</span></li>
             <li><a href="#" data-bs-toggle="modal" data-bs-target="#legalNotice">Mentions Légales</a></li>
                 <div class="modal fade" id="legalNotice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
@@ -183,6 +183,8 @@
     {# Le script de Bootstrap 5 #}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
+
+   {# <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script>#}
 </body>
 </html>

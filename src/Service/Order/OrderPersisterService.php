@@ -1,26 +1,30 @@
 <?php
+namespace App\Service\Order;
 
-namespace App\Service;
-
-use App\Entity\User;
 use App\Entity\Order;
 use DateTimeImmutable;
-use App\Entity\OrderDetail;
+use App\Entity\Address;
+use App\Entity\Carrier;
+use App\Entity\OrderItem;
+use App\Repository\ProductRepository;
 use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
-    class OrderService
+    class OrderPersisterService
     {
+
+        private Order $order;
+
         public function __construct(
-            private EntityManagerInterface $em,
+            private CartService $cartService,
             private Security $security,
-            private CartService $cartService
+            private EntityManagerInterface $em,
+            ProductRepository $productRepository
         )
         {
-            
         }
-
+        
         public function persist(DateTimeImmutable $pickupDate, string $pickupTime) : order
         {
             $order = new Order();
@@ -30,6 +34,8 @@ use Symfony\Bundle\SecurityBundle\Security;
              */
             $user = $this->security->getUser();
 
+            // dd($pickupDate, $pickupTime);
+
             $order
                 ->setUser($user)
                 ->setUserEmail($user->getEmail())
@@ -38,7 +44,7 @@ use Symfony\Bundle\SecurityBundle\Security;
                 ->setTotalAmount($this->cartService->getCartTotalAmount())
                 ->setPickupDate($pickupDate)
                 ->setPickupTime($pickupTime)
-                ->setStatus(Order::STATUS_PAYMENT_PENDING)
+                ->setStatus(Order::STATUS_PENDING)
                 ->setOrderedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable())
 
@@ -66,10 +72,14 @@ use Symfony\Bundle\SecurityBundle\Security;
 
             return $order; // Return the order entity
         }
-    
-        public function updateOrderStatus(Order $order, string $status): void
+
+        public function getOrder(): Order
         {
-            $order->setStatus($status);
-            $this->em->flush();
+            return $this->order;
+        }
+
+        public function setOrder(Order $order) : void
+        {
+            $this->order = $order;
         }
     }

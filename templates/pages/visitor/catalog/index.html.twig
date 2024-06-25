@@ -41,7 +41,7 @@
                                         </a>
                                         <p class="card-subtitle text-dark fw-bold fs-5 text-end my-3">{{ product.price }}€</p>
                                         <p class="card-text text-center">
-                                            <a href="{{path('visitor_add_cart', {'id':product.id})}}" class="cart btn btn-sm"><i class="fa-solid fa-cart-shopping fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
+                                            <a href="{{path('visitor_add_product_cart', {'id':product.id})}}" class="cart btn btn-sm"><i class="fa-solid fa-cart-shopping fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
                                             <a href="{{path('visitor_catalog_product_show', {'id': product.id, 'slug': product.slug})}}" class="detail btn btn-sm"><i class="fa-solid fa-eye fs-2 bg-transparent p-2" style="border: 1px solid black"></i></a>
                                         </p>
                                     </div>

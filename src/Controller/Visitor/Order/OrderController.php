@@ -56,22 +56,23 @@ class OrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
         
-            $pickupTime = $form->get('pickup_time')->getData();
-            $pickupDate = $form->get('pickup_date')->getData();
+            $data = $request->request->all()['order_form'];
 
-            // dd($pickupDate, $pickupTime);
+            $pickupDate = $data['pickup_date'];
+            $pickupTime = $data['pickup_time'];
 
-            // Convertir les objets DateTime en DateTimeImmutable
-            $pickupTime = DateTimeImmutable::createFromMutable($pickupTime);
-            $pickupDate = DateTimeImmutable::createFromMutable($pickupDate);
+            $pickupDate = new DateTimeImmutable($pickupDate);
 
-            $this->orderService->persist($pickupDate, $pickupTime);
+            $order = $this->orderService->persist($pickupDate, $pickupTime);
 
-            return $this->redirectToRoute('app_payment_index');
+            return $this->redirectToRoute('app_checkout', [
+                'id' => $order->getId()
+            ]);
         }
         
         // 4- Passer le formulaire à la vue
         return $this->render('pages/visitor/order/index.html.twig', [
+            "order" => $order,
             "form" =>$form->createView(),
             "cartItems" =>$this->cartService->getCartItems()
         ]);

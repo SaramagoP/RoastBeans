@@ -132,4 +132,9 @@ class CartService
         // Puis je mest à jour le panier
         $this->setCart($cart);
     }
+
+    public function emptyCart()
+    {
+        $this->requestStack->getSession()->set('cart', []);
+    }
 }
