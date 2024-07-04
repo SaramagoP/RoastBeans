@@ -41,11 +41,11 @@ class OrderController extends AbstractController
         {
             $this->addFlash('warning', "Un problème est survenu, veillez rajouter les produits au panier");
 
-            return $this->redirectToRoute('user_cart_index');
+            return $this->redirectToRoute('visitor_cart_index');
         }
 
         // 3- Créer le formulaire de commande
-        $form = $this->createForm(OrderFormType::class, null, [
+        $form = $this->createForm(OrderFormType::class, [
             "user" => $user
         ]);
 

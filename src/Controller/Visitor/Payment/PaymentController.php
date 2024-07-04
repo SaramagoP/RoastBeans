@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-#[Route('/checkout')]
+#[Route('/payment')]
 class PaymentController extends AbstractController
 {
 
@@ -75,15 +75,8 @@ class PaymentController extends AbstractController
                 $data
             ],
             'mode' => 'payment',
-            'success_url' => "https://localhost:8000/checkout/{$order->getId()}/success",
-            'cancel_url'  => "https://localhost:8000/checkout/{$order->getId()}/cancel",
-
-            // 'success_url' => $this->urlGenerator->generate('visitor.payment.success', [
-            //     "id" => $order->getId()
-            // ]),
-            // 'cancel_url'  => $this->urlGenerator->generate('visitor.payment.cancel', [
-            //     "id" => $order->getId()
-            // ]),
+            'success_url' => "https://localhost:8000/payment/{$order->getId()}/success",
+            'cancel_url'  => "https://localhost:8000/payment/{$order->getId()}/cancel",
         ]);
 
         $order->setStatus($order::STATUS_PAYMENT_PENDING);

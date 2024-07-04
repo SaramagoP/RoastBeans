@@ -3,13 +3,11 @@ namespace App\Service\Order;
 
 use App\Entity\Order;
 use DateTimeImmutable;
-use App\Entity\Address;
-use App\Entity\Carrier;
-use App\Entity\OrderItem;
 use App\Repository\ProductRepository;
 use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use App\Entity\OrderDetail;
 
     class OrderPersisterService
     {
@@ -20,7 +18,7 @@ use Symfony\Bundle\SecurityBundle\Security;
             private CartService $cartService,
             private Security $security,
             private EntityManagerInterface $em,
-            ProductRepository $productRepository
+            private ProductRepository $productRepository
         )
         {
         }
@@ -44,7 +42,7 @@ use Symfony\Bundle\SecurityBundle\Security;
                 ->setTotalAmount($this->cartService->getCartTotalAmount())
                 ->setPickupDate($pickupDate)
                 ->setPickupTime($pickupTime)
-                ->setStatus(Order::STATUS_PENDING)
+                ->setStatus(Order::STATUS_PAYMENT_PENDING)
                 ->setOrderedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable())
 

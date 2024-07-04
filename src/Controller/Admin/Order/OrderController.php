@@ -7,7 +7,6 @@ use App\Entity\Order;
 use DateTimeImmutable;
 use Symfony\Component\Mime\Email;
 use App\Repository\OrderRepository;
-use Symfony\Component\Mime\Address;
 use App\Form\EditOrderStatusFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +14,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mime\Address;
 
 #[Route('/admin')]
 class OrderController extends AbstractController
@@ -93,7 +93,7 @@ class OrderController extends AbstractController
     private function sendConfirmationEmail(Order $order): void
     {
         $email = (new Email())
-           ->from(new Address('roastbeans@gmail.com', 'Pierre Dubois'))
+            ->from(new Address('roastbeans@gmail.com', 'Pierre Dubois'))
             ->to($order->getUserEmail())
             ->subject('Confirmation de commande validé')
             ->html($this->renderView('emails/order_confirmation.html.twig', [
