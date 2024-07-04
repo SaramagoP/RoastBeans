@@ -24,7 +24,7 @@
                         <p><strong>Statut de la Commande :</strong> {{order.status}}</p>
                         <p><strong>Montant Total :</strong> {{order.totalAmount}} €</p>
                         <p><strong>Commandé le :</strong> {{order.orderedAt|format_datetime()}}</p>
-                        <p><strong>A recupérer le :</strong> {{order.pickupDate|format_date()}} à {{order.pickupTime|format_time()}}</p>{# <hr class="border border-secondary border-1 opacity-5 my-0"> #}
+                        <p><strong>A recupérer le :</strong> {{order.pickupDate|format_date()}} à {{order.pickupTime|format_time()}}</p>
                         {% if order.status != "commande validée" %}
                             <div class="d-inline mx-auto">
                                 <a href="{{ path('user_order_edit', {'id': order.id}) }}" class="btn btn-secondary">Modifier</a>

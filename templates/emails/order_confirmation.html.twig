@@ -1,14 +1,14 @@
-</div class="fs-5">
+<div class="fs-5">
 
     <h1>Confirmation de commande!</h1>
 
     <p>Bonjour {{ order.pickupFirstName }} {{ order.pickupLastName }},</p>
 
-    <p>Votre commande numéro <strong>{{ order.id }}</strong> a été validée.</p>
+    <p>Nous avons le plaisir de vous informer que votre commande numéro <strong>{{ order.id }}</strong> a été confirmée. Vous pourrez la récupérer à la date et à l'heure que vous avez choisies.</p>
 
     <p>Statut de la commande: <strong>{{ order.status }}</strong></p>
 
-    <p>Date de retrait: <strong>{{ order.pickupDate|format_datetime() }}</strong></p>
+    <p>Date de retrait: <strong>{{ order.pickupDate|date('Y-m-d') }}</strong></p>
 
     <p>Heure de retrait: <strong>{{ order.pickupTime }}</strong></p>
 
@@ -18,5 +18,4 @@
 
     <p>&copy; 2024 RoastBeans Café. Tous droits réservés.</p>
 
-<div>
-
+</div>
