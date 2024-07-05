@@ -11,72 +11,53 @@
     {% if cartItems is empty %}
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <h1 class="text-center my-3 display-3">Votre panier est vide</h1>
-                    <p class="text-center mb-5">Commencez votre shopping dès maintenant à travers nos articles</p>
+                <div class="col-12 text-center">
+                    <h1 class="display-2 mb-3">Votre panier est vide</h1>
+                    <p class="lead mb-5">Commencez votre shopping dès maintenant à travers nos articles</p>
+                    <a href="{{ path('visitor_catalog_index') }}" class="btn btn shadow" style="background-color: #C59B76">Commandez votre bonheur</a>
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center align-items-center mx-auto">
-            <a href="{{ path('visitor_catalog_index') }}" class="btn btn shadow" style="background-color: #C59B76">Commandez votre bonheur</a>
-        </div>
     {% else %}
-        <h1 class="text-center my-3 display-5">Panier</h1>
+        <h1 class="text-center my-4 display-2">Panier</h1>
 
-        <div class="container mt-5">
+        <div class="container my-5">
             <div class="row justify-content-center">
-                <div class="col-md-4 col-lg-8">
-                    <div class="table-responsive">
-                        <table class="table text-center">
-                            <thead>
-                                <tr>
-                                    <th style="color: #C59B76">Image</th>
-                                    <th style="color: #C59B76">Nom</th>
-                                    <th style="color: #C59B76">Quantité</th>
-                                    <th style="color: #C59B76">Prix unitaire</th>
-                                    <th style="color: #C59B76">Prix TTC</th>
-                                    <th style="color: #C59B76">Retirer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for cartItem in cartItems %}
-                                    <tr>
-                                        <td>
-                                            <img src="{{ vich_uploader_asset(cartItem.product, 'imageFile') }}" alt="{{ cartItem.product.name }}" class="img-thumbnail" style="width: 80px; height: 80px;">
-                                        </td>
-                                        <td class="align-middle">{{ cartItem.product.name }}</td>
-                                        <td class="align-middle">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <a href="{{path('visitor_decrement_cart', {'id': cartItem.product.id})}}" class="btn btn-sm" style="background-color: #C59B76">
-                                                    <i class="fa-solid fa-minus"></i>
-                                                </a>  
-                                                <span class="mx-1">{{ cartItem.quantity }}</span>
-                                                <a href="{{path('visitor_add_cart', {'id': cartItem.product.id})}}" class="btn btn-sm" style="background-color: #C59B76">
-                                                    <i class="fa-solid fa-plus"></i>
-                                                </a>   
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">{{ cartItem.product.price }} €</td>
-                                        <td class="align-middle">{{ cartItem.getAmount }} €</td>
-                                        <td class="align-middle">
-                                            <a href="{{path('visitor_remove_cart', {'id': cartItem.product.id})}}"><i class="fa-solid fa-trash text-danger mx-2"></i></a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td><a href="{{path('app_order_index')}}" class="btn btn shadow my-2" style="background-color: #C59B76">Passer commande</a></td>
-                                    <td colspan="4" class="text-right font-weight-bold"><strong>Total TTC</strong></td>
-                                    <td colspan="2" class="font-weight-bold"><strong>{{ cartTotalAmount }} €</strong></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                <div class="col-md-10">
+                    <div class="card border p-3 rounded bg-white text-dark">
+                        <div class="card-body">
+                            {% for cartItem in cartItems %}
+                                <div class="d-flex flex-column flex-md-row align-items-center mb-4 border-bottom pb-3">
+                                    <img src="{{ vich_uploader_asset(cartItem.product, 'imageFile') }}" alt="{{ cartItem.product.name }}" class="img-fluid mx-3 mb-md-0" style="max-width: 150px; height: auto;">
+                                        <p class="m-auto p-2 text-center"><strong>{{ cartItem.product.name }}</strong></p>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <a href="{{path('visitor_decrement_cart', {'id': cartItem.product.id})}}" class="btn btn-sm" style="background-color: #C59B76">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </a> 
+                                            <span class="m-2">{{ cartItem.quantity }}</span>
+                                            <a href="{{path('visitor_add_cart', {'id': cartItem.product.id})}}" class="btn btn-sm" style="background-color: #C59B76">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </a>
+                                        </div>
+                                            <p class="m-auto p-2 text-center"><strong>Prix unitaire : {{ cartItem.product.price }} €</strong> </p>
+                                            <p class="m-auto p-2 text-center"><strong>Prix TTC : {{ cartItem.getAmount }} €</strong></p>  
+                                            <div class="d-flex justify-content-center align-items-center m-3">
+                                                <a href="{{path('visitor_remove_cart', {'id': cartItem.product.id})}}" class="btn btn-sm btn-danger m-2">
+                                                    <i class="fa-solid fa-trash mx-2"></i>Retirer
+                                                </a>
+                                            </div> 
+                                
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center">
+                            <a href="{{path('app_order_index')}}" class="btn btn my-2" style="background-color: #C59B76">Passer commande</a>
+                            <h4 class="my-3"><strong>Total TTC : {{ cartTotalAmount }} €</strong></h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
-    
-{% endblock %}
 
+{% endblock %}
