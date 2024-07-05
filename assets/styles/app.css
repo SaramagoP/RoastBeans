@@ -8,6 +8,7 @@ body {
   grid-template-rows: auto 1fr auto;
   color: #ffffff;
   font-family: "Merienda", cursive;
+  font-display: swap;
 }
 
 header {
@@ -45,6 +46,7 @@ color: #C59B76;
 
 nav, footer{
 font-family: "Merienda", cursive;
+font-display: swap;
 }
 
 h1 {
@@ -54,15 +56,8 @@ font-optical-sizing: auto;
 font-weight: 600;
 font-style: normal;
 font-size: 50px;
+font-display: swap;
 }
-
-/* .buttonComand {
-border-radius: 50px;
-border: none;
-padding: 15px;
-font-weight: bolder;
-font-size: 20px;
-} */
 
 footer {
   background-color: #000;
