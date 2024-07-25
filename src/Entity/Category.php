@@ -23,6 +23,11 @@ class Category
         max: 255,
         maxMessage: 'Le nom ne doit pas depasser de {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+           message: 'Le nom ne peut contenir que des lettres.'
+    )]
     #[Assert\NotBlank(message: 'Le nom de la catégorie est obligatoire')]
     #[ORM\Column(length: 255, unique: true)]
     private ?string $name = null;

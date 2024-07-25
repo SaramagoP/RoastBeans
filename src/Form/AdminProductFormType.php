@@ -18,7 +18,6 @@ class AdminProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-      
             ->add('name', TextType::class)
             ->add('category', EntityType::class, [
                 'class' => Category::class,  

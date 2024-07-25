@@ -34,21 +34,21 @@ class EmailVerifier
         $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
         $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
 
-        $email->context($context);
+        $email->context($context); // Met à jour le contexte de l'email avec l'URL signée et les informations d'expiration.
 
-        $this->mailer->send($email);
+        $this->mailer->send($email); // Envoie l'email à l'utilisateur.
     }
 
     /**
      * @throws VerifyEmailExceptionInterface
      */
-    public function handleEmailConfirmation(Request $request, User $user): void
+    public function handleEmailConfirmation(Request $request, User $user): void // handleEmailConfirmation: Valide la confirmation de l'email à partir de la requête. 
     {
         $this->verifyEmailHelper->validateEmailConfirmationFromRequest($request, (string) $user->getId(), $user->getEmail());
 
         $user->setVerified(true);
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->entityManager->persist($user); // Met à jour le statut de l'utilisateur pour indiquer qu'il est vérifié. 
+        $this->entityManager->flush(); //Persiste l'utilisateur mis à jour dans la base de données.
     }
 }

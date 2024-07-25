@@ -44,6 +44,7 @@
                     <label for="contact_form_message">Message<span class="text-danger">*</span></label>
                     <div class="text-danger">{{form_errors(form.message)}}</div>
                     {{form_widget(form.message, {'attr':{'class':'form-control', 'rows': 6}})}}
+                    <p class="text-danger">* Tous les champs avec un astérisque sont obligatoires.</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center my-3">
                     <input formnovalidate type="submit" class="btn btn" style="background-color: #C59B76" value="Envoyer">

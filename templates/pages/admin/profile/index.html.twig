@@ -20,9 +20,9 @@
                 <div class="card border-0">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Gestion de mon Profil</h2>
-                        <p class="card-text"><strong>Prénom: </strong>{{app.user.firstName}}</p>
-                        <p class="card-text"><strong>Nom: </strong>{{app.user.lastName}}</p>
-                        <p class="card-text"><strong>Email: </strong>{{app.user.email}}</p>
+                        <p class="card-text"><strong>Prénom: </strong>{{app.user.firstName|e}}</p>
+                        <p class="card-text"><strong>Nom: </strong>{{app.user.lastName|e}}</p>
+                        <p class="card-text"><strong>Email: </strong>{{app.user.email|e}}</p>
                         <a href="{{path('admin_profile_edit')}}" class="m-2 btn btn-secondary">Modifier le profil</a>
                         <a href="{{path('admin_profile_edit_password')}}"class="m-2 btn btn-dark">Modifier le mot de passe</a>
 

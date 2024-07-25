@@ -67,19 +67,19 @@
                         </td>
                         {# Affiche l'image du produit s'il existe, sinon affiche '---' #}
 
-                        <td>{{ produit.name }}</td>
+                        <td>{{ produit.name|e }}</td>
                         {# Affiche le nom du produit #}
 
-                        <td>{{ produit.category.name }}</td>
+                        <td>{{ produit.category.name|e }}</td>
                         {# Affiche le nom de la catégorie du produit #}
 
-                        <td>{{ produit.description }}</td>
+                        <td>{{ produit.description|e }}</td>
                         {# Affiche la description du produit #}
 
-                        <td class="text-center">{{ produit.price }}€</td>
+                        <td class="text-center">{{ produit.price|e }}€</td>
                         {# Affiche le prix du produit suivi du symbole '€' #}
 
-                        <td class="text-center">{{ produit.quantity }}</td>
+                        <td class="text-center">{{ produit.quantity|e }}</td>
                         {# Affiche la quantité du produit #}
 
                         <td>{{ produit.createdAt|format_datetime() }}</td>

@@ -104,6 +104,7 @@
                         <input formnovalidate type="submit" class="w-100 btn btn" style="background-color: #C59B76" value="S'inscrire">
                     </div>
                 {{form_end(registrationForm)}}
+                <p class="text-danger my-1">* Tous les champs avec un astérisque sont obligatoires.</p>
                 <div class="text-center mt-3">
                     <p>Vous avez déjà un compte? <a href="{{path('visitor_authentication_login')}}" class="text-white">Connectez-vous</a></p> 
                     <p><a href="{{path('visitor_welcome_index')}}" class="text-white">Retour à l'accueil</a></p>

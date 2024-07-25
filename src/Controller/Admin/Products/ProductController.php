@@ -52,6 +52,12 @@ class ProductController extends AbstractController // Extension de la classe Abs
 
         if ($form->isSubmitted() && $form->isValid()) // Vérification si le formulaire est soumis et valide.
         {
+            // Échapper le nom du produit
+            $escapedProductName = htmlspecialchars($product->getName(), ENT_QUOTES, 'UTF-8');
+            $product->setName($escapedProductName);
+            $escapedProductDescription = htmlspecialchars($product->getDescription(), ENT_QUOTES, 'UTF-8');
+            $product->setDescription($escapedProductDescription);
+
             $product->setCreatedAt(new DateTimeImmutable()); // Définition de la date de création du produit.
             $product->setUpdatedAt(new DateTimeImmutable()); // Définition de la date de mise à jour du produit.
 
@@ -85,6 +91,12 @@ class ProductController extends AbstractController // Extension de la classe Abs
 
         if ($form->isSubmitted() && $form->isValid()) // Vérification si le formulaire est soumis et valide.
         {
+            // Échapper le nom du produit
+            $escapedProductName = htmlspecialchars($product->getName(), ENT_QUOTES, 'UTF-8');
+            $product->setName($escapedProductName);
+            $escapedProductDescription = htmlspecialchars($product->getDescription(), ENT_QUOTES, 'UTF-8');
+            $product->setDescription($escapedProductDescription);
+
             // $product->setCreatedAt(new DateTimeImmutable()); // Définition de la date de création du produit.
             $product->setUpdatedAt(new DateTimeImmutable()); // Définition de la date de mise à jour du produit.
 

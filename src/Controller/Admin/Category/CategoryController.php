@@ -37,19 +37,25 @@ class CategoryController extends AbstractController // il herite de la classe Ab
     public function create(Request $request): Response // Méthode pour gérer la création d'une nouvelle catégorie.
     {
         $category = new Category(); // Création d'un nouvel objet Category.
-
+        
+        
         $form = $this->createForm(AdminCategoryFormType::class, $category); // Création du formulaire pour la nouvelle catégorie.
-
+        
         $form->handleRequest($request); //Associer les données de la requête aux données du formulaire
-
+        
         if ($form->isSubmitted() && $form->isValid()) // Vérification si le formulaire est soumis et valide.
         {
+            // Échapper le nom de la catégorie
+            $escapedCategoryName = htmlspecialchars($category->getName(), ENT_QUOTES, 'UTF-8');
+            $category->setName($escapedCategoryName);
+
             $category->setCreatedAt(new DateTimeImmutable()); // Définition de la date de création de la catégorie.
             $category->setUpdatedAt(new DateTimeImmutable()); // Définition de la date de mise à jour de la catégorie.
-
+            
             $this->em->persist($category); //Demander au manager des entités de préparer la requête d'insertion de la nouvelle category en base de données
-
+            
             $this->em->flush(); // Validation des modifications dans la base de données. Exécuter la requête
+            
 
             $this->addFlash('success', "La catégorie a été ajoutée avec succès."); // Ajout d'un message flash de succès.
 
@@ -65,17 +71,23 @@ class CategoryController extends AbstractController // il herite de la classe Ab
     #[Route('/category/{id<\d+>}/edit', name: 'admin_category_edit', methods: ['GET', 'POST'])] // Définition de la route pour modifier une catégorie.
     public function edit(Category $category, Request $request): Response // Méthode pour gérer la modification d'une catégorie existante.
     {
+        
         $form = $this->createForm(AdminCategoryFormType::class, $category); // Création du formulaire pour la catégorie existante.
-
+        
         $form->handleRequest($request); // Gestion de la requête avec le formulaire.
-
+        
         if ($form->isSubmitted() && $form->isValid()) // Vérification si le formulaire est soumis et valide.
         {
+            // Échapper le nom de la catégorie
+            $escapedCategoryName = htmlspecialchars($category->getName(), ENT_QUOTES, 'UTF-8');
+            $category->setName($escapedCategoryName);
+            
             $category->setUpdatedAt(new DateTimeImmutable()); // Définition de la date de mise à jour de la catégorie.
-
+            
             $this->em->persist($category); // Persistance de l'entité catégorie.
-
+            
             $this->em->flush(); // Validation des modifications dans la base de données.
+            
 
             $this->addFlash('success', "La catégorie {$category->getName()} a été modifiée avec succès."); // Ajout d'un message flash de succès.
 

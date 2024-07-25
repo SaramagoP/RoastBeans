@@ -28,6 +28,10 @@ class Review
         max: 1000,
         maxMessage: "Le commentaire ne peut pas être supérieur a {{ limit }} caractères"
     )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z\s_'!?,. áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, et certains caractères spéciaux sont autorisés pour le message")]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
