@@ -23,7 +23,7 @@ class CartService
         return $this->requestStack->getSession()->get('cart', []);
     }
 
-    // En dernier il faut mettre à jour le panier, parce que jai récupérer les données de la session (getSession), j'ai travaillé du coup sur $cart, mais je dois mettre à jour justement les données dans la session et pour ça il faut créer la méthode setCart. Donc pour mofiier le panier je vais recevoir les données du nouveau panier et ensuite je récupére le panier et j'utilise la méthode set en le passant $cart
+    // En dernier il faut mettre à jour le panier, parce que jai récupérer les données de la session (getSession), j'ai travaillé du coup sur $cart, mais je dois mettre à jour justement les données dans la session et pour ça il faut créer la méthode setCart. Donc pour modifier le panier je vais recevoir les données du nouveau panier et ensuite je récupére le panier et j'utilise la méthode set en le passant $cart
     public function setCart(array $cart) : self
     {
         $this->requestStack->getSession()->set('cart', $cart);
@@ -65,11 +65,13 @@ class CartService
         {
             $product = $this->productRepository->find($id);
 
+            // Si le produit n'existe pas, continue à la prochaine itération.
             if (null === $product) 
             {
                 continue;
             }
 
+            // Ajoute un nouvel objet CartItem au tableau des éléments du panier.
             $cartItems[] = new CartItem($product, $quantity);
         }
 
@@ -78,15 +80,20 @@ class CartService
 
     public function getCartTotalAmount(): float
     {
+        // Récupère tous les articles du panier
         $cartItems = $this->getCartItems();
 
+        // Initialise le montant total à 0
         $totalAmount = 0;
 
+        // Parcourt chaque article du panier
         foreach ($cartItems as $cartItem)
         {
+            // Ajoute le montant de l'article courant au montant total
             $totalAmount += $cartItem->getAmount();
         }
 
+        // Retourne le montant total du panier
         return $totalAmount;
     }
 

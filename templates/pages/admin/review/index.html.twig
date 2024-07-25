@@ -48,9 +48,9 @@
                 {% for review in reviews %}
                     <tr>
                         <td>{{review.id}}</td>
-                        <td>{{review.user.firstName}} {{review.user.lastName}}</td>
-                        <td>{{review.user.email}}</td>
-                        <td>{{review.product.name}}</td>
+                        <td>{{review.user.firstName|e}} {{review.user.lastName|e}}</td>
+                        <td>{{review.user.email|e}}</td>
+                        <td>{{review.product.name|e}}</td>
                         <td>
                             <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#modal_{{review.id}}"><i class="fa-solid fa-book-open-reader"></i></a> 
                             <!-- Modal -->

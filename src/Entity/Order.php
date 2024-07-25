@@ -61,13 +61,10 @@ class Order
     #[ORM\Column]
     private ?\DateTimeImmutable $orderedAt = null;
 
-    // #[Assert\NotBlank(message:'Pour récupérer le produit il faut preciser la date')]
+    
     #[ORM\Column]
     private ?\DateTimeImmutable $pickupDate = null;
 
-    // #[Assert\NotBlank(message:'Pour récupérer le produit il faut preciser l\'heure')]
-    // #[ORM\Column]
-    // private ?\DateTimeImmutable $pickupTime = null;
 
     #[ORM\Column]
     private ?string $pickupTime = null;

@@ -50,24 +50,30 @@
             <tbody>
                 {% for user in users %}
                     <tr>
-                        <td class="text-center">{{user.id}}</td>
-                        <td>{{user.firstName}}</td>
-                        <td>{{user.lastName}}</td>
-                        <td>{{user.email}}</td>
+                        <td class="text-center">{{ user.id }}</td>
+                        <td>{{ user.firstName|e}}</td>
+                        <td>{{ user.lastName|e }}</td>
+                        <td>{{ user.email|e }}</td>
                         <td>
                             {% for role in user.roles %}
-                                <span class="badge text-bg-dark">{{role}}</span>
+                                <span class="badge text-bg-dark">{{ role }}</span>
                             {% endfor %}
                         </td>
-                        <td class="text-center">{{user.isVerified ? user.isVerified : "Pas encore"}}</td>
-                        <td>{{user.createdAt|format_datetime()}}</td>
-                        <td>{{user.updatedAt|format_datetime()}}</td>
+                        <td class="text-center">
+                            {% if user.isVerified %}
+                                Oui
+                            {% else %}
+                                Pas encore
+                            {% endif %}
+                        </td>
+                        <td>{{ user.createdAt|format_datetime() }}</td>
+                        <td>{{ user.updatedAt|format_datetime() }}</td>
                         <td class="d-flex justify-content-evenly">
                         {% if "ROLE_SUPER_ADMIN" not in user.roles %}
-                            <a href="{{path('admin_user_edit_roles', {'id':user.id})}}" type="submit" value="Modifier"><i class="fa-solid fa-edit"></i></a>
-                            <form action="{{path('admin_user_delete_roles', {'id':user.id})}}" method="post">
+                            <a href="{{ path('admin_user_edit_roles', {'id': user.id}) }}" type="submit" value="Modifier"><i class="fa-solid fa-edit"></i></a>
+                            <form action="{{ path('admin_user_delete_roles', {'id': user.id}) }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_user_'~user.id)}}">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete_user_'~user.id) }}">
                                 <button onClick="return confirm('Confirmer la suppression de ce compte?')" type="submit" value="Supprimer" style="border: none; background: none; padding: 0; color: #ff0000">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>

@@ -19,6 +19,10 @@ class Settings
         max: 255,
         maxMessage: 'Le nom du site ne doit pas depasser de {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, l'undescore et tiret sont autorisés pour le nom")]
     #[Assert\NotBlank(message: 'Le nom du site est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $websiteName = null;
@@ -33,6 +37,10 @@ class Settings
     private ?string $websiteUrl = null;
 
     #[Assert\NotBlank(message: 'La description est obligatoire')]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z\s_'!?,. áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, l'undescore et tiret sont autorisés pour le message")]
     #[Assert\Length(
         max: 600,
         maxMessage: 'La description ne peut pas contenir plus de {{ limit }} caractères',
@@ -67,6 +75,10 @@ class Settings
         max: 255,
         maxMessage: 'L\'adresse ne doit pas depasser de {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z\s_'!?,. áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, l'undescore et tiret sont autorisés pour l'adresse")]
     #[Assert\NotBlank(message: 'L\'adresse est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
@@ -75,6 +87,10 @@ class Settings
         max: 255,
         maxMessage: 'La ville ne doit pas depasser de {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls  les lettres, l'undescore et tiret sont autorisés pour la ville")]
     #[Assert\NotBlank(message: 'La ville est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $city = null;

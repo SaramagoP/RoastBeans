@@ -1,8 +1,8 @@
 {% extends 'themes/base_visitor.html.twig' %}
 
-{% block title %}{{ product.name }}{% endblock %}
+{% block title %}{{ product.name|e  }}{% endblock %}
 
-{% block description %}{{ product.name }}{% endblock %}
+{% block description %}{{ product.name|e  }}{% endblock %}
 
 {% block keywords %}Produits, catalog{% endblock %}
 
@@ -50,7 +50,7 @@
                     {{form_end(form)}}
                 </div>
             {% else %}
-                <p class="text-center my-5">Veuillez vous <a href="{{path('visitor_authentication_login')}}" class="text-decoration-none">connecter</a>  ou vous <a href="{{path('visitor_registration_register')}}"class="text-decoration-none">inscrire</a> pour poivoir laisser un commentaire.</p>
+                <p class="text-center my-5">Veuillez vous <a href="{{path('visitor_authentication_login')}}" class="text-decoration-none">connecter</a>  ou vous <a href="{{path('visitor_registration_register')}}"class="text-decoration-none">inscrire</a> pour pouvoir laisser un commentaire.</p>
             {% endif %}
             </div>
         </div>    
@@ -63,7 +63,7 @@
                     <div class="col-md-6">
                         <div class="review bg-light text-dark ">
                             <h2 class="comment_name">{{review.user.firstName}} {{review.user.lastName}}</h2>
-                            <p>{{review.content}}</p>
+                            <p>{{review.content|e}}</p>
                             <p class="text-end my-2">{{review.createdAt|format_datetime()}}</p>
                         </div>
                     </div>

@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/order')]
 class OrderController extends AbstractController
 {
+    // Constructeur pour injecter les services nécessaires.
     public function __construct( 
         private CartService $cartService,
         private OrderService $orderService
@@ -55,16 +56,20 @@ class OrderController extends AbstractController
         // 7- Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid())
         {
-        
+            // Récupérer les données du formulaire
             $data = $request->request->all()['order_form'];
 
+            // Extraire la date et l'heure de retrait
             $pickupDate = $data['pickup_date'];
             $pickupTime = $data['pickup_time'];
 
+            // Convertir la date en objet DateTimeImmutable
             $pickupDate = new DateTimeImmutable($pickupDate);
 
+            // Persister la commande en utilisant le service OrderService
             $order = $this->orderService->persist($pickupDate, $pickupTime);
 
+            // Rediriger vers la page de paiement
             return $this->redirectToRoute('app_checkout', [
                 'id' => $order->getId()
             ]);

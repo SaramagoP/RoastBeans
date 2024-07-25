@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Profile;
 
 
+use App\Entity\User;
 use App\Form\EditProfilFormType;
 use App\Form\EditPasswordFormType;
 use DateTimeImmutable;
@@ -41,21 +42,28 @@ class ProfileController extends AbstractController
     public function editProfile(Request $request): Response
     {
         // Récupère l'utilisateur actuellement connecté (l'administrateur)
-        /** @var User */
+        /** @var User $admin */
         $admin = $this->getUser();
 
+        
         // Crée un formulaire en utilisant la classe EditProfilFormType
         // Le formulaire est lié à l'entité utilisateur ($admin) et configuré pour utiliser la méthode HTTP PUT
         $form = $this->createForm(EditProfilFormType::class, $admin, [
             "method" => "PUT"
         ]);
-
+        
         // Traite la requête HTTP actuelle et met à jour le formulaire avec les données soumises
         $form->handleRequest($request);
-
+        
         // Vérifie si le formulaire a été soumis et si les données sont valides
         if ($form->isSubmitted() && $form->isValid())
         {
+            // Echappe les données pour le message flash
+            $firstName = htmlspecialchars($admin->getFirstName(), ENT_QUOTES, 'UTF-8');
+            $lastName = htmlspecialchars($admin->getLastName(), ENT_QUOTES, 'UTF-8');
+            
+            $admin->setUpdatedAt(new DateTimeImmutable());
+
             // Persiste l'entité utilisateur dans la base de données
             $this->em->persist($admin);
 
@@ -128,20 +136,34 @@ class ProfileController extends AbstractController
     #[Route('/profile/delete', name: 'admin_profile_delete', methods: ['POST', 'DELETE'])]
     public function deleteProfile(Request $request): Response
     {
+        // Vérifie si le jeton CSRF est valide en utilisant le nom 'delete_profile_' et le jeton obtenu à partir de la requête.
         if ( $this->isCsrfTokenValid('delete_profile_', $request->request->get('_csrf_token')) )
         {
-            /** @var User */
+            // Récupère l'utilisateur actuellement connecté (administrateur) à partir de la méthode getUser().
+            /** @var User $admin */
             $admin = $this->getUser();
 
+            // Ajoute un message flash de succès indiquant que le profil de l'utilisateur a été supprimé avec succès.
             $this->addFlash('success', "Le profile de {$admin->getFirstName()} {$admin->getLastName()} a été supprimée avec succès.");
             
+             // Efface le token de sécurité actuel (déconnecte l'utilisateur).
             $this->container->get('security.token_storage')->setToken(null);
 
+            // Supprime l'utilisateur (administrateur) de la base de données à l'aide de l'EntityManager.
             $this->em->remove($admin);
             
+            // Applique les modifications dans la base de données (commit des changements).
             $this->em->flush();
 
+
+        // Redirige vers la route 'admin_profile_index' après la suppression réussie.
         return $this->redirectToRoute('admin_profile_index');
         }
+
+        // Ajoute un message flash d'erreur si le jeton CSRF est invalide.
+        $this->addFlash('error', "Le token CSRF est invalide.");
+       
+        // Redirige vers la route 'admin_profile_index' si le jeton CSRF est invalide.
+        return $this->redirectToRoute('admin_profile_index');
     }
 }

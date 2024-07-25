@@ -28,6 +28,11 @@ class Product
         maxMessage: 'Le nom ne doit pas depasser de {{ limit }} caractères',
     )]
     #[Assert\NotBlank(message: 'Le nom du produit est obligatoire')]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+           message: 'Le nom du produit ne peut contenir que des lettres.'
+    )]
     #[ORM\Column(length: 255,  unique: true)]
     private ?string $name = null;
 
@@ -52,6 +57,10 @@ class Product
         max: 600,
         maxMessage: 'La description ne peut pas contenir plus de {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z\s_'!?,. áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message:"Seuls les lettres, les chiffres, l'undescore et tiret sont autorisés pour le message")]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 

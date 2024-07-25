@@ -1,6 +1,6 @@
 {% extends 'themes/base_admin.html.twig' %}
 
-{% block title %}Modifier: {{category.name}}{% endblock %}
+{% block title %}Modifier: {{category.name|e}}{% endblock %}
 
 {% block description %}Modifier cette catégorie{% endblock %}
 

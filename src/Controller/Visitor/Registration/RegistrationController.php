@@ -54,7 +54,7 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
         $user->setUpdatedAt(new DateTimeImmutable());
 
         // 6- Encoder le mot de passe
-        $passwordHashed = $userPasswordHasher->hashPassword($user, $form->get('password')->getData()); // $user Il s'agit de l'objet utilisateur pour lequel le mot de passe doit être hashé. // $form->get('password')->getData(): Cela récupère la valeur du champ de formulaire contenant le mot de passe brut fourni par l'utilisateur. Le mot de passe est récupéré du formulaire et non directement du texte brut pour des raisons de sécurité. // $passwordHashed: C'est la variable dans laquelle le mot de passe hashé sera stocké après avoir été généré par hashPassword().
+        $passwordHashed = $userPasswordHasher->hashPassword($user, $form->get('password')->getData()); 
 
         // 7- Mettre à jour le mot de pass de l'utilisateur
         $user->setPassword($passwordHashed);

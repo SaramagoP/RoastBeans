@@ -36,7 +36,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
         // 4- Vérifier si l'email et le mot de passe provenant du formulaire correspondent 
             // à un utilisateur existant dans la base de données
-        return new Passport(
+        return new Passport( //Retourne un Passport avec les badges nécessaires (utilisateur, mot de passe, CSRF, et RememberMe).
             new UserBadge($email),
             new PasswordCredentials($request->getPayload()->getString('password')),
             [
@@ -72,7 +72,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         }
     }
 
-    protected function getLoginUrl(Request $request): string
+    protected function getLoginUrl(Request $request): string //getLoginUrl: Génère l'URL de connexion en utilisant la constante LOGIN_ROUTE.
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }

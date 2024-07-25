@@ -29,6 +29,12 @@ class ContactController extends AbstractController
 
         if ( $form->isSubmitted() && $form->isValid() )
         {
+            // Échapper les champs de formulaire pour prévenir les attaques XSS
+            $contact->setMessage(htmlspecialchars($contact->getMessage(), ENT_QUOTES, 'UTF-8'));
+            $contact->setFirstName(htmlspecialchars($contact->getFirstName(), ENT_QUOTES, 'UTF-8'));
+            $contact->setLastName(htmlspecialchars($contact->getLastName(), ENT_QUOTES, 'UTF-8'));
+            $contact->setEmail(htmlspecialchars($contact->getEmail(), ENT_QUOTES, 'UTF-8'));
+            $contact->setPhone(htmlspecialchars($contact->getPhone(), ENT_QUOTES, 'UTF-8'));
             $contact->setMessage(htmlspecialchars($contact->getMessage(), ENT_QUOTES, 'UTF-8'));
 
             if ($this->getUser()) 

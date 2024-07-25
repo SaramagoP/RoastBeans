@@ -48,11 +48,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for category in categories %}
+                {% for category in categories %} {# La variable category prendra successivement la valeur de chaque élément dans la collection categories pour chaque itération de la boucle. #}
                     <tr>
                         <td class="text-center">{{category.id}}</td>
-                        <td>{{category.name}}</td>
-                        <td>{{category.slug}}</td>
+                        <td>{{category.name|e}}</td>
+                        <td>{{category.slug|e}}</td>
                         <td>{{category.createdAt|format_datetime()}}</td>
                         <td>{{category.updatedAt|format_datetime()}}</td>
                         <td class="d-flex justify-content-evenly">
